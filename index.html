@@ -42,6 +42,13 @@
       transition: transform 1200ms cubic-bezier(.2,.8,.2,1), filter 1200ms cubic-bezier(.2,.8,.2,1);
     }
 
+    /* Fade out the enter overlay instead of hard-cutting it */
+.enter-page.fade-out {
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
+}
+
     @keyframes pageFade {
       to { opacity: 1; }
     }

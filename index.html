@@ -315,17 +315,17 @@
     const slides = document.querySelectorAll(".slide");
 
     setInterval(() => {
-  const next = (current + 1) % slides.length;
+      const next = (current + 1) % slides.length;
 
-  // Turn the next slide on first (so we never see through)
-  slides[next].classList.add("active");
+      // Turn the next slide on first (so we never see through)
+      slides[next].classList.add("active");
 
-  // Then turn the current one off (next tick = smooth overlap)
-  setTimeout(() => {
-    slides[current].classList.remove("active");
-    current = next;
-  }, 50);
-}, 3000);
+      // Then turn the current one off (next tick = smooth overlap)
+      setTimeout(() => {
+        slides[current].classList.remove("active");
+        current = next;
+        }, 50);
+      }, 3000);
   </script>
 
   <!-- SEAMLESS ZOOM TRANSITION (no navigation) -->

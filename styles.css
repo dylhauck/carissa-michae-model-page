@@ -166,3 +166,26 @@ h3{ margin:18px 0 10px; font-size:16px; }
   text-align:center;
   color:var(--muted);
 }
+
+/* Cinematic "zoom out" entrance */
+.page-wrap {
+  transform: scale(1);
+  transform-origin: center;
+}
+
+.page-wrap.enter-zoom {
+  animation: zoomOutIn 900ms ease forwards;
+}
+
+@keyframes zoomOutIn {
+  from {
+    transform: scale(1.12);
+    opacity: 0.6;
+    filter: blur(2px);
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+}

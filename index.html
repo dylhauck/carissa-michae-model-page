@@ -46,22 +46,6 @@
       transition: opacity 220ms ease;
       pointer-events: none;
     }
-
-    <script>
-  (function () {
-    const params = new URLSearchParams(window.location.search);
-    const shouldSkip = params.get("skipEnter") === "1" || !!window.location.hash;
-
-    if (!shouldSkip) return;
-
-    const overlay = document.getElementById("enterOverlay");
-    if (overlay) overlay.style.display = "none";
-
-    // restore scrolling
-    document.documentElement.style.overflow = "auto";
-    document.body.style.overflow = "auto";
-  })();
-</script>
     
     .slideshow {
       position: absolute;

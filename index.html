@@ -315,6 +315,23 @@
     slides[current].classList.add("active");
   }, 3000);
 </script>
+  <script>
+  const enterBtn = document.getElementById("enterBtn");
+  const enterPage = document.querySelector(".enter-page");
+
+  enterBtn.addEventListener("click", () => {
+    // mark that we should animate the next page "zoom out"
+    sessionStorage.setItem("fromEnter", "1");
+
+    // zoom in on the splash page
+    enterPage.classList.add("zoom-out");
+
+    // navigate after the zoom finishes
+    setTimeout(() => {
+      window.location.href = "home.html";
+    }, 900);
+  });
+</script>
   
 </body>
 </html>

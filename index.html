@@ -164,12 +164,12 @@
     .enter-page {
       transform: scale(1);
       transform-origin: center;
-      transition: transform 900ms ease, filter 900ms ease;
+      transition: transform 1100ms cubic-bezier(.2,.8,.2,1), filter 1100ms cubic-bezier(.2,.8,.2,1);
     }
 
     .enter-page.zoom-out {
-      transform: scale(1.55);
-      filter: blur(3px);
+      transform: scale(2.05);
+      filter: blur(8px);
     }
 
     .enter-page.zoom-out .top-left,
@@ -238,7 +238,7 @@
       // navigate after the zoom finishes
       setTimeout(() => {
         window.location.href = "home.html";
-      }, 900);
+      }, 1100);
     });
   </script>
 

@@ -189,3 +189,129 @@ h3{ margin:18px 0 10px; font-size:16px; }
     filter: blur(0);
   }
 }
+
+/* Cinematic hero */
+.hero{
+  position: relative;
+  height: 90svh;
+  min-height: 640px;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.hero-media{
+  position:absolute;
+  inset:0;
+  /* Uses your first enter image as a background (no renaming) */
+  background: url("images/enter.jpeg") center 18% / cover no-repeat;
+  transform: scale(1.06);
+  filter: contrast(1.02) saturate(1.02);
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(0,0,0,0.10), rgba(0,0,0,0.70)),
+    rgba(0,0,0,0.18);
+}
+
+.hero-content{
+  position: relative;
+  z-index: 1;
+  width: min(1000px, calc(100% - 80px));
+  color: #fff;
+}
+
+.hero-eyebrow{
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.hero-title{
+  margin: 12px 0 10px;
+  font-size: clamp(44px, 6vw, 78px);
+  line-height: 0.95;
+  letter-spacing: -0.8px;
+  font-weight: 600;
+}
+
+.hero-subtitle{
+  margin: 0;
+  max-width: 560px;
+  color: rgba(255,255,255,0.86);
+  line-height: 1.7;
+}
+
+.hero-actions{
+  margin-top: 22px;
+  display:flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 12px 18px;
+  border-radius: 999px;
+  text-decoration:none;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-size: 13px;
+  border: 1px solid rgba(255,255,255,0.22);
+  transition: transform 220ms ease, background 220ms ease;
+}
+.btn:hover{ transform: translateY(-1px); }
+
+.btn-primary{
+  background: rgba(255,255,255,0.92);
+  color:#000;
+  border-color: rgba(255,255,255,0.0);
+}
+.btn-ghost{
+  background: rgba(0,0,0,0.45);
+  color:#fff;
+}
+
+.hero-scroll{
+  position:absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display:flex;
+  gap: 10px;
+  align-items:center;
+  color: rgba(255,255,255,0.75);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.hero-line{
+  width: 46px;
+  height: 1px;
+  background: rgba(255,255,255,0.65);
+}
+
+@media (max-width: 900px){
+  .hero-content{ width: calc(100% - 36px); }
+  .hero{ min-height: 560px; }
+}
+
+/* Scroll reveal */
+.reveal{
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+.reveal.in{
+  opacity: 1;
+  transform: translateY(0);
+}

@@ -342,17 +342,12 @@
       
       // Swap while fully zoomed/blurred, then zoom home out
       setTimeout(() => {
-  // Start the home zoom-out FIRST
+  overlay.style.display = "none";
+
+  // force paint so the zoom-out transition reliably triggers
   void home.offsetWidth;
+
   home.classList.add("zoom-out");
-
-  // Then fade the overlay out (no flash)
-  overlay.classList.add("fade-out");
-
-  // Remove overlay after fade completes
-  setTimeout(() => {
-    overlay.style.display = "none";
-   }, 230);
 }, 1200);
     });
   </script>

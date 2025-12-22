@@ -21,3 +21,16 @@ tabs.forEach(tab => {
 
 // Footer year
 document.getElementById("year").textContent = new Date().getFullYear();
+
+// If we came from the Enter page, play the zoom-out entrance animation
+(function () {
+  const fromEnter = sessionStorage.getItem("fromEnter");
+  if (!fromEnter) return;
+
+  sessionStorage.removeItem("fromEnter");
+
+  const wrap = document.querySelector(".page-wrap");
+  if (!wrap) return;
+
+  wrap.classList.add("enter-zoom");
+})();

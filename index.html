@@ -422,11 +422,13 @@
 
       // Zoom overlay away until it becomes unrecognizable
       overlay.classList.add("zoom-away");
-
+      
       // Swap while fully zoomed/blurred, then zoom home out
       setTimeout(() => {
         overlay.style.display = "none";
 
+        // RE_ENABLE SCROLLING AFTER ENTER
+        document.body.style.overflow = "auto";
         // force paint so the zoom-out transition reliably triggers
         void home.offsetWidth;
 
@@ -434,20 +436,6 @@
       }, 1200);
     });
   </script>
-  
-// Scroll reveal
-(() => {
-  const items = document.querySelectorAll(".section, .hero, .card, .contact-card");
-  items.forEach(el => el.classList.add("reveal"));
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add("in");
-    });
-  }, { threshold: 0.12 });
-
-  items.forEach(el => io.observe(el));
-})();
   <!-- Your existing home page JS (tabs + year + any other logic) -->
   <script src="script.js"></script>
 

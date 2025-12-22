@@ -9,10 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Home page styles -->
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- Enter page styles + seamless transition styles -->
   <style>
     * { box-sizing: border-box; }
     html, body {
@@ -24,7 +22,6 @@
       background: #fff;
     }
 
-    /* --- ENTER OVERLAY (your existing enter page setup) --- */
     .enter-page {
       position: fixed;
       inset: 0;
@@ -39,23 +36,21 @@
       transform: scale(1);
       transform-origin: center;
       transition: transform 1200ms cubic-bezier(.2,.8,.2,1), filter 1200ms cubic-bezier(.2,.8,.2,1);
+      background: #000;
     }
 
-    /* Fade out the enter overlay instead of hard-cutting it */
-.enter-page.fade-out {
-  opacity: 0;
-  transition: opacity 220ms ease;
-  pointer-events: none;
-}
+    @keyframes pageFade { to { opacity: 1; } }
 
-    @keyframes pageFade {
-      to { opacity: 1; }
+    .enter-page.fade-out {
+      opacity: 0;
+      transition: opacity 220ms ease;
+      pointer-events: none;
     }
 
-    /* Slideshow layers */
     .slideshow {
       position: absolute;
       inset: 0;
+      background: #000;
     }
 
     .slide {
@@ -68,21 +63,15 @@
       transition: opacity 1.5s ease;
     }
 
-    .slide.active {
-      opacity: 1;
-    }
+    .slide.active { opacity: 1; }
 
-    /* Desktop framing */
     @media (min-width: 769px) {
       .slide { background-position: 50% 20%; }
     }
-
-    /* Mobile framing (faces sit higher) */
     @media (max-width: 768px) {
       .slide { background-position: 50% 12%; }
     }
 
-    /* Overlay for readability */
     .overlay {
       position: absolute;
       inset: 0;
@@ -93,11 +82,8 @@
       animation: overlayFade 1.4s ease forwards;
     }
 
-    @keyframes overlayFade {
-      to { opacity: 1; }
-    }
+    @keyframes overlayFade { to { opacity: 1; } }
 
-    /* Text + button gently slide up */
     .top-left, .top-right, .enter-container {
       position: absolute;
       opacity: 0;
@@ -134,7 +120,6 @@
       animation-delay: 0.95s;
     }
 
-    /* NOTE: keep riseIn as translateY only (prevents cutting off name) */
     @keyframes riseIn {
       to {
         opacity: 1;
@@ -142,7 +127,6 @@
       }
     }
 
-    /* Button */
     .enter-btn {
       background: rgba(0,0,0,0.85);
       color: #fff;
@@ -167,9 +151,6 @@
       .enter-container { bottom: 40px; }
     }
 
-    /* --- SEAMLESS ZOOM TRANSITION (no page change) --- */
-
-    /* Home sits behind overlay */
     #homeWrap {
       position: relative;
       z-index: 1;
@@ -177,27 +158,23 @@
       filter: blur(0);
     }
 
-    /* Zoom the overlay so far it becomes unrecognizable */
     .enter-page.zoom-away {
       transform: scale(3.2);
       filter: blur(18px);
     }
 
-    /* Fade the overlay UI during the zoom-away */
     .enter-page.zoom-away .top-left,
     .enter-page.zoom-away .top-right,
     .enter-page.zoom-away .enter-container {
       opacity: 0;
     }
 
-    /* Prep home to start from the same extreme zoom/blur */
     #homeWrap.prep-zoom {
       transform: scale(3.2);
       filter: blur(18px);
       opacity: 1;
     }
 
-    /* Then zoom home out to normal */
     #homeWrap.zoom-out {
       transition: transform 1200ms cubic-bezier(.2,.8,.2,1), filter 1200ms cubic-bezier(.2,.8,.2,1);
       transform: scale(1);
@@ -223,35 +200,36 @@
   <!-- HOME PAGE (behind overlay) -->
   <div class="page-wrap" id="homeWrap">
 
-
-    </div>
-  </header>
-
-  <!-- ✅ PASTE THE HERO SECTION RIGHT HERE -->
-  <section class="hero" aria-label="Hero">
-    <div class="hero-media" aria-hidden="true"></div>
-
-    <div class="hero-content">
-      <div class="hero-eyebrow">Carissa Michae</div>
-      <h1 class="hero-title">Presence, Poise, Story.</h1>
-      <p class="hero-subtitle">
-        Professional · Commercial · Editorial · Lifestyle — crafted imagery with intentional movement.
-      </p>
-
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="portfolio.html">View Portfolio</a>
-        <a class="btn btn-ghost" href="contact.html">Book Now</a>
+    <header class="site-header">
+      <div class="brand">
+        <div class="brand-name">Carissa Michae</div>
+        <div class="brand-subtitle">Professional Model · Commercial · Editorial · Lifestyle</div>
       </div>
-    </div>
+    </header>
 
-    <div class="hero-scroll">
-      <span>Scroll</span>
-      <div class="hero-line"></div>
-    </div>
-  </section>
-  <!-- ✅ END HERO SECTION -->
+    <section class="hero" aria-label="Hero">
+      <div class="hero-media" aria-hidden="true"></div>
 
-  <main>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Carissa Michae</div>
+        <h1 class="hero-title">Presence, Poise, Story.</h1>
+        <p class="hero-subtitle">
+          Professional · Commercial · Editorial · Lifestyle — crafted imagery with intentional movement.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="portfolio.html">View Portfolio</a>
+          <a class="btn btn-ghost" href="contact.html">Book Now</a>
+        </div>
+      </div>
+
+      <div class="hero-scroll">
+        <span>Scroll</span>
+        <div class="hero-line"></div>
+      </div>
+    </section>
+
+    <main>
       <!-- ABOUT -->
       <section id="about" class="section">
         <div class="section-header">
@@ -321,10 +299,10 @@
     const slides = document.querySelectorAll(".slide");
 
     setInterval(() => {
-  slides[current].classList.remove("active");
-  current = (current + 1) % slides.length;
-  slides[current].classList.add("active");
-}, 3000);
+      slides[current].classList.remove("active");
+      current = (current + 1) % slides.length;
+      slides[current].classList.add("active");
+    }, 3000);
   </script>
 
   <!-- SEAMLESS ZOOM TRANSITION (no navigation) -->
@@ -334,25 +312,29 @@
     const home = document.getElementById("homeWrap");
 
     enterBtn.addEventListener("click", () => {
-      // Prep home behind the overlay to match the extreme zoom/blur state
       home.classList.add("prep-zoom");
-
-      // Zoom overlay away until it becomes unrecognizable
       overlay.classList.add("zoom-away");
-      
-      // Swap while fully zoomed/blurred, then zoom home out
+
       setTimeout(() => {
-  overlay.style.display = "none";
+        // re-enable scrolling on main page
+        document.documentElement.style.overflow = "auto";
+        document.body.style.overflow = "auto";
 
-  // force paint so the zoom-out transition reliably triggers
-  void home.offsetWidth;
+        // start home zoom-out
+        void home.offsetWidth;
+        home.classList.add("zoom-out");
 
-  home.classList.add("zoom-out");
-}, 1200);
+        // fade overlay out instead of hard cut
+        overlay.classList.add("fade-out");
+
+        // remove overlay after fade finishes
+        setTimeout(() => {
+          overlay.style.display = "none";
+        }, 230);
+      }, 1200);
     });
   </script>
-  <!-- Your existing home page JS (tabs + year + any other logic) -->
-  <script src="script.js"></script>
 
+  <script src="script.js"></script>
 </body>
 </html>

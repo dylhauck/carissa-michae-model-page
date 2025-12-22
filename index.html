@@ -312,29 +312,35 @@
     const home = document.getElementById("homeWrap");
 
     enterBtn.addEventListener("click", () => {
-      home.classList.add("prep-zoom");
-      overlay.classList.add("zoom-away");
+  // Prep home to the extreme zoom/blur state
+  home.classList.add("prep-zoom");
 
-      setTimeout(() => {
-        // re-enable scrolling on main page
-        document.documentElement.style.overflow = "auto";
-        document.body.style.overflow = "auto";
+  // Ensure the browser paints the pre-zoom state first
+  void home.offsetWidth;
 
-        // start home zoom-out
-        void home.offsetWidth;
-        home.classList.add("zoom-out");
+  // Start the home zoom-out immediately (next frame) so there is NO pause
+  requestAnimationFrame(() => {
+    home.classList.add("zoom-out");
+  });
 
-        // fade overlay out instead of hard cut
-        overlay.classList.add("fade-out");
+  // Zoom the overlay away at the same time
+  overlay.classList.add("zoom-away");
 
-        document.getElementById("homeHeader").style.display = "none";
+  // Start fading the overlay slightly before the zoom finishes
+  setTimeout(() => {
+    overlay.classList.add("fade-out");
+    document.getElementById("homeHeader").style.display = "none";
 
-        // remove overlay after fade finishes
-        setTimeout(() => {
-          overlay.style.display = "none";
-        }, 230);
-      }, 800);
-    });
+    // Re-enable scrolling on the main page
+    document.documentElement.style.overflow = "auto";
+    document.body.style.overflow = "auto";
+  }, 850);
+
+  // Remove overlay after fade completes
+  setTimeout(() => {
+    overlay.style.display = "none";
+  }, 1100);
+});
   </script>
 
   <script src="script.js"></script>

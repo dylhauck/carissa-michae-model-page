@@ -1,1 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio | Carissa Michae</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="page-wrap">
+
+    <header class="site-header">
+      <div class="brand">
+        <div class="brand-name">Carissa Michae</div>
+        <div class="brand-subtitle">Professional Model · Commercial · Editorial · Lifestyle</div>
+      </div>
+
+      <!-- Optional nav for this page (recommended) -->
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+
+      <!-- PORTFOLIO -->
+      <section class="section">
+        <div class="section-header">
+          <h2>Portfolio</h2>
+          <p class="muted">Select a category to browse.</p>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Portfolio Categories">
+          <button class="tab active" role="tab" aria-selected="true" data-target="headshots">Headshots</button>
+          <button class="tab" role="tab" aria-selected="false" data-target="fullbody">Full-Body Shots</button>
+          <button class="tab" role="tab" aria-selected="false" data-target="profile">Profile Shots</button>
+        </div>
+
+        <div class="tab-panels">
+          <div class="panel active" id="headshots" role="tabpanel">
+            <div class="grid">
+              <img alt="Headshot 1" src="https://picsum.photos/900/1200?random=11" />
+              <img alt="Headshot 2" src="https://picsum.photos/900/1200?random=12" />
+              <img alt="Headshot 3" src="https://picsum.photos/900/1200?random=13" />
+              <img alt="Headshot 4" src="https://picsum.photos/900/1200?random=14" />
+              <img alt="Headshot 5" src="https://picsum.photos/900/1200?random=15" />
+              <img alt="Headshot 6" src="https://picsum.photos/900/1200?random=16" />
+            </div>
+          </div>
+
+          <div class="panel" id="fullbody" role="tabpanel">
+            <div class="grid">
+              <img alt="Full body 1" src="https://picsum.photos/900/1200?random=21" />
+              <img alt="Full body 2" src="https://picsum.photos/900/1200?random=22" />
+              <img alt="Full body 3" src="https://picsum.photos/900/1200?random=23" />
+              <img alt="Full body 4" src="https://picsum.photos/900/1200?random=24" />
+              <img alt="Full body 5" src="https://picsum.photos/900/1200?random=25" />
+              <img alt="Full body 6" src="https://picsum.photos/900/1200?random=26" />
+            </div>
+          </div>
+
+          <div class="panel" id="profile" role="tabpanel">
+            <div class="grid">
+              <img alt="Profile 1" src="https://picsum.photos/900/1200?random=31" />
+              <img alt="Profile 2" src="https://picsum.photos/900/1200?random=32" />
+              <img alt="Profile 3" src="https://picsum.photos/900/1200?random=33" />
+              <img alt="Profile 4" src="https://picsum.photos/900/1200?random=34" />
+              <img alt="Profile 5" src="https://picsum.photos/900/1200?random=35" />
+              <img alt="Profile 6" src="https://picsum.photos/900/1200?random=36" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      © <span id="year"></span> Carissa Michae · All Rights Reserved
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

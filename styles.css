@@ -174,14 +174,14 @@ h3{ margin:18px 0 10px; font-size:16px; }
 }
 
 .page-wrap.enter-zoom {
-  animation: zoomOutIn 900ms ease forwards;
+  animation: zoomOutIn 1100ms cubic-bezier(.2,.8,.2,1) forwards;
 }
 
 @keyframes zoomOutIn {
   from {
-    transform: scale(1.18);
-    opacity: 0.6;
-    filter: blur(2px);
+    transform: scale(2.05);
+    opacity: 0.85;
+    filter: blur(8px);
   }
   to {
     transform: scale(1);

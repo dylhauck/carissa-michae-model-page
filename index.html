@@ -245,6 +245,28 @@
     transform: translateY(0);
   }
 }
+    /* Zoom-in exit transition */
+.enter-page {
+  transform: scale(1);
+  transform-origin: center;
+  transition: transform 900ms ease, filter 900ms ease;
+}
+
+.enter-page.zoom-out {
+  transform: scale(1.18);
+  filter: blur(2px);
+}
+
+/* Optional: UI fades during exit */
+.top-left, .top-right, .enter-container {
+  transition: opacity 500ms ease;
+}
+
+.enter-page.zoom-out .top-left,
+.enter-page.zoom-out .top-right,
+.enter-page.zoom-out .enter-container {
+  opacity: 0;
+}
   </style>
 </head>
 <body>
@@ -259,7 +281,7 @@
 
     <div class="enter-container">
       <a href="home.html">
-        <button class="enter-btn">ENTER</button>
+        <button class="enter-btn" id="enterBtn">ENTER</button>
       </a>
     </div>
   </div>

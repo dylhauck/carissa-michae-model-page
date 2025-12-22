@@ -20,8 +20,15 @@
     .enter-page {
       position: relative;
       width: 100%;
-      height: 100%;
+      height: 100vh;
       background: url("images/enter.jpeg") center / cover no-repeat;
+
+      /* KEY: control the crop */
+      background-size: cover;
+      background-position: 50% 20%; /* move "up" to show face */
+
+      /* optional: keeps it stable on mobile address bar */
+      min-height: 100svh;
     }
 
     .overlay {

@@ -20,142 +20,89 @@
     }
 
     .enter-page {
-  position: relative;
-  width: 100%;
-  height: 100dvh;
-  min-height: 100dvh;
-  overflow: hidden;
-  opacity: 0;
-  animation: pageFade 1.2s ease forwards;
-}
+      position: relative;
+      width: 100%;
+      height: 100dvh;
+      min-height: 100dvh;
+      overflow: hidden;
+      opacity: 0;
+      animation: pageFade 1.2s ease forwards;
+    }
 
-@keyframes pageFade {
-  to { opacity: 1; }
-}
+    @keyframes pageFade {
+      to { opacity: 1; }
+    }
 
-/* Slideshow layers */
-.slideshow {
-  position: absolute;
-  inset: 0;
-}
+    /* Slideshow layers */
+    .slideshow {
+      position: absolute;
+      inset: 0;
+    }
 
-.slide {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 50% 20%;
-  opacity: 0;
-  transition: opacity 1.5s ease;
-}
+    .slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 50% 20%;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
 
-.slide.active {
-  opacity: 1;
-}
+    .slide.active {
+      opacity: 1;
+    }
 
-/* Desktop framing */
-@media (min-width: 769px) {
-  .slide {
-    background-position: 50% 20%;
-  }
-}
+    /* Desktop framing */
+    @media (min-width: 769px) {
+      .slide {
+        background-position: 50% 20%;
+      }
+    }
 
-/* Mobile framing (faces sit higher) */
-@media (max-width: 768px) {
-  .slide {
-    background-position: 50% 12%;
-  }
-}
+    /* Mobile framing (faces sit higher) */
+    @media (max-width: 768px) {
+      .slide {
+        background-position: 50% 12%;
+      }
+    }
 
-/* Overlay for readability */
-.overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at center, rgba(0,0,0,0.15), rgba(0,0,0,0.6)),
-    rgba(0,0,0,0.2);
-}
-
-/* Text & button animation */
-.top-left,
-.top-right,
-.enter-container {
-  position: absolute;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: riseIn 1s ease forwards;
-}
-
-.top-left {
-  top: 24px;
-  left: 24px;
-  color: #fff;
-  font-weight: 600;
-  animation-delay: 0.6s;
-}
-
-.top-right {
-  top: 24px;
-  right: 24px;
-  color: #fff;
-  font-size: 14px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  background: rgba(0,0,0,0.6);
-  padding: 8px 12px;
-  animation-delay: 0.75s;
-}
-
-.enter-container {
-  bottom: 60px;
-  left: 50%;
-  transform: translate(-50%, 10px);
-  animation-delay: 0.95s;
-}
-
-@keyframes riseIn {
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-}
-
-/* Button */
-.enter-btn {
-  background: rgba(0,0,0,0.85);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.25);
-  padding: 14px 52px;
-  font-size: 14px;
-  letter-spacing: 2px;
-  cursor: pointer;
-  transition: transform 0.25s ease, background 0.25s ease;
-}
-
-.enter-btn:hover {
-  transform: translateY(-2px);
-  background: rgba(255,255,255,0.95);
-  color: #000;
-}
-
+    /* Overlay for readability */
     .overlay {
-  position: absolute;
-  inset: 0;
-  background:
-  radial-gradient(circle at center, rgba(0,0,0,0.15), rgba(0,0,0,0.55)), rgba(0,0,0,0.15);
-}
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at center, rgba(0,0,0,0.15), rgba(0,0,0,0.6)),
+        rgba(0,0,0,0.2);
+      opacity: 0;
+      animation: overlayFade 1.4s ease forwards;
+    }
+
+    @keyframes overlayFade {
+      to { opacity: 1; }
+    }
+
+    /* Text & button animation */
+    .top-left,
+    .top-right,
+    .enter-container {
+      position: absolute;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: riseIn 1s ease forwards;
+      transition: opacity 500ms ease;
+    }
 
     .top-left {
-      position: absolute;
       top: 24px;
       left: 24px;
       color: #fff;
       font-weight: 600;
       letter-spacing: 0.5px;
-}
+      animation-delay: 0.6s;
+    }
 
     .top-right {
-      position: absolute;
       top: 24px;
       right: 24px;
       color: #fff;
@@ -164,36 +111,40 @@
       text-transform: uppercase;
       background: rgba(0,0,0,0.6);
       padding: 8px 12px;
-}
+      animation-delay: 0.75s;
+    }
 
     .enter-container {
-      position: absolute;
       bottom: 60px;
       left: 50%;
-      transform: translateX(-50%);
-}
+      transform: translate(-50%, 10px);
+      animation-delay: 0.95s;
+    }
 
+    @keyframes riseIn {
+      to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+    }
+
+    /* Button */
     .enter-btn {
-  background: rgba(0,0,0,0.85);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.22);
-  padding: 14px 52px;
-  font-size: 14px;
-  letter-spacing: 2px;
-  cursor: pointer;
-  transition: transform 0.25s ease, background 0.25s ease;
-}
+      background: rgba(0,0,0,0.85);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 14px 52px;
+      font-size: 14px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
 
     .enter-btn:hover {
-  transform: translateY(-2px);
-  background: rgba(255,255,255,0.92);
-  color: #000;
-}
-
-    .enter-btn:hover {
-      background: #fff;
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.95);
       color: #000;
-}
+    }
 
     @media (max-width: 600px) {
       .top-left,
@@ -209,64 +160,23 @@
       }
     }
 
-    /* Cinematic fade */
-.enter-page {
-  opacity: 0;
-  animation: pageFade 1.2s ease forwards;
-}
-
-@keyframes pageFade {
-  to { opacity: 1; }
-}
-
-.overlay {
-  opacity: 0;
-  animation: overlayFade 1.4s ease forwards;
-}
-
-@keyframes overlayFade {
-  to { opacity: 1; }
-}
-
-/* Text + button gently slide up */
-.top-left, .top-right, .enter-container {
-  opacity: 0;
-  transform: translateY(10px);
-  animation: riseIn 1s ease forwards;
-}
-
-.top-left { animation-delay: 0.6s; }
-.top-right { animation-delay: 0.75s; }
-.enter-container { animation-delay: 0.95s; }
-
-@keyframes riseIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
     /* Zoom-in exit transition */
-.enter-page {
-  transform: scale(1);
-  transform-origin: center;
-  transition: transform 900ms ease, filter 900ms ease;
-}
+    .enter-page {
+      transform: scale(1);
+      transform-origin: center;
+      transition: transform 900ms ease, filter 900ms ease;
+    }
 
-.enter-page.zoom-out {
-  transform: scale(1.18);
-  filter: blur(2px);
-}
+    .enter-page.zoom-out {
+      transform: scale(1.55);
+      filter: blur(3px);
+    }
 
-/* Optional: UI fades during exit */
-.top-left, .top-right, .enter-container {
-  transition: opacity 500ms ease;
-}
-
-.enter-page.zoom-out .top-left,
-.enter-page.zoom-out .top-right,
-.enter-page.zoom-out .enter-container {
-  opacity: 0;
-}
+    .enter-page.zoom-out .top-left,
+    .enter-page.zoom-out .top-right,
+    .enter-page.zoom-out .enter-container {
+      opacity: 0;
+    }
   </style>
 </head>
 <body>
@@ -280,58 +190,57 @@
     <div class="top-right">Model. Muse. Creative.</div>
 
     <div class="enter-container">
-      <a href="home.html">
-        <button class="enter-btn" id="enterBtn">ENTER</button>
-      </a>
+      <button class="enter-btn" id="enterBtn" type="button">ENTER</button>
     </div>
   </div>
 
   <script>
-  const images = [
-    "images/enter.jpeg",
-    "images/enter2.JPG",
-    "images/enter3.JPG",
-    "images/enter4.JPG",
-    "images/enter5.JPEG",
-    "images/enter6.JPEG"
-  ];
+    const images = [
+      "images/enter.jpeg",
+      "images/enter2.JPG",
+      "images/enter3.JPG",
+      "images/enter4.JPG",
+      "images/enter5.JPEG",
+      "images/enter6.JPEG"
+    ];
 
-  const slideshow = document.querySelector(".slideshow");
-  let current = 0;
+    const slideshow = document.querySelector(".slideshow");
+    let current = 0;
 
-  images.forEach((src, index) => {
-    const slide = document.createElement("div");
-    slide.className = "slide";
-    slide.style.backgroundImage = `url('${src}')`;
-    if (index === 0) slide.classList.add("active");
-    slideshow.appendChild(slide);
-  });
+    images.forEach((src, index) => {
+      const slide = document.createElement("div");
+      slide.className = "slide";
+      slide.style.backgroundImage = `url('${src}')`;
+      if (index === 0) slide.classList.add("active");
+      slideshow.appendChild(slide);
+    });
 
-  const slides = document.querySelectorAll(".slide");
+    const slides = document.querySelectorAll(".slide");
 
-  setInterval(() => {
-    slides[current].classList.remove("active");
-    current = (current + 1) % slides.length;
-    slides[current].classList.add("active");
-  }, 3000);
-</script>
+    setInterval(() => {
+      slides[current].classList.remove("active");
+      current = (current + 1) % slides.length;
+      slides[current].classList.add("active");
+    }, 3000);
+  </script>
+
   <script>
-  const enterBtn = document.getElementById("enterBtn");
-  const enterPage = document.querySelector(".enter-page");
+    const enterBtn = document.getElementById("enterBtn");
+    const enterPage = document.querySelector(".enter-page");
 
-  enterBtn.addEventListener("click", () => {
-    // mark that we should animate the next page "zoom out"
-    sessionStorage.setItem("fromEnter", "1");
+    enterBtn.addEventListener("click", () => {
+      // mark that we should animate the next page "zoom out"
+      sessionStorage.setItem("fromEnter", "1");
 
-    // zoom in on the splash page
-    enterPage.classList.add("zoom-out");
+      // zoom in on the splash page
+      enterPage.classList.add("zoom-out");
 
-    // navigate after the zoom finishes
-    setTimeout(() => {
-      window.location.href = "home.html";
-    }, 900);
-  });
-</script>
-  
+      // navigate after the zoom finishes
+      setTimeout(() => {
+        window.location.href = "home.html";
+      }, 900);
+    });
+  </script>
+
 </body>
 </html>

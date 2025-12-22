@@ -68,15 +68,21 @@
     }
 
     .enter-btn {
-      background: #000;
-      color: #fff;
-      border: none;
-      padding: 14px 48px;
-      font-size: 14px;
-      letter-spacing: 2px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.22);
+  padding: 14px 52px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.enter-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.92);
+  color: #000;
+}
 
     .enter-btn:hover {
       background: #fff;

@@ -37,3 +37,17 @@ tabs.forEach(tab => {
 
 // Footer year
 document.getElementById("year").textContent = new Date().getFullYear();
+
+// Scroll reveal
+(() => {
+  const items = document.querySelectorAll(".section, .hero, .card, .contact-card");
+  items.forEach(el => el.classList.add("reveal"));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add("in");
+    });
+  }, { threshold: 0.12 });
+
+  items.forEach(el => io.observe(el));
+})();

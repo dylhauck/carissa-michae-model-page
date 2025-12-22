@@ -1,1 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carissa Michae | Model Booking</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-name">Carissa Michae</div>
+      <div class="brand-subtitle">Professional Model · Commercial · Editorial · Lifestyle</div>
+    </div>
+
+    <nav class="nav">
+      <a href="#portfolio" class="nav-link">Portfolio</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="section">
+      <div class="section-header">
+        <h2>Portfolio</h2>
+        <p class="muted">Select a category to browse.</p>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Portfolio Categories">
+        <button class="tab active" role="tab" aria-selected="true" data-target="headshots">Headshots</button>
+        <button class="tab" role="tab" aria-selected="false" data-target="fullbody">Full-Body Shots</button>
+        <button class="tab" role="tab" aria-selected="false" data-target="profile">Profile Shots</button>
+      </div>
+
+      <div class="tab-panels">
+        <div class="panel active" id="headshots" role="tabpanel">
+          <div class="grid">
+            <img alt="Headshot 1" src="https://picsum.photos/900/1200?random=11" />
+            <img alt="Headshot 2" src="https://picsum.photos/900/1200?random=12" />
+            <img alt="Headshot 3" src="https://picsum.photos/900/1200?random=13" />
+            <img alt="Headshot 4" src="https://picsum.photos/900/1200?random=14" />
+            <img alt="Headshot 5" src="https://picsum.photos/900/1200?random=15" />
+            <img alt="Headshot 6" src="https://picsum.photos/900/1200?random=16" />
+          </div>
+        </div>
+
+        <div class="panel" id="fullbody" role="tabpanel">
+          <div class="grid">
+            <img alt="Full body 1" src="https://picsum.photos/900/1200?random=21" />
+            <img alt="Full body 2" src="https://picsum.photos/900/1200?random=22" />
+            <img alt="Full body 3" src="https://picsum.photos/900/1200?random=23" />
+            <img alt="Full body 4" src="https://picsum.photos/900/1200?random=24" />
+            <img alt="Full body 5" src="https://picsum.photos/900/1200?random=25" />
+            <img alt="Full body 6" src="https://picsum.photos/900/1200?random=26" />
+          </div>
+        </div>
+
+        <div class="panel" id="profile" role="tabpanel">
+          <div class="grid">
+            <img alt="Profile 1" src="https://picsum.photos/900/1200?random=31" />
+            <img alt="Profile 2" src="https://picsum.photos/900/1200?random=32" />
+            <img alt="Profile 3" src="https://picsum.photos/900/1200?random=33" />
+            <img alt="Profile 4" src="https://picsum.photos/900/1200?random=34" />
+            <img alt="Profile 5" src="https://picsum.photos/900/1200?random=35" />
+            <img alt="Profile 6" src="https://picsum.photos/900/1200?random=36" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="section-header">
+        <h2>About Me</h2>
+        <p class="muted">A polished introduction and casting-ready details.</p>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <p>
+            Carissa Michae is a professional model with experience across commercial, editorial, and lifestyle work.
+            Known for a calm on-set presence and strong direction-following, she brings a polished, approachable energy
+            to every shoot—helping brands communicate clearly through confident movement and authentic expression.
+          </p>
+
+          <h3>Special Skills</h3>
+          <ul class="bullets">
+            <li>Studio & natural-light modeling</li>
+            <li>Commercial lifestyle posing</li>
+            <li>Editorial movement & expression</li>
+            <li>Brand-focused visual storytelling</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Measurements & Stats</h3>
+          <div class="stats">
+            <div class="stat"><span>Height</span><strong>5’9”</strong></div>
+            <div class="stat"><span>Bust</span><strong>34”</strong></div>
+            <div class="stat"><span>Waist</span><strong>25”</strong></div>
+            <div class="stat"><span>Hips</span><strong>36”</strong></div>
+            <div class="stat"><span>Shoe</span><strong>8.5 (US)</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="section-header">
+        <h2>Contact</h2>
+        <p class="muted">For bookings, rates, and availability.</p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-row">
+          <span>Email</span>
+          <a href="mailto:bookings@carissamichae.com">bookings@carissamichae.com</a>
+        </div>
+        <div class="contact-row">
+          <span>Phone</span>
+          <a href="tel:+15552148890">(555) 214-8890</a>
+        </div>
+        <div class="contact-row">
+          <span>Social</span>
+          <div class="social">
+            <a href="#" aria-label="Instagram">Instagram</a>
+            <a href="#" aria-label="TikTok">TikTok</a>
+            <a href="#" aria-label="LinkedIn">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    © <span id="year"></span> Carissa Michae · All Rights Reserved
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -29,6 +29,9 @@ tabs.forEach(tab => {
   const wrap = document.querySelector(".page-wrap");
   if (!wrap) return;
 
+  // Force a paint so the animation reliably triggers
+  void wrap.offsetWidth;
+
   wrap.classList.add("enter-zoom");
 })();
 

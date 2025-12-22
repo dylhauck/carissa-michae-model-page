@@ -200,7 +200,7 @@
   <!-- HOME PAGE (behind overlay) -->
   <div class="page-wrap" id="homeWrap">
 
-    <header class="site-header">
+    <header class="site-header" id="homeHeader">
       <div class="brand">
         <div class="brand-name">Carissa Michae</div>
         <div class="brand-subtitle">Professional Model · Commercial · Editorial · Lifestyle</div>
@@ -326,6 +326,8 @@
 
         // fade overlay out instead of hard cut
         overlay.classList.add("fade-out");
+
+        document.getElementById("homeHeader").style.display = "none";
 
         // remove overlay after fade finishes
         setTimeout(() => {

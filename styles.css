@@ -320,5 +320,5 @@ h3{ margin:18px 0 10px; font-size:16px; }
 .section,
 .page-wrap {
   transform: none !important;
-  filter: non !important;
+  filter: none !important;
 }

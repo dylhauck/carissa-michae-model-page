@@ -317,16 +317,65 @@ h3{ margin:18px 0 10px; font-size:16px; }
   transform: translateY(0);
 }
 
-/* Fix desktop graininess caused by transformed parent layers */
-.grid img {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  image-rendering: auto;
+/* Contact form */
+.contact-form{
+  margin-top: 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+  background: #fff;
 }
 
-#portfolio,
-#portfolio * {
-  transform: none !important;
-  filter: none !important;
+.form-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 0;
+}
+
+.field label{
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 12px;
+  font: inherit;
+  background: var(--soft);
+  color: var(--text);
+  outline: none;
+}
+
+.field textarea{
+  resize: vertical;
+  min-height: 140px;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  background: #fff;
+  border-color: #111;
+}
+
+.form-actions{
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 8px;
+}
+
+@media (max-width: 700px){
+  .form-row{ grid-template-columns: 1fr; }
 }

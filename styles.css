@@ -431,6 +431,7 @@ h3{ margin:18px 0 10px; font-size:16px; }
   border-radius: 2px;
 }
 
-main > h1, main > p {
+/* Center ONLY on contact page */
+.section-header{
   text-align: center;
 }

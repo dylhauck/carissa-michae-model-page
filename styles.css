@@ -316,3 +316,9 @@ h3{ margin:18px 0 10px; font-size:16px; }
   opacity: 1;
   transform: translateY(0);
 }
+
+.section,
+.page-wrap {
+  transform: none !important;
+  filter: non !important;
+}

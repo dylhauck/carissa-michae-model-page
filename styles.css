@@ -477,3 +477,15 @@ body.home .footer {
 body.home .footer {
   text-align: center;
 }
+
+/* HOME: no scrolling on mobile */
+body.home,
+body.home html {
+  height: 100%;
+}
+
+body.home {
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+}

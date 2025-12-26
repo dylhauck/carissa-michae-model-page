@@ -450,3 +450,21 @@ h3{ margin:18px 0 10px; font-size:16px; }
 
 .form-success{ color: #1a7f37; }
 .form-error{ color: #b42318; }
+
+/* HOME ONLY: make footer blend into hero image */
+body.home .footer {
+  background: transparent;
+  border-top: none;
+  position: relative;
+  z-index: 2;
+  margin-top: -70px;        /* pulls footer up onto the image */
+  padding-top: 40px;        /* keeps spacing so it doesn't look cramped */
+  padding-bottom: 26px;
+  color: rgba(255,255,255,0.8);
+  text-shadow: 0 1px 10px rgba(0,0,0,0.6);
+}
+
+/* Optional: center footer text on home only (if you want) */
+body.home .footer {
+  text-align: center;
+}

@@ -478,56 +478,6 @@ body.home .footer {
   text-align: center;
 }
 
-/* HOME: no scrolling on mobile */
-body.home,
-body.home html {
-  height: 100%;
-}
-
-body.home {
-  overflow: hidden;
-  overscroll-behavior: none;
-  touch-action: none;
-}
-
-/* HOME: hero fits the phone screen */
-@media (max-width: 900px) {
-  body.home .hero {
-    height: 100svh;      /* best for mobile browser UI */
-    min-height: 100svh;
-    padding-bottom: 0;   /* important: removes extra height */
-  }
-
-  /* if your footer overlaps hero on desktop, disable that on mobile */
-  body.home .footer {
-    margin-top: 0;
-  }
-}
-
-/* prevent stray margins from creating scroll */
-body.home * {
-  max-width: 100%;
-}
-
-/* HOME ONLY: make the hero image sit lower on mobile (match enter page framing) */
-.home .hero{
-  min-height: 100svh;   /* iOS-safe viewport height */
-  height: 100svh;
-  overflow: hidden;
-}
-
-.home .hero-media{
-  /* keep cover, just change the framing */
-  background-position: 50% 35%;
-}
-
-/* Mobile: push image down more */
-@media (max-width: 768px){
-  .home .hero-media{
-    background-position: 50% 45%;
-  }
-}
-
 /* ===== CONTACT ONLY: fit-to-viewport, no scrolling ===== */
 body.contact-page {
   height: 100%;

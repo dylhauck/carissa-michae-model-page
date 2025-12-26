@@ -398,7 +398,7 @@ h3{ margin:18px 0 10px; font-size:16px; }
 ​
 /* Center + style Send Message button */
 .form-actions {
-  justify-content: center !important;
+  justify-content: center;
 }
 
 .form-actions .btn {

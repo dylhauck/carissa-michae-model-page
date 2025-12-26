@@ -316,3 +316,12 @@ h3{ margin:18px 0 10px; font-size:16px; }
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Fix desktop graininess caused by transformed parent layers */
+.grid img {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: auto;
+}
+

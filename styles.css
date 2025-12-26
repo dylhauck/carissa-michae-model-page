@@ -379,22 +379,6 @@ h3{ margin:18px 0 10px; font-size:16px; }
 @media (max-width: 700px){
   .form-row{ grid-template-columns: 1fr; }
 }
-
-​/* Active nav link underline */
-.nav a[aria-current="page"] {
-  position: relative;
-}
-
-.nav a[aria-current="page"]::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -6px;
-  height: 2px;
-  background: var(--text);
-  border-radius: 2px;
-}
 ​
 /* Center + style Send Message button */
 .form-actions {
@@ -418,4 +402,31 @@ h3{ margin:18px 0 10px; font-size:16px; }
   color: #fff;
   border-color: #111;
   transform: translateY(-1px);
+}
+
+/* Center contact page heading + subtitle */
+.contact-header {
+  text-align: center;
+}
+
+/* Center the Send Message button wrapper */
+.form-actions {
+  display: flex;
+  justify-content: center;
+}
+
+/* Only underline the active page link */
+.nav a {
+  position: relative;
+}
+
+.nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
 }

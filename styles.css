@@ -380,7 +380,22 @@ h3{ margin:18px 0 10px; font-size:16px; }
   .form-row{ grid-template-columns: 1fr; }
 }
 
-​You​
+​/* Active nav link underline */
+.nav a[aria-current="page"] {
+  position: relative;
+}
+
+.nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+}
+​
 /* Center + style Send Message button */
 .form-actions {
   justify-content: center !important;

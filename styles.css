@@ -508,3 +508,22 @@ body.home {
 body.home * {
   max-width: 100%;
 }
+
+/* HOME ONLY: make the hero image sit lower on mobile (match enter page framing) */
+.home .hero{
+  min-height: 100svh;   /* iOS-safe viewport height */
+  height: 100svh;
+  overflow: hidden;
+}
+
+.home .hero-media{
+  /* keep cover, just change the framing */
+  background-position: 50% 35%;
+}
+
+/* Mobile: push image down more */
+@media (max-width: 768px){
+  .home .hero-media{
+    background-position: 50% 45%;
+  }
+}

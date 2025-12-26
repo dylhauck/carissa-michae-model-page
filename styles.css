@@ -503,3 +503,8 @@ body.home {
     margin-top: 0;
   }
 }
+
+/* prevent stray margins from creating scroll */
+body.home * {
+  max-width: 100%;
+}

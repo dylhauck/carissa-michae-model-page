@@ -383,7 +383,7 @@ h3{ margin:18px 0 10px; font-size:16px; }
 ​You​
 /* Center + style Send Message button */
 .form-actions {
-  justify-content: center;
+  justify-content: center !important;
 }
 
 .form-actions .btn {

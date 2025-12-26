@@ -325,3 +325,8 @@ h3{ margin:18px 0 10px; font-size:16px; }
   image-rendering: auto;
 }
 
+#portfolio,
+#portfolio * {
+  transform: none !important;
+  filter: none !important;
+}

@@ -489,3 +489,17 @@ body.home {
   overscroll-behavior: none;
   touch-action: none;
 }
+
+/* HOME: hero fits the phone screen */
+@media (max-width: 900px) {
+  body.home .hero {
+    height: 100svh;      /* best for mobile browser UI */
+    min-height: 100svh;
+    padding-bottom: 0;   /* important: removes extra height */
+  }
+
+  /* if your footer overlaps hero on desktop, disable that on mobile */
+  body.home .footer {
+    margin-top: 0;
+  }
+}

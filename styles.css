@@ -477,3 +477,23 @@ body.home .footer {
 body.home .footer {
   text-align: center;
 }
+
+/* CONTACT PAGE — desktop only fit-to-screen */
+@media (min-width: 1024px) {
+  body.contact-page {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  body.contact-page main {
+    height: calc(100vh - 120px); /* adjust if header height changes */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  body.contact-page .contact-form {
+    max-height: 100%;
+    overflow: auto;
+  }
+}

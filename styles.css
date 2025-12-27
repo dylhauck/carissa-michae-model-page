@@ -550,3 +550,22 @@ body.contact-page textarea {
     padding: 16px 18px calc(16px + env(safe-area-inset-bottom));
   }
 }
+
+/* ===== HOME ONLY: prevent page scroll on mac ===== */
+body.home {
+  overflow: hidden;          /* stop page scroll */
+  height: 100svh;            /* stable viewport height */
+}
+
+/* Make the home wrapper fill the viewport (no extra height) */
+body.home #homeWrap {
+  height: 100svh;
+  overflow: hidden;
+}
+
+/* Make hero fill exactly the viewport */
+body.home .hero {
+  height: 100svh;
+  min-height: 100svh;
+  overflow: hidden;
+}

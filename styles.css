@@ -502,3 +502,18 @@ body.contact-page textarea {
   min-height: 140px; /* adjust if needed */
   resize: none;
 }
+
+@media (max-width: 768px) {
+  body.contact.page {
+    height: auto !important;
+    overflow: auto !important;
+  }
+
+  body.contact.page main,
+  body.contact.page .page-wrap,
+  body.contact.page .contact-form {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}

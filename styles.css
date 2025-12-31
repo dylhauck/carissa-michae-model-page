@@ -602,3 +602,34 @@ body.lightbox-open { overflow: hidden; }
   .lightbox-dialog { grid-template-columns: 56px 1fr 56px; padding: 16px; }
   .lightbox-img { max-height: 78vh; }
 }
+
+@media (max-width: 768px) {
+  .lightbox-dialog{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    padding: 14px;
+  }
+
+  /* force the image to be truly centered */
+  .lightbox-figure{
+    align-self: center;
+    justify-self: center;
+    width: 100%;
+    display: grid;
+    place-items: center;
+  }
+
+  .lightbox-img{
+    max-width: 92vw;
+    max-height: 80vh;
+  }
+
+  /* move arrows to bottom so they don’t push layout */
+  .lightbox-nav{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .lightbox-prev{ left: 10px; }
+  .lightbox-next{ right: 10px; }
+}

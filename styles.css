@@ -634,3 +634,8 @@ body.lightbox-open { overflow: hidden; }
   .lightbox-prev{ left: 10px; }
   .lightbox-next{ right: 10px; }
 }
+
+/* About page: vertically center the ONLY the paragraph */
+body.about-page .about-text {
+  margin-top: clamp(40px, 12vh, 160px);
+}

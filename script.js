@@ -54,7 +54,16 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
 // Lightbox (enlarge + blur + arrows)
 (function () {
-  const gridImages = Array.from(document.querySelectorAll(".grid img"));
+  // ✅ ONLY change: scope navigation to the currently active tab/panel
+  function getActiveTabImages() {
+    const activePanel =
+      document.querySelector(".panel.active") ||
+      document.querySelector(".tab-panels .panel.active");
+
+    return Array.from((activePanel || document).querySelectorAll(".grid img"));
+  }
+
+  let gridImages = getActiveTabImages();
   if (!gridImages.length) return;
 
   const lightbox = document.getElementById("lightbox");
@@ -67,6 +76,10 @@ document.getElementById("year").textContent = new Date().getFullYear();
   let currentIndex = 0;
 
   function openAt(index) {
+    // refresh list at open time so we only use the active tab
+    gridImages = getActiveTabImages();
+    if (!gridImages.length) return;
+
     currentIndex = (index + gridImages.length) % gridImages.length;
 
     const img = gridImages[currentIndex];
@@ -90,10 +103,17 @@ document.getElementById("year").textContent = new Date().getFullYear();
   function prev() { openAt(currentIndex - 1); }
   function next() { openAt(currentIndex + 1); }
 
-  // Click any grid image to open
-  gridImages.forEach((img, idx) => {
+  // ✅ ONLY change: click handler uses the active panel at click time
+  document.addEventListener("click", (e) => {
+    const img = e.target.closest(".panel.active .grid img");
+    if (!img) return;
+
+    gridImages = getActiveTabImages();
+    const idx = gridImages.indexOf(img);
+    if (idx === -1) return;
+
     img.style.cursor = "zoom-in";
-    img.addEventListener("click", () => openAt(idx));
+    openAt(idx);
   });
 
   // Backdrop or X closes

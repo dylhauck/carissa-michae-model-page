@@ -12,6 +12,12 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="contact-page">
+  <!-- =========================================================
+       Contact Page
+       - Uses global styles.css for layout + form styling
+       - Posts to Formspree endpoint
+       - Shows success/error messages inline
+       ========================================================= -->
 
   <div class="page-wrap">
 
@@ -32,139 +38,156 @@
     </header>
 
     <main>
-  <section class="section">
-    <div class="section-header">
-      <h2>Contact</h2>
-      <p class="muted">Send a message for bookings, rates, and availability.</p>
-    </div>
-
-    <form class="contact-form" action="https://formspree.io/f/mwvkpdwy" method="POST">
-      <!-- Row 1 -->
-      <div class="form-row">
-        <div class="field">
-          <label for="firstName">First Name</label>
-          <input id="firstName" name="firstName" type="text" autocomplete="given-name" required />
+      <section class="section">
+        <div class="section-header">
+          <h2>Contact</h2>
+          <p class="muted">Send a message for bookings, rates, and availability.</p>
         </div>
 
-        <div class="field">
-          <label for="lastName">Last Name</label>
-          <input id="lastName" name="lastName" type="text" autocomplete="family-name" required />
-        </div>
-      </div>
+        <!-- Contact Form (Formspree) -->
+        <form class="contact-form" action="https://formspree.io/f/mwvkpdwy" method="POST">
+          <!-- Row 1 -->
+          <div class="form-row">
+            <div class="field">
+              <label for="firstName">First Name</label>
+              <input id="firstName" name="firstName" type="text" autocomplete="given-name" required />
+            </div>
 
-      <!-- Row 2 -->
-      <div class="form-row">
-        <div class="field">
-          <label for="phone">Phone Number</label>
-          <input id="phone" name="phone" type="tel" autocomplete="tel" />
-        </div>
+            <div class="field">
+              <label for="lastName">Last Name</label>
+              <input id="lastName" name="lastName" type="text" autocomplete="family-name" required />
+            </div>
+          </div>
 
-        <div class="field">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" required />
-        </div>
-      </div>
+          <!-- Row 2 -->
+          <div class="form-row">
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" />
+            </div>
 
-      <!-- Row 3 -->
-      <div class="form-row">
-        <div class="field">
-          <label for="preferredContact">Preferred Choice of Contact</label>
-          <select id="preferredContact" name="preferredContact" required>
-            <option value="" selected disabled>Select one</option>
-            <option value="Phone">Call</option>
-            <option value="Email">Email</option>
-            <option value="Text">Text</option>
-          </select>
-        </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+          </div>
 
-        <div class="field">
-          <label for="bookingType">Type of Booking</label>
-          <select id="bookingType" name="bookingType" required>
-            <option value="" selected disabled>Select one</option>
-            <option value="Collaboration">Collaborations</option>
-            <option value="Events">Events</option>
-            <option value="Photoshoot">Photoshoots</option>
-            <option value="Social Media">Social Media</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-      </div>
+          <!-- Row 3 -->
+          <div class="form-row">
+            <div class="field">
+              <label for="preferredContact">Preferred Choice of Contact</label>
+              <select id="preferredContact" name="preferredContact" required>
+                <option value="" selected disabled>Select one</option>
+                <option value="Phone">Call</option>
+                <option value="Email">Email</option>
+                <option value="Text">Text</option>
+              </select>
+            </div>
 
-      <!-- Message -->
-      <div class="field">
-        <label for="message">Additional Comments</label>
-        <textarea
-          id="message"
-          name="message"
-          rows="6"
-          required
-          placeholder="Share dates, location, brand details, deliverables, and any links."
-        ></textarea>
-      </div>
+            <div class="field">
+              <label for="bookingType">Type of Booking</label>
+              <select id="bookingType" name="bookingType" required>
+                <option value="" selected disabled>Select one</option>
+                <option value="Collaboration">Collaborations</option>
+                <option value="Events">Events</option>
+                <option value="Photoshoot">Photoshoots</option>
+                <option value="Social Media">Social Media</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
 
-      <div class="form-actions">
-        <button class="btn btn-primary" type="submit" id="sendBtn">Send Message</button>
-      </div>
+          <!-- Message -->
+          <div class="field">
+            <label for="message">Additional Comments</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="6"
+              required
+              placeholder="Share dates, location, brand details, deliverables, and any links."
+            ></textarea>
+          </div>
 
-      <p class="form-success" id="formSuccess" style="display:none;">Message sent! Please be on the lookout for a response in 24-48 hours.</p>
-      <p class="form-error" id="formError" style="display:none;">Something went wrong. Please try again.</p>
-      
-    </form>
-    <style>
-      .centered-paragraph {
-        text-align: center;
-      }
-      </style>
-    <br>
-    <br>
-    <p class="centered-paragraph";>© <span id="year"></span> Carissa Michae · All Rights Reserved</p>
-  </section>
-</main>
+          <!-- Submit -->
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit" id="sendBtn">Send Message</button>
+          </div>
+
+          <!-- Status Messages -->
+          <p class="form-success" id="formSuccess" style="display:none;">
+            Message sent! Please be on the lookout for a response in 24-48 hours.
+          </p>
+          <p class="form-error" id="formError" style="display:none;">
+            Something went wrong. Please try again.
+          </p>
+        </form>
+
+        <!-- Footer (contact page only) -->
+        <br><br>
+        <p class="centered-paragraph">© <span id="year"></span> Carissa Michae · All Rights Reserved</p>
+      </section>
+    </main>
+
   </div>
 
+  <!-- Local helpers (kept minimal + non-invasive) -->
+  <style>
+    /* Centered text utility used on this page only */
+    .centered-paragraph { text-align: center; }
+  </style>
+
+  <!-- Your shared site JS (tabs/year/reveal/lightbox, etc.) -->
   <script src="script.js"></script>
+
+  <!-- Contact form submit handler (AJAX Formspree) -->
   <script>
-  (function () {
-    const form = document.querySelector(".contact-form");
-    if (!form) return;
+    (function () {
+      const form = document.querySelector(".contact-form");
+      if (!form) return;
 
-    const btn = document.getElementById("sendBtn");
-    const okMsg = document.getElementById("formSuccess");
-    const errMsg = document.getElementById("formError");
+      const btn = document.getElementById("sendBtn");
+      const okMsg = document.getElementById("formSuccess");
+      const errMsg = document.getElementById("formError");
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+      // Footer year (kept here so this page works even if script.js changes later)
+      const yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-      okMsg.style.display = "none";
-      errMsg.style.display = "none";
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-      const originalText = btn.textContent;
-      btn.disabled = true;
-      btn.textContent = "Sending...";
+        okMsg.style.display = "none";
+        errMsg.style.display = "none";
 
-      try {
-        const res = await fetch(form.action, {
-          method: "POST",
-          body: new FormData(form),
-          headers: { "Accept": "application/json" }
-        });
+        const originalText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = "Sending...";
 
-        if (res.ok) {
-          form.reset();
-          okMsg.style.display = "block";
-          btn.textContent = "Sent ✓";
-        } else {
+        try {
+          const res = await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { "Accept": "application/json" }
+          });
+
+          if (res.ok) {
+            form.reset();
+            okMsg.style.display = "block";
+            btn.textContent = "Sent ✓";
+          } else {
+            errMsg.style.display = "block";
+            btn.disabled = false;
+            btn.textContent = originalText;
+          }
+        } catch (err) {
           errMsg.style.display = "block";
           btn.disabled = false;
           btn.textContent = originalText;
         }
-      } catch (err) {
-        errMsg.style.display = "block";
-        btn.disabled = false;
-        btn.textContent = originalText;
-      }
-    });
-  })();
-</script>
+      });
+    })();
+  </script>
+
 </body>
 </html>

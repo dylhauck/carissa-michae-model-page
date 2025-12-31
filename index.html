@@ -53,31 +53,52 @@
       background: #000;
     }
 
-    /* ✅ Video replaces photo slides */
-    .enter-video{
+    /* ✅ 2-layer video technique */
+    .video-showcase{
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .video-bg{
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: 50% 20%;
+      filter: blur(22px) brightness(0.8);
+      transform: scale(1.1);
     }
 
-    @media (min-width: 769px) {
-      .enter-video { object-position: 50% 20%; }
+    .video-main{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
+
     @media (max-width: 768px) {
-      .enter-video { object-position: 50% 12%; }
+      .video-bg,
+      .video-main{
+        object-position: 50% 35%;
+      }
     }
 
+    /* ✅ Vignette overlay */
     .overlay {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at center, rgba(0,0,0,0.15), rgba(0,0,0,0.6)),
-        rgba(0,0,0,0.2);
+        radial-gradient(circle at 50% 45%,
+          rgba(0,0,0,0.10) 0%,
+          rgba(0,0,0,0.35) 55%,
+          rgba(0,0,0,0.70) 100%),
+        rgba(0,0,0,0.10);
       opacity: 0;
       animation: overlayFade 1.4s ease forwards;
+      pointer-events: none;
     }
 
     @keyframes overlayFade { to { opacity: 1; } }
@@ -185,16 +206,11 @@
   <!-- ENTER OVERLAY -->
   <div class="enter-page" id="enterOverlay">
     <div class="slideshow">
-      <!-- ✅ Single video background -->
-      <video
-        class="enter-video"
-        src="videos/Carissa.MOV"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="auto"
-      ></video>
+      <!-- ✅ 2-layer video background -->
+      <div class="video-showcase">
+        <video class="video-bg" src="videos/Carissa.MOV" autoplay muted loop playsinline preload="auto"></video>
+        <video class="video-main" src="videos/Carissa.MOV" autoplay muted loop playsinline preload="auto"></video>
+      </div>
     </div>
 
     <div class="overlay"></div>

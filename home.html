@@ -12,26 +12,37 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- =========================================================
+       Home Page (Standalone)
+       - Uses global styles.css
+       - Uses script.js for footer year (and any shared effects)
+       ========================================================= -->
+
   <div class="page-wrap">
 
-  <header class="site-header">
-    <div class="brand">
-      <div class="brand-name">Carissa Michae</div>
-      <div class="brand-subtitle">Professional · Commercial · Editorial · Lifestyle</div>
-    </div>
+    <header class="site-header">
+      <div class="brand">
+        <div class="brand-name">Carissa Michae</div>
+        <div class="brand-subtitle">Professional · Commercial · Editorial · Lifestyle</div>
+      </div>
 
-    <nav class="nav">
-      <a href="portfolio.html" class="nav-link">Portfolio</a>
-      <a href="about.html" class="nav-link">About</a>
-      <a href="contact.html" class="nav-link">Contact</a>
-    </nav>
-  </header>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+    </header>
 
-  <footer class="footer">
-    © <span id="year"></span> Carissa Michae · All Rights Reserved
-  </footer>
+    <!-- NOTE: This page currently contains only header + footer.
+         If you later add hero/sections, place them here inside <main>. -->
 
+    <footer class="footer">
+      © <span id="year"></span> Carissa Michae · All Rights Reserved
+    </footer>
+
+  </div>
+
+  <!-- Shared site JS -->
   <script src="script.js"></script>
-    </div>
 </body>
 </html>

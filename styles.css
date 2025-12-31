@@ -634,8 +634,3 @@ body.lightbox-open { overflow: hidden; }
   .lightbox-prev{ left: 10px; }
   .lightbox-next{ right: 10px; }
 }
-
-/* About page vertical centering (keep left-aligned) */
-body.about-page main {
-  padding-top: clamp(80px, 18vh, 220px);
-}

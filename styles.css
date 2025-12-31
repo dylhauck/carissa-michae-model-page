@@ -655,23 +655,22 @@ body.about-page .card {
   padding-bottom: 14px;
 }
 
-/* HOME (mobile): prevent dragging / bounce scrolling */
-@media (max-width: 768px){
-  body.home{
-    height: 100dvh;
-    overflow: hidden;
-    overscroll-behavior: none;
-    touch-action: none;
+@media (max-width: 768px) {
+  body.home,
+  body.home #homeWrap,
+  body.home .hero {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
-  body.home .page-wrap{
-    height: 100dvh;
-    overflow: hidden;
+  body.home {
+    position: fixed;
+    inset: 0;
   }
 
-  body.home .hero{
+  body.home .hero {
     height: 100dvh;
     min-height: 100dvh;
-    padding-bottom: 0; /* removes extra space that can create scroll */
   }
 }

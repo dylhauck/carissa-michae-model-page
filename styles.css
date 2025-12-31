@@ -639,3 +639,12 @@ body.lightbox-open { overflow: hidden; }
 body.about-page .about-text {
   margin-top: clamp(40px, 12vh, 160px);
 }
+
+/* About page — tighten spacing under header */
+body.about-page .section-header {
+  margin-bottom: 24px;
+}
+
+body.about-page .about-text {
+  margin-top: 0;
+}

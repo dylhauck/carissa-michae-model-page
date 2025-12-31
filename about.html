@@ -12,6 +12,11 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="about-page">
+  <!-- =========================================================
+       About Page
+       - Uses global styles.css for layout + typography
+       - Only adds a small local helper class for centered text
+       ========================================================= -->
 
   <div class="page-wrap">
 
@@ -31,63 +36,62 @@
       </nav>
     </header>
 
-  <main>
-    <section class="section">
-      <div class="section-header">
-        <h2>About Me</h2>
-        <p class="muted">Where Inner Confidence Meets Authenticity & Visual Storytelling</p>
-      </div>
-
-      <div class="two-col">
-        <div>
-          <p class="about-text">
-            Carissa Michae is a professional model with experience across commercial, editorial, and lifestyle work.
-            Known for a calm on-set presence and strong direction-following, she brings a polished, approachable energy
-            to every shoot—helping brands communicate clearly through confident movement and authentic expression. She is comfortable
-            working both independently and within collaborative teams, adapting quickly to creative direction while maintaining a consistent, professional presence.
-            Carissa approaches each project with intention and understands the importance of movement, expression, and subtle deatil in creating refined imagery. 
-          </p>
-          <p>
-            With a strong understanding of brand identity and visual storytelling, Carissa brings versatility across commercial campaigns, editorial features, and lifestyle content. 
-            Her ability to translate creative vision into natural, engaging imagery allows brands to connect with audiences in a polished yet approachable way.
-            Known for her reliability and professionalism on set, Carissa is punctual, communicative, and easy to work with. 
-            She takes direction well, remains adaptable throughout shoots, and contributes positively to the creative environment—making her a trusted choice for photographers, stylists, and production teams.
-            Whether working on set or on location, Carissa aims to create imagery that feels confident, intentional, and visually compelling—supporting each project with clarity, presence, and professionalism.
-          </p>
+    <main>
+      <section class="section">
+        <div class="section-header">
+          <h2>About Me</h2>
+          <p class="muted">Where Inner Confidence Meets Authenticity & Visual Storytelling</p>
         </div>
 
-        <div class="card">
-          <style>
-        .centered-paragraph {
-          text-align: center;
-        }
-      </style>
-          <h3 class="centered-paragraph";>Stats & Features</h3><br>
-          <div class="stats">
-            <div class="stat"><span>Height</span><strong>5’9”</strong></div>
-            <div class="stat"><span>Dress Size</span><strong>6 (US)</strong></div>
-            <div class="stat"><span>Apparel</span><strong>M</strong></div>
-            <div class="stat"><span>Pant Size</span><strong>6</strong></div>
-            <div class="stat"><span>Shoe Size</span><strong>9.5 (US)</strong></div>
-            <div class="stat"><span>Heel Size</span><strong>10 (US)</strong></div>
-            <div class="stat"><span>Hair</span><strong>Brown</strong></div>
-            <div class="stat"><span>Eyes</span><strong>Brown</strong></div>
-            <br>
+        <div class="two-col">
+          <div>
+            <p class="about-text">
+              Carissa Michae is a professional model with experience across commercial, editorial, and lifestyle work.
+              Known for a calm on-set presence and strong direction-following, she brings a polished, approachable energy
+              to every shoot—helping brands communicate clearly through confident movement and authentic expression. She is comfortable
+              working both independently and within collaborative teams, adapting quickly to creative direction while maintaining a consistent, professional presence.
+              Carissa approaches each project with intention and understands the importance of movement, expression, and subtle deatil in creating refined imagery.
+            </p>
+            <p>
+              With a strong understanding of brand identity and visual storytelling, Carissa brings versatility across commercial campaigns, editorial features, and lifestyle content.
+              Her ability to translate creative vision into natural, engaging imagery allows brands to connect with audiences in a polished yet approachable way.
+              Known for her reliability and professionalism on set, Carissa is punctual, communicative, and easy to work with.
+              She takes direction well, remains adaptable throughout shoots, and contributes positively to the creative environment—making her a trusted choice for photographers, stylists, and production teams.
+              Whether working on set or on location, Carissa aims to create imagery that feels confident, intentional, and visually compelling—supporting each project with clarity, presence, and professionalism.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 class="centered-paragraph">Stats & Features</h3><br>
+
+            <div class="stats">
+              <div class="stat"><span>Height</span><strong>5’9”</strong></div>
+              <div class="stat"><span>Dress Size</span><strong>6 (US)</strong></div>
+              <div class="stat"><span>Apparel</span><strong>M</strong></div>
+              <div class="stat"><span>Pant Size</span><strong>6</strong></div>
+              <div class="stat"><span>Shoe Size</span><strong>9.5 (US)</strong></div>
+              <div class="stat"><span>Heel Size</span><strong>10 (US)</strong></div>
+              <div class="stat"><span>Hair</span><strong>Brown</strong></div>
+              <div class="stat"><span>Eyes</span><strong>Brown</strong></div>
+            </div>
           </div>
         </div>
-      </div>
-      <style>
-        .centered-paragraph {
-          text-align: center;
-        }
-      </style>
-      <br>
-      <br>
-      <p class="centered-paragraph";>© <span id="year"></span> Carissa Michae · All Rights Reserved</p>
-    </main>
-    </section>
-  </main>
 
+        <!-- Footer (about page only) -->
+        <br><br>
+        <p class="centered-paragraph">© <span id="year"></span> Carissa Michae · All Rights Reserved</p>
+      </section>
+    </main>
+
+  </div>
+
+  <!-- Local helpers (kept minimal + non-invasive) -->
+  <style>
+    /* Centered text utility used on this page only */
+    .centered-paragraph { text-align: center; }
+  </style>
+
+  <!-- Footer year (kept exactly as behavior you had) -->
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>

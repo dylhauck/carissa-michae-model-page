@@ -80,7 +80,7 @@ main{
 .section{ padding:70px 0; }
 .section + .section{ border-top:1px solid var(--border); }
 
-/* NOTE: You currently center section headers globally.
+/* NOTE: Currently center section headers globally.
    Keeping as-is to avoid unintended changes. */
 .section-header h2{
   margin:0 0 10px;
@@ -114,7 +114,7 @@ main{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  justify-content:center; /* you wanted centered */
+  justify-content:center; /* centered tabs */
 }
 
 .tab{
@@ -370,7 +370,7 @@ body.home .hero{
   color:#fff;
 }
 
-/* (Unused now but kept since you had it) */
+/* (Unused now but kept as a precaution) */
 .hero-scroll{
   position:absolute;
   bottom: 22px;
@@ -665,7 +665,7 @@ body.lightbox-open{ overflow: hidden; }
    About Page Tweaks
    ========================================================= */
 /* Currently have margin-top then immediately override it later.
-   Keeping only the final behavior (margin-top: 0) to match your current output. */
+   Keeping only the final behavior (margin-top: 0) to match current output. */
 body.about-page .about-text{ margin-top: 0; }
 
 body.about-page .section-header{ margin-bottom: 24px; }

@@ -208,10 +208,6 @@ body.home .hero {
   height: 100vh;
 }
 
-body.home .hero {
-  padding-bottom: 120px;
-}
-
 .hero-media{
   position:absolute;
   inset:0;

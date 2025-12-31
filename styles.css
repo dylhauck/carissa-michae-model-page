@@ -648,3 +648,13 @@ body.about-page .section-header {
 body.about-page .about-text {
   margin-top: 0;
 }
+
+/* About page: center stats vertically with paragraph */
+body.about-page .two-col {
+  align-items: center;
+}
+
+/* Tighten stats card vertical spacing */
+body.about-page .card {
+  padding-bottom: 14px;
+}

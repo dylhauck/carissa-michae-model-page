@@ -678,11 +678,15 @@ body.about-page .card{ padding-bottom: 14px; }
 
 /* =========================================================
    Mobile Home: Lock Page + Prevent Drag/Scroll
-   (This is what fixed the "drag left/down" issue.)
+   (Home only — does not affect other pages)
    ========================================================= */
 @media (max-width: 768px){
-  html{ overflow: hidden !important; }
-  body.home{ overflow: hidden !important; }
+  /* IMPORTANT: do NOT lock html overflow (breaks scrolling on other pages) */
+  body.home{
+    overflow: hidden !important;
+    overscroll-behavior: none;
+    touch-action: none;
+  }
 
   body.home,
   body.home #homeWrap{

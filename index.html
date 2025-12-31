@@ -4,23 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Carissa Michae</title>
-  
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Global site styles -->
   <link rel="stylesheet" href="styles.css" />
-  
+
+  <!-- =========================================================
+       Index Page (Enter Overlay + Home Behind)
+       NOTE: Keeping these styles inline so we don't change your
+       global CSS structure. Only removing true redundancies.
+       ========================================================= -->
   <style>
+    /* Base reset for this page (kept minimal) */
     * { box-sizing: border-box; }
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden;
+      overflow: hidden; /* enter overlay starts locked; JS re-enables after Enter */
       font-family: Inter, system-ui, sans-serif;
       background: #fff;
     }
-    
+
+    /* =========================
+       ENTER OVERLAY
+       ========================= */
     .enter-page {
       position: fixed;
       inset: 0;
@@ -28,29 +40,38 @@
       height: 100dvh;
       min-height: 100dvh;
       overflow: hidden;
+      z-index: 9999;
+      background: #000;
+
+      /* Cinematic load */
       opacity: 0;
       animation: pageFade 1.2s ease forwards;
-      z-index: 9999;
+
+      /* Zoom-away transition */
       transform: scale(1);
       transform-origin: center;
-      transition: transform 1200ms cubic-bezier(.2,.8,.2,1), filter 1200ms cubic-bezier(.2,.8,.2,1);
-      background: #000;
+      transition:
+        transform 1200ms cubic-bezier(.2,.8,.2,1),
+        filter 1200ms cubic-bezier(.2,.8,.2,1);
     }
-    
+
     @keyframes pageFade { to { opacity: 1; } }
+
+    /* Fade overlay out (prevents hard cut) */
     .enter-page.fade-out {
       opacity: 0;
       transition: opacity 220ms ease;
       pointer-events: none;
     }
-    
+
+    /* Media wrapper */
     .slideshow {
       position: absolute;
       inset: 0;
       background: #000;
     }
 
-    /* ✅ Video replaces photo slides */
+    /* Background video (single source) */
     .enter-video{
       position: absolute;
       inset: 0;
@@ -60,29 +81,34 @@
       object-position: 50% 20%;
     }
 
-    @media (min-width: 769px) {
-      .enter-video { object-position: 50% 20%; }
-    }
-
+    /* Mobile framing */
     @media (max-width: 768px) {
       .enter-video { object-position: 50% 12%; }
     }
 
+    /* Overlay for readability (your existing look) */
     .overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at center, rgba(0,0,0,0.15), rgba(0,0,0,0.6)), rgba(0,0,0,0.2);
+      background:
+        radial-gradient(circle at center, rgba(0,0,0,0.15), rgba(0,0,0,0.6)),
+        rgba(0,0,0,0.2);
       opacity: 0;
       animation: overlayFade 1.4s ease forwards;
     }
 
     @keyframes overlayFade { to { opacity: 1; } }
-    .top-left, .top-right, .enter-container {
+
+    /* Top text + button */
+    .top-left,
+    .top-right,
+    .enter-container {
       position: absolute;
       opacity: 0;
       transform: translateY(10px);
       animation: riseIn 1s ease forwards;
       transition: opacity 500ms ease;
+      z-index: 2; /* ensure above video + overlay */
     }
 
     .top-left {
@@ -120,6 +146,7 @@
       }
     }
 
+    /* Enter button */
     .enter-btn {
       background: rgba(0,0,0,0.85);
       color: #fff;
@@ -137,6 +164,7 @@
       color: #000;
     }
 
+    /* Small screens spacing */
     @media (max-width: 600px) {
       .top-left, .top-right { top: 16px; }
       .top-left { left: 16px; }
@@ -144,6 +172,9 @@
       .enter-container { bottom: 40px; }
     }
 
+    /* =========================
+       SEAMLESS ZOOM TRANSITION
+       ========================= */
     #homeWrap {
       position: relative;
       z-index: 1;
@@ -151,37 +182,43 @@
       filter: blur(0);
     }
 
+    /* Zoom overlay away so far it becomes unrecognizable */
     .enter-page.zoom-away {
       transform: scale(3.2);
       filter: blur(18px);
     }
 
+    /* Fade overlay UI during zoom-away */
     .enter-page.zoom-away .top-left,
     .enter-page.zoom-away .top-right,
     .enter-page.zoom-away .enter-container {
       opacity: 0;
     }
 
+    /* Prep home to start at the same extreme zoom/blur */
     #homeWrap.prep-zoom {
       transform: scale(3.2);
       filter: blur(18px);
       opacity: 1;
     }
 
+    /* Then zoom home back to normal */
     #homeWrap.zoom-out {
-      transition: transform 1200ms cubic-bezier(.2,.8,.2,1), filter 1200ms cubic-bezier(.2,.8,.2,1);
+      transition:
+        transform 1200ms cubic-bezier(.2,.8,.2,1),
+        filter 1200ms cubic-bezier(.2,.8,.2,1);
       transform: scale(1);
       filter: blur(0);
     }
   </style>
 </head>
-<body class="home">
 
-  <!-- ENTER OVERLAY -->
+<body class="home">
+  <!-- =========================================================
+       ENTER OVERLAY (Video + UI)
+       ========================================================= -->
   <div class="enter-page" id="enterOverlay">
     <div class="slideshow">
-      
-      <!-- ✅ Single video background -->
       <video
         class="enter-video"
         src="videos/Carissa.MOV"
@@ -194,14 +231,18 @@
     </div>
 
     <div class="overlay"></div>
+
     <div class="top-left">Carissa Michae</div>
     <div class="top-right">Model. Muse. Creative.</div>
+
     <div class="enter-container">
       <button class="enter-btn" id="enterBtn" type="button">ENTER</button>
     </div>
   </div>
-  
-  <!-- HOME PAGE (behind overlay) -->
+
+  <!-- =========================================================
+       HOME (Behind Overlay)
+       ========================================================= -->
   <div class="page-wrap" id="homeWrap">
     <header class="site-header" id="homeHeader">
       <div class="brand">
@@ -212,6 +253,7 @@
 
     <section class="hero" id="home" aria-label="Hero">
       <div class="hero-media" aria-hidden="true"></div>
+
       <div class="hero-content">
         <div class="hero-eyebrow">Carissa Michae</div>
         <h1 class="hero-title">Presence, Poise, Story.</h1>
@@ -226,41 +268,60 @@
         </div>
       </div>
     </section>
-    
+
     <footer class="footer">
       © <span id="year"></span> Carissa Michae · All Rights Reserved
     </footer>
   </div>
 
-  <!-- SEAMLESS ZOOM TRANSITION (no navigation) -->
+  <!-- =========================================================
+       Enter → Home seamless zoom transition
+       (kept same timing/behavior; just commented + slightly organized)
+       ========================================================= -->
   <script>
-    const enterBtn = document.getElementById("enterBtn");
-    const overlay = document.getElementById("enterOverlay");
-    const home = document.getElementById("homeWrap");
-    enterBtn.addEventListener("click", () => {
-      home.classList.add("prep-zoom");
-      overlay.classList.add("zoom-away");
-      setTimeout(() => {
-        
-        // re-enable scrolling on main page
-        document.documentElement.style.overflow = "auto";
-        document.body.style.overflow = "auto";
-        
-        // start home zoom-out
-        void home.offsetWidth;
-        home.classList.add("zoom-out");
-        
-        // fade overlay out instead of hard cut
-        overlay.classList.add("fade-out");
-        document.getElementById("homeHeader").style.display = "none";
-        
-        // remove overlay after fade finishes
+    (function () {
+      const enterBtn = document.getElementById("enterBtn");
+      const overlay = document.getElementById("enterOverlay");
+      const home = document.getElementById("homeWrap");
+      const homeHeader = document.getElementById("homeHeader");
+
+      if (!enterBtn || !overlay || !home) return;
+
+      enterBtn.addEventListener("click", () => {
+        // Match home to the extreme zoom/blur BEFORE we zoom the overlay away
+        home.classList.add("prep-zoom");
+
+        // Zoom the enter overlay away (so far it becomes unrecognizable)
+        overlay.classList.add("zoom-away");
+
+        // When the overlay is mostly "gone", start the home zoom-out and fade overlay
         setTimeout(() => {
-          overlay.style.display = "none";
-        }, 230);
-      }, 850);
-    });
+          // Re-enable scrolling for the site (index starts locked)
+          document.documentElement.style.overflow = "auto";
+          document.body.style.overflow = "auto";
+
+          // Force paint so the transition reliably triggers
+          void home.offsetWidth;
+
+          // Zoom home back to normal
+          home.classList.add("zoom-out");
+
+          // Fade overlay out instead of a hard cut
+          overlay.classList.add("fade-out");
+
+          // Hide header during the transition (your existing behavior)
+          if (homeHeader) homeHeader.style.display = "none";
+
+          // Remove overlay after fade finishes
+          setTimeout(() => {
+            overlay.style.display = "none";
+          }, 230);
+        }, 850);
+      });
+    })();
   </script>
+
+  <!-- Shared site JS (year, reveal, tabs, lightbox, etc.) -->
   <script src="script.js"></script>
 </body>
 </html>

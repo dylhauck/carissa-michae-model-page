@@ -4,20 +4,6 @@ A cinematic, responsive portfolio website designed to showcase professional mode
 
 ---
 
-## 📸 Screenshots
-
-> Add screenshots to `/screenshots` and update filenames below.
-
-| Enter Page | Home Page |
-|-----------|-----------|
-| ![Enter Page](screenshots/enter-page.jpg) | ![Home Page](screenshots/home-page.jpg) |
-
-| Portfolio (Lightbox) | Contact Page |
-|---------------------|--------------|
-| ![Portfolio Lightbox](screenshots/portfolio-lightbox.jpg) | ![Contact Page](screenshots/contact-page.jpg) |
-
----
-
 ## ✨ Features
 
 ### Cinematic Enter Experience

@@ -86,7 +86,7 @@
       .enter-video { object-position: 50% 12%; }
     }
 
-    /* Overlay for readability (your existing look) */
+    /* Overlay for readability (existing look) */
     .overlay {
       position: absolute;
       inset: 0;
@@ -288,7 +288,7 @@
       if (!enterBtn || !overlay || !home) return;
 
       enterBtn.addEventListener("click", () => {
-        // Match home to the extreme zoom/blur BEFORE we zoom the overlay away
+        // Match home to the extreme zoom/blur BEFORE zooming the overlay away
         home.classList.add("prep-zoom");
 
         // Zoom the enter overlay away (so far it becomes unrecognizable)
@@ -309,7 +309,7 @@
           // Fade overlay out instead of a hard cut
           overlay.classList.add("fade-out");
 
-          // Hide header during the transition (your existing behavior)
+          // Hide header during the transition (existing behavior)
           if (homeHeader) homeHeader.style.display = "none";
 
           // Remove overlay after fade finishes

@@ -520,15 +520,13 @@ body.home .hero{
   }
 
   body.contact-page main{
-    height: calc(100vh - 120px); /* adjust if header height changes */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding-top: 40px;
   }
 
   body.contact-page .contact-form{
     max-height: 100%;
     overflow: auto;
+    margin: 0 auto;
   }
 }
 

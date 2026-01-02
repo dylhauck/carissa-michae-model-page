@@ -1,80 +1,92 @@
-# Carissa Michae — Model Portfolio Website
+# Carissa Michae — Model Portfolio & Booking Site
 
-A clean, cinematic portfolio website built with **HTML, CSS, and vanilla JavaScript**, deployed using **GitHub Pages**.  
-Designed to highlight professional modeling work while maintaining a smooth, intentional user experience across desktop and mobile.
+A cinematic, responsive portfolio website designed to showcase professional modeling work across **commercial, editorial, and lifestyle** categories. Built with visual storytelling, accessibility, and performance in mind.
 
 ---
 
-## 🌐 Live Site
-https://dylhauck.github.io
+## 📸 Screenshots
+
+> Add screenshots to `/screenshots` and update filenames below.
+
+| Enter Page | Home Page |
+|-----------|-----------|
+| ![Enter Page](screenshots/enter-page.jpg) | ![Home Page](screenshots/home-page.jpg) |
+
+| Portfolio (Lightbox) | Contact Page |
+|---------------------|--------------|
+| ![Portfolio Lightbox](screenshots/portfolio-lightbox.jpg) | ![Contact Page](screenshots/contact-page.jpg) |
 
 ---
 
 ## ✨ Features
 
-- **Cinematic Enter Page**
-  - Full-screen hero with fade/zoom transition into the site
-  - Mobile-optimized and scroll-free
+### Cinematic Enter Experience
+- Full-screen **background video**
+- Smooth **zoom-through transition** into the homepage
+- Overlay text and call-to-action remain readable across devices
+- Mobile-safe playback (`muted`, `autoplay`, `playsinline`)
 
-- **Home Page**
-  - Full-viewport hero image with blended footer
-  - No scrolling on initial load
-  - Call-to-action buttons for Portfolio, About, and Booking
+### Home Page
+- Full-viewport hero layout
+- Cinematic typography and call-to-action buttons
+- Footer visually blends into the hero image
+- Mobile experience is **locked to viewport** (no drag, no scroll bleed)
 
-- **Portfolio Page**
-  - Image-forward layout
-  - Categorized sections (Headshots, Full-Body, Profile)
-  - Responsive grid for desktop and mobile
+### Portfolio
+- Categorized tabs:
+  - Headshots
+  - Full-Body Shots
+  - Profile Shots
+- Responsive image grid
+- **Lightbox viewer**:
+  - Click-to-enlarge
+  - Background blur
+  - Left / right navigation
+  - Close button
+  - Keyboard support
+  - Navigation stays within the active category
 
-- **About Page**
-  - Dedicated page (removed from home)
-  - Focused on story, presence, and brand
+### About Page
+- Editorial-style biography
+- Vertically balanced two-column layout
+- Stats card aligned with text
+- Mobile spacing handled independently
 
-- **Contact Page**
-  - Separate page with custom booking form
-  - Desktop-only fit-to-screen layout (no scrolling)
-  - Mobile-friendly scrolling preserved
-  - Form submissions handled via **Formspree**
+### Contact Page
+- Professional booking form powered by **Formspree**
+- Desktop-only fit-to-screen layout
+- Mobile scrolling preserved
+- Inline success and error messaging
 
 ---
 
-## 📩 Contact Form Details
+## 📱 Mobile vs Desktop Behavior
 
-The contact form collects:
-- First Name / Last Name
-- Phone Number / Email
-- Preferred Method of Contact
-- Type of Booking  
-  - Collaboration  
-  - Events  
-  - Photoshoot  
-  - Social Media  
-  - Other
-- Additional Comments
+This site intentionally behaves differently across devices.
 
-Form submissions are routed through **Formspree** and delivered directly to the configured email inbox.
+### Mobile
+- Enter page and home page are locked to the viewport
+- No dragging, panning, or scroll bleed
+- Lightbox and forms remain scroll-safe
+
+### Desktop
+- Natural scrolling where appropriate
+- Contact page fits screen height on large displays only
+
+These behaviors are handled via **media queries** and **page-specific body classes**, without affecting other pages.
 
 ---
 
 ## 🧠 Accessibility & UX
 
-- `aria-current="page"` used for active navigation state
-- Keyboard-accessible navigation
-- Responsive typography and buttons
-- Desktop and mobile behaviors handled independently via media queries
+- Semantic HTML structure
+- ARIA attributes for:
+  - Tabs
+  - Dialogs (lightbox)
+  - Navigation
+- Keyboard navigation supported
+- Motion kept smooth and intentional (no infinite transforms)
 
 ---
 
-## 🛠 Tech Stack
-
-- **HTML5**
-- **CSS3**
-  - Flexbox & Grid
-  - Media queries for device-specific behavior
-- **JavaScript (Vanilla)**
-- **Formspree** (form handling)
-- **GitHub Pages** (hosting)
-
----
-
-## 📂 Project Structure
+## 🗂️ Project Structure

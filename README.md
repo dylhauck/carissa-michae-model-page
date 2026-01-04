@@ -1,4 +1,4 @@
-# Carissa Michae — Model Portfolio & Booking Site
+# Carissa Micháe — Model Portfolio & Booking Site
 
 A cinematic, responsive portfolio website designed to showcase professional modeling work across **commercial, editorial, and lifestyle** categories. Built with visual storytelling, accessibility, and performance in mind.
 

@@ -1,10 +1,10 @@
 /* =========================================================
    script.js — cleaned + organized + commented
-   (Behavior preserved — no feature changes)
+   (Behavior preserved — plus compatibility for single-grid portfolio)
    ========================================================= */
 
 /* =========================================================
-   Tabs (Portfolio categories)
+   Tabs (Portfolio categories) — safe no-op if tabs not present
    ========================================================= */
 (() => {
   const tabs = document.querySelectorAll(".tab");
@@ -34,7 +34,6 @@
 
 /* =========================================================
    Enter → Home zoom entrance animation
-   (Plays when coming from the Enter page)
    ========================================================= */
 (() => {
   const fromEnter = sessionStorage.getItem("fromEnter");
@@ -45,9 +44,7 @@
   const wrap = document.querySelector(".page-wrap");
   if (!wrap) return;
 
-  // Force a paint so the animation reliably triggers
-  void wrap.offsetWidth;
-
+  void wrap.offsetWidth; // Force paint
   wrap.classList.add("enter-zoom");
 })();
 
@@ -61,7 +58,7 @@
 })();
 
 /* =========================================================
-   Scroll reveal (fade/slide in as elements enter viewport)
+   Scroll reveal
    ========================================================= */
 (() => {
   const items = document.querySelectorAll(".section, .hero, .card, .contact-card");
@@ -82,12 +79,34 @@
 })();
 
 /* =========================================================
-   Lightbox (enlarge images + blur background + arrows + X)
-   - Keeps navigation within the CURRENT tab only
-   - Centers correctly on mobile (CSS handles layout)
+   Portfolio horizontal gallery arrows (masonry-x)
+   - Works only if markup exists
    ========================================================= */
 (() => {
-  // Required lightbox elements
+  const scroller = document.querySelector(".grid.masonry-x");
+  const arrows = document.querySelectorAll(".gallery-arrow");
+  if (!scroller || !arrows.length) return;
+
+  function scrollByAmount(dir) {
+    // Scroll roughly one column width + gap
+    const col = scroller.querySelector("img");
+    const colWidth = col ? col.getBoundingClientRect().width : 260;
+    scroller.scrollBy({ left: dir * (colWidth + 16), behavior: "smooth" });
+  }
+
+  arrows.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const dir = Number(btn.getAttribute("data-dir")) || 1;
+      scrollByAmount(dir);
+    });
+  });
+})();
+
+/* =========================================================
+   Lightbox (enlarge images + blur background + arrows + X)
+   - Works with tabbed panels OR a single grid (new layout)
+   ========================================================= */
+(() => {
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightboxImg");
   if (!lightbox || !lightboxImg) return;
@@ -95,13 +114,14 @@
   const btnPrev = lightbox.querySelector(".lightbox-prev");
   const btnNext = lightbox.querySelector(".lightbox-next");
 
-  // Helper: get currently active panel (tab content)
+  // If tabs/panels exist, keep navigation within the ACTIVE panel.
+  // Otherwise, fall back to ALL images on the page (single-grid portfolio).
   const getActivePanel = () => document.querySelector(".panel.active");
 
-  // Helper: get only images in the active panel (prevents skipping to other tabs)
   const getActiveImages = () => {
     const panel = getActivePanel();
-    return panel ? Array.from(panel.querySelectorAll(".grid img")) : [];
+    if (panel) return Array.from(panel.querySelectorAll(".grid img"));
+    return Array.from(document.querySelectorAll(".grid img"));
   };
 
   let currentIndex = 0;
@@ -110,7 +130,6 @@
     const images = getActiveImages();
     if (!images.length) return;
 
-    // Wrap index within current tab only
     currentIndex = (index + images.length) % images.length;
 
     const img = images[currentIndex];
@@ -126,58 +145,55 @@
     lightbox.classList.remove("is-open");
     lightbox.setAttribute("aria-hidden", "true");
     document.body.classList.remove("lightbox-open");
-
-    // Clear src to reduce memory use on large images
     lightboxImg.src = "";
   }
 
-  function prev() {
-    openAt(currentIndex - 1);
-  }
+  function prev() { openAt(currentIndex - 1); }
+  function next() { openAt(currentIndex + 1); }
 
-  function next() {
-    openAt(currentIndex + 1);
-  }
-
-  // Delegate clicks: open image only within the active panel
+  // Click-to-open:
+  // - If panels exist: only open from the active panel
+  // - Otherwise: open from any grid image (single grid)
   document.addEventListener("click", (e) => {
     const target = e.target;
     if (!(target instanceof Element)) return;
 
-    // If the click is on a grid image inside the active panel, open it
-    if (target.matches(".panel.active .grid img")) {
+    const panel = getActivePanel();
+
+    if (panel) {
+      if (!target.matches(".panel.active .grid img")) return;
+      const images = getActiveImages();
+      const idx = images.indexOf(target);
+      if (idx !== -1) openAt(idx);
+      return;
+    }
+
+    if (target.matches(".grid img")) {
       const images = getActiveImages();
       const idx = images.indexOf(target);
       if (idx !== -1) openAt(idx);
     }
   });
 
-  // Add cursor hint on images (works even after tab switches)
+  // Cursor hint
   document.addEventListener("mouseover", (e) => {
     const target = e.target;
     if (!(target instanceof Element)) return;
-
-    if (target.matches(".grid img")) {
-      target.style.cursor = "zoom-in";
-    }
+    if (target.matches(".grid img")) target.style.cursor = "zoom-in";
   });
 
-  // Backdrop or X closes
+  // Backdrop / X closes
   lightbox.addEventListener("click", (e) => {
     const target = e.target;
     if (!(target instanceof Element)) return;
-
     if (target.getAttribute("data-close") === "true") close();
   });
 
-  // Arrow buttons (guard in case markup changes)
   if (btnPrev) btnPrev.addEventListener("click", prev);
   if (btnNext) btnNext.addEventListener("click", next);
 
-  // Keyboard support
   window.addEventListener("keydown", (e) => {
     if (!lightbox.classList.contains("is-open")) return;
-
     if (e.key === "Escape") close();
     if (e.key === "ArrowLeft") prev();
     if (e.key === "ArrowRight") next();

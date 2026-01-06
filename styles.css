@@ -80,8 +80,7 @@ main{
 .section{ padding:70px 0; }
 .section + .section{ border-top:1px solid var(--border); }
 
-/* NOTE: Currently center section headers globally.
-   Keeping as-is to avoid unintended changes. */
+/* NOTE: Section headers centered globally (kept as-is). */
 .section-header h2{
   margin:0 0 10px;
   font-size:28px;
@@ -107,14 +106,14 @@ main{
 }
 
 /* =========================================================
-   Tabs (Portfolio categories)
+   Tabs (Portfolio categories) — kept for compatibility
    ========================================================= */
 .tabs{
   margin-top:22px;
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  justify-content:center; /* centered tabs */
+  justify-content:center;
 }
 
 .tab{
@@ -137,7 +136,7 @@ main{
 .panel.active{ display:block; }
 
 /* =========================================================
-   Image Grid (Portfolio)
+   Image Grid (Legacy Portfolio Grid)
    ========================================================= */
 .grid{
   display:grid;
@@ -154,72 +153,6 @@ main{
   border:1px solid var(--border);
   background:var(--soft);
   image-rendering:auto;
-}
-
-/* =========================================================
-   Portfolio — Horizontal Masonry (Centered)
-   (Used by updated portfolio.html)
-   ========================================================= */
-.portfolio-scroller{
-  position: relative;
-  max-width: 1200px;   /* aligns with main width */
-  margin: 0 auto;      /* centers the block */
-  padding: 0 40px;     /* aligns with main padding */
-}
-
-@media (max-width: 900px){
-  .portfolio-scroller{
-    padding: 0 18px;
-  }
-}
-
-/* Horizontal scroller layout */
-.grid.masonry-x{
-  max-width: 100%;
-  height: clamp(520px, 70vh, 720px); /* keeps it as a centered section, not full-page */
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x proximity;
-  padding: 8px 0;
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(240px, 320px);
-  align-items: start;
-}
-
-/* Keep your same image styling, just ensure snapping feels good */
-.grid.masonry-x img{
-  scroll-snap-align: start;
-  width: 100%;
-  height: auto;
-}
-
-/* Optional: arrows (if present in your HTML) */
-.portfolio-arrow{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  border: 1px solid rgba(0,0,0,0.12);
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(8px);
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  z-index: 2;
-}
-
-.portfolio-arrow.prev{ left: 8px; }
-.portfolio-arrow.next{ right: 8px; }
-
-@media (max-width: 900px){
-  .portfolio-arrow{
-    width: 40px;
-    height: 40px;
-  }
 }
 
 /* =========================================================
@@ -304,12 +237,12 @@ body.home .footer{
   border-top: none;
   position: relative;
   z-index: 2;
-  margin-top: -70px;      /* pulls footer onto the image */
+  margin-top: -70px;
   padding-top: 40px;
   padding-bottom: 26px;
   color: rgba(255,255,255,0.8);
   text-shadow: 0 1px 10px rgba(0,0,0,0.6);
-  text-align: center;     /* merged from duplicate block */
+  text-align: center;
 }
 
 /* =========================================================
@@ -436,7 +369,6 @@ body.home .hero{
   color:#fff;
 }
 
-/* (Unused now but kept as a precaution) */
 .hero-scroll{
   position:absolute;
   bottom: 22px;
@@ -533,7 +465,7 @@ body.home .hero{
 /* Actions row (Send Message button) */
 .form-actions{
   display:flex;
-  justify-content:center;  /* final intended behavior */
+  justify-content:center;
   padding-top: 8px;
 }
 
@@ -561,7 +493,6 @@ body.home .hero{
   transform: translateY(-1px);
 }
 
-/* Contact page header alignment */
 .contact-header{ text-align:center; }
 
 /* Form status messages */
@@ -696,7 +627,6 @@ body.lightbox-open{ overflow: hidden; }
 .lightbox-prev{ justify-self: start; }
 .lightbox-next{ justify-self: end; }
 
-/* Mobile lightbox layout */
 @media (max-width: 768px){
   .lightbox-dialog{
     grid-template-columns: 1fr;
@@ -728,16 +658,9 @@ body.lightbox-open{ overflow: hidden; }
 /* =========================================================
    About Page Tweaks
    ========================================================= */
-/* Currently have margin-top then immediately override it later.
-   Keeping only the final behavior (margin-top: 0) to match current output. */
 body.about-page .about-text{ margin-top: 0; }
-
 body.about-page .section-header{ margin-bottom: 24px; }
-
-/* Center stats vertically with paragraph */
 body.about-page .two-col{ align-items: center; }
-
-/* Tighten stats card vertical spacing */
 body.about-page .card{ padding-bottom: 14px; }
 
 /* =========================================================
@@ -745,7 +668,6 @@ body.about-page .card{ padding-bottom: 14px; }
    (Home only — does not affect other pages)
    ========================================================= */
 @media (max-width: 768px){
-  /* IMPORTANT: do NOT lock html overflow (breaks scrolling on other pages) */
   body.home{
     overflow: hidden !important;
     overscroll-behavior: none;
@@ -771,7 +693,6 @@ body.about-page .card{ padding-bottom: 14px; }
     width: 100vw;
   }
 
-  /* Footer must not add document height on mobile home */
   body.home .footer{
     position: absolute;
     left: 0;
@@ -781,4 +702,90 @@ body.about-page .card{ padding-bottom: 14px; }
     padding: 0 18px;
     border-top: 0;
   }
+}
+
+/* =========================================================
+   Portfolio — Horizontal Masonry (columns + horizontal scroll)
+   - Only active when <body class="portfolio-page">
+   ========================================================= */
+body.portfolio-page .section-header{
+  margin-bottom: 18px;
+}
+
+/* Shell keeps arrows aligned and gallery centered */
+body.portfolio-page .masonry-x-shell{
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 22px;
+}
+
+/* Horizontal masonry scroller */
+body.portfolio-page .masonry-x{
+  height: clamp(420px, 62vh, 720px);
+  padding: 6px 8px;
+
+  column-width: 280px;
+  column-gap: 16px;
+  column-fill: auto;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+
+  border-radius: 16px;
+}
+
+/* Masonry tiles */
+body.portfolio-page .masonry-x img{
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 0 16px;
+  break-inside: avoid;
+
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--soft);
+  object-fit: cover;
+
+  cursor: zoom-in;
+}
+
+/* Scroll arrows */
+body.portfolio-page .masonry-x-arrow{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  color: #111;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+}
+
+body.portfolio-page .masonry-x-prev{ left: -10px; }
+body.portfolio-page .masonry-x-next{ right: -10px; }
+
+body.portfolio-page .masonry-x-arrow:hover{
+  background: #fff;
+}
+
+/* Mobile tweaks */
+@media (max-width: 768px){
+  body.portfolio-page .masonry-x{
+    height: clamp(420px, 68vh, 680px);
+    column-width: 220px;
+    padding: 6px;
+  }
+
+  body.portfolio-page .masonry-x-prev{ left: 6px; }
+  body.portfolio-page .masonry-x-next{ right: 6px; }
 }

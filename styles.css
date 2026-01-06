@@ -716,3 +716,79 @@ body.about-page .card{ padding-bottom: 14px; }
     border-top: 0;
   }
 }
+
+/* ================================
+   PORTFOLIO — Horizontal Masonry
+   (keeps .grid for existing JS)
+================================== */
+
+body.portfolio-page .portfolio-scroller{
+  position: relative;
+  margin-top: 22px;
+}
+
+/* Override the normal CSS grid on portfolio page ONLY */
+body.portfolio-page .grid.masonry-x{
+  display: block;                /* overrides display:grid from .grid */
+  height: min(72vh, 760px);      /* comfortable desktop height */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+
+  /* masonry columns that flow left-to-right */
+  column-width: 260px;
+  column-gap: 16px;
+  column-fill: auto;
+
+  padding: 2px 52px 14px;        /* room for arrows */
+}
+
+/* Each image becomes a “brick” in the masonry column flow */
+body.portfolio-page .grid.masonry-x img{
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  margin: 0 0 16px;
+  break-inside: avoid;
+}
+
+/* Arrow controls */
+body.portfolio-page .gallery-arrow{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.92);
+  color: #111;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+body.portfolio-page .gallery-arrow.prev{ left: 6px; }
+body.portfolio-page .gallery-arrow.next{ right: 6px; }
+
+body.portfolio-page .gallery-arrow:hover{
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+/* Mobile tuning */
+@media (max-width: 768px){
+  body.portfolio-page .grid.masonry-x{
+    height: 72dvh;
+    column-width: 210px;
+    padding: 2px 44px 14px;
+  }
+
+  body.portfolio-page .gallery-arrow{
+    width: 40px;
+    height: 40px;
+    font-size: 26px;
+  }
+}

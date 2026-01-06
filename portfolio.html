@@ -12,7 +12,8 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
+<!-- ✅ Only change: add portfolio-page class for portfolio-only CSS targeting -->
+<body class="portfolio-page">
   <!-- =========================================================
        Portfolio Page
        - Uses global styles.css for layout + tabs + grid styling
@@ -44,30 +45,36 @@
           <br>
         </div>
 
-        <!-- Tabs -->
-        <div class="grid">
-              <img alt="Headshot 1" src="images/headshot2.JPG" />
-              <img alt="Headshot 2" src="images/headshot3.JPG" />
-              <img alt="Headshot 3" src="images/new7.JPG" />
-              <img alt="Headshot 4" src="images/head1.jpeg" />
-              <img alt="Headshot 5" src="images/new3.jpeg" />
-              <img alt="Full body 1" src="images/fullbody1.JPG" />
-              <img alt="Full body 2" src="images/new2.jpeg" />
-              <img alt="Full body 3" src="images/new6.JPG" />
-              <img alt="Full body 4" src="images/enter6.JPEG" />
-              <img alt="Full body 5" src="images/enter.jpeg" />
-              <img alt="Full body 6" src="images/full1.png" />
-              <img alt="Full body 7" src="images/full2.jpg" />
-              <img alt="Full body 8" src="images/full3.jpeg" />
-              <img alt="Full body 9" src="images/full4.jpeg" />
-              <img alt="Full body 10" src="images/new4.JPG" />
-              <img alt="Full body 11" src="images/new1.JPG" />
-              <img alt="Profile 1" src="images/headshot1.JPEG" />
-              <img alt="Profile 2" src="images/enter3.JPG" />
-              <img alt="Profile 3" src="images/fullbody2.JPEG" />
-              <img alt="Profile 4" src="images/prof2.JPEG" />
-              <img alt="Profile 5" src="images/fullbody3.JPG" />
-            </div>
+        <!-- ✅ Horizontal masonry wrapper + arrows (keeps .grid so lightbox still works) -->
+        <div class="portfolio-scroller">
+          <button class="gallery-arrow prev" type="button" aria-label="Scroll left">‹</button>
+
+          <div class="grid masonry-x" aria-label="Portfolio gallery">
+            <img alt="Headshot 1" src="images/headshot2.JPG" />
+            <img alt="Headshot 2" src="images/headshot3.JPG" />
+            <img alt="Headshot 3" src="images/new7.JPG" />
+            <img alt="Headshot 4" src="images/head1.jpeg" />
+            <img alt="Headshot 5" src="images/new3.jpeg" />
+            <img alt="Full body 1" src="images/fullbody1.JPG" />
+            <img alt="Full body 2" src="images/new2.jpeg" />
+            <img alt="Full body 3" src="images/new6.JPG" />
+            <img alt="Full body 4" src="images/enter6.JPEG" />
+            <img alt="Full body 5" src="images/enter.jpeg" />
+            <img alt="Full body 6" src="images/full1.png" />
+            <img alt="Full body 7" src="images/full2.jpg" />
+            <img alt="Full body 8" src="images/full3.jpeg" />
+            <img alt="Full body 9" src="images/full4.jpeg" />
+            <img alt="Full body 10" src="images/new4.JPG" />
+            <img alt="Full body 11" src="images/new1.JPG" />
+            <img alt="Profile 1" src="images/headshot1.JPEG" />
+            <img alt="Profile 2" src="images/enter3.JPG" />
+            <img alt="Profile 3" src="images/fullbody2.JPEG" />
+            <img alt="Profile 4" src="images/prof2.JPEG" />
+            <img alt="Profile 5" src="images/fullbody3.JPG" />
+          </div>
+
+          <button class="gallery-arrow next" type="button" aria-label="Scroll right">›</button>
+        </div>
 
         <!-- Footer (portfolio page only) -->
         <br><br>
@@ -104,5 +111,26 @@
 
   <!-- Shared site JS (tabs + year + reveal + lightbox) -->
   <script src="script.js"></script>
+
+  <!-- ✅ Portfolio-only arrow scrolling (does NOT touch your script.js) -->
+  <script>
+    (function () {
+      const scroller = document.querySelector(".masonry-x");
+      if (!scroller) return;
+
+      const prev = document.querySelector(".gallery-arrow.prev");
+      const next = document.querySelector(".gallery-arrow.next");
+
+      const step = () => Math.round(scroller.clientWidth * 0.85);
+
+      prev && prev.addEventListener("click", () => {
+        scroller.scrollBy({ left: -step(), behavior: "smooth" });
+      });
+
+      next && next.addEventListener("click", () => {
+        scroller.scrollBy({ left: step(), behavior: "smooth" });
+      });
+    })();
+  </script>
 </body>
 </html>

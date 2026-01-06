@@ -80,8 +80,6 @@ main{
 .section{ padding:70px 0; }
 .section + .section{ border-top:1px solid var(--border); }
 
-/* NOTE: Currently center section headers globally.
-   Keeping as-is to avoid unintended changes. */
 .section-header h2{
   margin:0 0 10px;
   font-size:28px;
@@ -107,14 +105,14 @@ main{
 }
 
 /* =========================================================
-   Tabs (Portfolio categories)
+   Tabs (legacy — safe to keep)
    ========================================================= */
 .tabs{
   margin-top:22px;
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  justify-content:center; /* centered tabs */
+  justify-content:center;
 }
 
 .tab{
@@ -137,7 +135,7 @@ main{
 .panel.active{ display:block; }
 
 /* =========================================================
-   Image Grid (Portfolio)
+   Image Grid (Portfolio) - Default
    ========================================================= */
 .grid{
   display:grid;
@@ -154,6 +152,81 @@ main{
   border:1px solid var(--border);
   background:var(--soft);
   image-rendering:auto;
+}
+
+/* =========================================================
+   Portfolio — Horizontal "Masonry" (Centered)
+   Applies ONLY if you add: class="grid masonry-x"
+   ========================================================= */
+
+/* If you wrap your grid with <div class="portfolio-scroller"> ... </div> */
+.portfolio-scroller{
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 900px){
+  .portfolio-scroller{ padding: 0 18px; }
+}
+
+/* Horizontal scrolling grid */
+.grid.masonry-x{
+  height: clamp(520px, 68vh, 720px);
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  scroll-snap-type: x proximity;
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(240px, 320px);
+  gap: 16px;
+  padding: 10px 0;
+
+  /* important: keep the "masonry" stagger based on varying heights */
+  align-items: start;
+}
+
+/* Allow varying heights (masonry feel) only in masonry-x mode */
+.grid.masonry-x img{
+  aspect-ratio: auto;
+  height: auto;
+  max-height: 100%;
+  width: 100%;
+  object-fit: cover;
+  scroll-snap-align: start;
+}
+
+/* Subtle stagger (masonry-ish) without JS */
+.grid.masonry-x img:nth-child(3n+1){ height: 92%; align-self: start; }
+.grid.masonry-x img:nth-child(3n+2){ height: 78%; align-self: center; }
+.grid.masonry-x img:nth-child(3n+3){ height: 86%; align-self: end; }
+
+/* Optional arrows if present in HTML */
+.portfolio-arrow{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+}
+
+.portfolio-arrow.prev{ left: 8px; }
+.portfolio-arrow.next{ right: 8px; }
+
+@media (max-width: 900px){
+  .portfolio-arrow{ width: 40px; height: 40px; }
 }
 
 /* =========================================================
@@ -196,7 +269,7 @@ h3{ margin:18px 0 10px; font-size:16px; }
 .stat strong{ font-weight:600; }
 
 /* =========================================================
-   Contact Card (Non-form contact info blocks)
+   Contact Card
    ========================================================= */
 .contact-card{
   margin-top:18px;
@@ -232,22 +305,21 @@ h3{ margin:18px 0 10px; font-size:16px; }
   color:var(--muted);
 }
 
-/* Home-only footer blend on hero */
 body.home .footer{
   background: transparent;
   border-top: none;
   position: relative;
   z-index: 2;
-  margin-top: -70px;      /* pulls footer onto the image */
+  margin-top: -70px;
   padding-top: 40px;
   padding-bottom: 26px;
   color: rgba(255,255,255,0.8);
   text-shadow: 0 1px 10px rgba(0,0,0,0.6);
-  text-align: center;     /* merged from duplicate block */
+  text-align: center;
 }
 
 /* =========================================================
-   Cinematic "Zoom Out" Entrance (Enter -> Home)
+   Cinematic "Zoom Out" Entrance
    ========================================================= */
 .page-wrap{
   transform: scale(1);
@@ -284,7 +356,6 @@ body.home .footer{
   place-items: center;
 }
 
-/* Force full-screen hero on home */
 body.home .hero{
   min-height: 100vh;
   height: 100vh;
@@ -298,7 +369,6 @@ body.home .hero{
   filter: contrast(1.02) saturate(1.02);
 }
 
-/* Dark overlay on hero for readability */
 .hero::after{
   content:"";
   position:absolute;
@@ -344,7 +414,6 @@ body.home .hero{
   flex-wrap: wrap;
 }
 
-/* Buttons */
 .btn{
   display:inline-flex;
   align-items:center;
@@ -370,34 +439,13 @@ body.home .hero{
   color:#fff;
 }
 
-/* (Unused now but kept as a precaution) */
-.hero-scroll{
-  position:absolute;
-  bottom: 22px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
-  display:flex;
-  gap: 10px;
-  align-items:center;
-  color: rgba(255,255,255,0.75);
-  font-size: 12px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-.hero-line{
-  width: 46px;
-  height: 1px;
-  background: rgba(255,255,255,0.65);
-}
-
 @media (max-width: 900px){
   .hero-content{ width: calc(100% - 36px); }
   .hero{ min-height: 560px; }
 }
 
 /* =========================================================
-   Scroll Reveal Utility
+   Scroll Reveal
    ========================================================= */
 .reveal{
   opacity: 0;
@@ -464,10 +512,9 @@ body.home .hero{
   border-color: #111;
 }
 
-/* Actions row (Send Message button) */
 .form-actions{
   display:flex;
-  justify-content:center;  /* final intended behavior */
+  justify-content:center;
   padding-top: 8px;
 }
 
@@ -475,7 +522,6 @@ body.home .hero{
   .form-row{ grid-template-columns: 1fr; }
 }
 
-/* Send Message button style */
 .form-actions .btn{
   font-family: inherit;
   font-weight: 500;
@@ -495,10 +541,6 @@ body.home .hero{
   transform: translateY(-1px);
 }
 
-/* Contact page header alignment */
-.contact-header{ text-align:center; }
-
-/* Form status messages */
 .form-success,
 .form-error{
   margin: 14px auto 0;
@@ -531,7 +573,7 @@ body.home .hero{
 }
 
 /* =========================================================
-   Enter Page Video (for the overlay)
+   Enter Overlay Video
    ========================================================= */
 .enter-video{
   position: absolute;
@@ -547,7 +589,6 @@ body.home .hero{
   .enter-video{ object-position: 50% 35%; }
 }
 
-/* Ensure overlay + UI sit above enter video */
 .overlay,
 .top-left,
 .top-right,
@@ -556,7 +597,7 @@ body.home .hero{
 }
 
 /* =========================================================
-   Lightbox (Portfolio Enlarge)
+   Lightbox
    ========================================================= */
 body.lightbox-open{ overflow: hidden; }
 
@@ -630,7 +671,6 @@ body.lightbox-open{ overflow: hidden; }
 .lightbox-prev{ justify-self: start; }
 .lightbox-next{ justify-self: end; }
 
-/* Mobile lightbox layout */
 @media (max-width: 768px){
   .lightbox-dialog{
     grid-template-columns: 1fr;
@@ -662,24 +702,15 @@ body.lightbox-open{ overflow: hidden; }
 /* =========================================================
    About Page Tweaks
    ========================================================= */
-/* Currently have margin-top then immediately override it later.
-   Keeping only the final behavior (margin-top: 0) to match current output. */
 body.about-page .about-text{ margin-top: 0; }
-
 body.about-page .section-header{ margin-bottom: 24px; }
-
-/* Center stats vertically with paragraph */
 body.about-page .two-col{ align-items: center; }
-
-/* Tighten stats card vertical spacing */
 body.about-page .card{ padding-bottom: 14px; }
 
 /* =========================================================
    Mobile Home: Lock Page + Prevent Drag/Scroll
-   (Home only — does not affect other pages)
    ========================================================= */
 @media (max-width: 768px){
-  /* IMPORTANT: do NOT lock html overflow (breaks scrolling on other pages) */
   body.home{
     overflow: hidden !important;
     overscroll-behavior: none;
@@ -705,7 +736,6 @@ body.about-page .card{ padding-bottom: 14px; }
     width: 100vw;
   }
 
-  /* Footer must not add document height on mobile home */
   body.home .footer{
     position: absolute;
     left: 0;
@@ -714,81 +744,5 @@ body.about-page .card{ padding-bottom: 14px; }
     margin: 0;
     padding: 0 18px;
     border-top: 0;
-  }
-}
-
-/* ================================
-   PORTFOLIO — Horizontal Masonry
-   (keeps .grid for existing JS)
-================================== */
-
-body.portfolio-page .portfolio-scroller{
-  position: relative;
-  margin-top: 22px;
-}
-
-/* Override the normal CSS grid on portfolio page ONLY */
-body.portfolio-page .grid.masonry-x{
-  display: block;                /* overrides display:grid from .grid */
-  height: min(72vh, 760px);      /* comfortable desktop height */
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
-
-  /* masonry columns that flow left-to-right */
-  column-width: 260px;
-  column-gap: 16px;
-  column-fill: auto;
-
-  padding: 2px 52px 14px;        /* room for arrows */
-}
-
-/* Each image becomes a “brick” in the masonry column flow */
-body.portfolio-page .grid.masonry-x img{
-  display: inline-block;
-  width: 100%;
-  height: auto;
-  margin: 0 0 16px;
-  break-inside: avoid;
-}
-
-/* Arrow controls */
-body.portfolio-page .gallery-arrow{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 5;
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  border: 1px solid rgba(0,0,0,0.12);
-  background: rgba(255,255,255,0.92);
-  color: #111;
-  font-size: 28px;
-  line-height: 1;
-  cursor: pointer;
-}
-
-body.portfolio-page .gallery-arrow.prev{ left: 6px; }
-body.portfolio-page .gallery-arrow.next{ right: 6px; }
-
-body.portfolio-page .gallery-arrow:hover{
-  background: #111;
-  color: #fff;
-  border-color: #111;
-}
-
-/* Mobile tuning */
-@media (max-width: 768px){
-  body.portfolio-page .grid.masonry-x{
-    height: 72dvh;
-    column-width: 210px;
-    padding: 2px 44px 14px;
-  }
-
-  body.portfolio-page .gallery-arrow{
-    width: 40px;
-    height: 40px;
-    font-size: 26px;
   }
 }

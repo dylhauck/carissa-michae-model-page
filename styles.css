@@ -80,6 +80,8 @@ main{
 .section{ padding:70px 0; }
 .section + .section{ border-top:1px solid var(--border); }
 
+/* NOTE: Currently center section headers globally.
+   Keeping as-is to avoid unintended changes. */
 .section-header h2{
   margin:0 0 10px;
   font-size:28px;
@@ -105,14 +107,14 @@ main{
 }
 
 /* =========================================================
-   Tabs (legacy — safe to keep)
+   Tabs (Portfolio categories)
    ========================================================= */
 .tabs{
   margin-top:22px;
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  justify-content:center;
+  justify-content:center; /* centered tabs */
 }
 
 .tab{
@@ -135,7 +137,7 @@ main{
 .panel.active{ display:block; }
 
 /* =========================================================
-   Image Grid (Portfolio) - Default
+   Image Grid (Portfolio)
    ========================================================= */
 .grid{
   display:grid;
@@ -155,57 +157,45 @@ main{
 }
 
 /* =========================================================
-   Portfolio — Horizontal "Masonry" (Centered)
-   Applies ONLY if you add: class="grid masonry-x"
+   Portfolio — Horizontal Masonry (Centered)
+   (Used by updated portfolio.html)
    ========================================================= */
-
-/* If you wrap your grid with <div class="portfolio-scroller"> ... </div> */
 .portfolio-scroller{
   position: relative;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px;
+  max-width: 1200px;   /* aligns with main width */
+  margin: 0 auto;      /* centers the block */
+  padding: 0 40px;     /* aligns with main padding */
 }
 
 @media (max-width: 900px){
-  .portfolio-scroller{ padding: 0 18px; }
+  .portfolio-scroller{
+    padding: 0 18px;
+  }
 }
 
-/* Horizontal scrolling grid */
+/* Horizontal scroller layout */
 .grid.masonry-x{
-  height: clamp(520px, 68vh, 720px);
+  max-width: 100%;
+  height: clamp(520px, 70vh, 720px); /* keeps it as a centered section, not full-page */
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
-
   scroll-snap-type: x proximity;
-
+  padding: 8px 0;
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: minmax(240px, 320px);
-  gap: 16px;
-  padding: 10px 0;
-
-  /* important: keep the "masonry" stagger based on varying heights */
   align-items: start;
 }
 
-/* Allow varying heights (masonry feel) only in masonry-x mode */
+/* Keep your same image styling, just ensure snapping feels good */
 .grid.masonry-x img{
-  aspect-ratio: auto;
-  height: auto;
-  max-height: 100%;
-  width: 100%;
-  object-fit: cover;
   scroll-snap-align: start;
+  width: 100%;
+  height: auto;
 }
 
-/* Subtle stagger (masonry-ish) without JS */
-.grid.masonry-x img:nth-child(3n+1){ height: 92%; align-self: start; }
-.grid.masonry-x img:nth-child(3n+2){ height: 78%; align-self: center; }
-.grid.masonry-x img:nth-child(3n+3){ height: 86%; align-self: end; }
-
-/* Optional arrows if present in HTML */
+/* Optional: arrows (if present in your HTML) */
 .portfolio-arrow{
   position: absolute;
   top: 50%;
@@ -226,7 +216,10 @@ main{
 .portfolio-arrow.next{ right: 8px; }
 
 @media (max-width: 900px){
-  .portfolio-arrow{ width: 40px; height: 40px; }
+  .portfolio-arrow{
+    width: 40px;
+    height: 40px;
+  }
 }
 
 /* =========================================================
@@ -269,7 +262,7 @@ h3{ margin:18px 0 10px; font-size:16px; }
 .stat strong{ font-weight:600; }
 
 /* =========================================================
-   Contact Card
+   Contact Card (Non-form contact info blocks)
    ========================================================= */
 .contact-card{
   margin-top:18px;
@@ -305,21 +298,22 @@ h3{ margin:18px 0 10px; font-size:16px; }
   color:var(--muted);
 }
 
+/* Home-only footer blend on hero */
 body.home .footer{
   background: transparent;
   border-top: none;
   position: relative;
   z-index: 2;
-  margin-top: -70px;
+  margin-top: -70px;      /* pulls footer onto the image */
   padding-top: 40px;
   padding-bottom: 26px;
   color: rgba(255,255,255,0.8);
   text-shadow: 0 1px 10px rgba(0,0,0,0.6);
-  text-align: center;
+  text-align: center;     /* merged from duplicate block */
 }
 
 /* =========================================================
-   Cinematic "Zoom Out" Entrance
+   Cinematic "Zoom Out" Entrance (Enter -> Home)
    ========================================================= */
 .page-wrap{
   transform: scale(1);
@@ -356,6 +350,7 @@ body.home .footer{
   place-items: center;
 }
 
+/* Force full-screen hero on home */
 body.home .hero{
   min-height: 100vh;
   height: 100vh;
@@ -369,6 +364,7 @@ body.home .hero{
   filter: contrast(1.02) saturate(1.02);
 }
 
+/* Dark overlay on hero for readability */
 .hero::after{
   content:"";
   position:absolute;
@@ -414,6 +410,7 @@ body.home .hero{
   flex-wrap: wrap;
 }
 
+/* Buttons */
 .btn{
   display:inline-flex;
   align-items:center;
@@ -439,13 +436,34 @@ body.home .hero{
   color:#fff;
 }
 
+/* (Unused now but kept as a precaution) */
+.hero-scroll{
+  position:absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display:flex;
+  gap: 10px;
+  align-items:center;
+  color: rgba(255,255,255,0.75);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.hero-line{
+  width: 46px;
+  height: 1px;
+  background: rgba(255,255,255,0.65);
+}
+
 @media (max-width: 900px){
   .hero-content{ width: calc(100% - 36px); }
   .hero{ min-height: 560px; }
 }
 
 /* =========================================================
-   Scroll Reveal
+   Scroll Reveal Utility
    ========================================================= */
 .reveal{
   opacity: 0;
@@ -512,9 +530,10 @@ body.home .hero{
   border-color: #111;
 }
 
+/* Actions row (Send Message button) */
 .form-actions{
   display:flex;
-  justify-content:center;
+  justify-content:center;  /* final intended behavior */
   padding-top: 8px;
 }
 
@@ -522,6 +541,7 @@ body.home .hero{
   .form-row{ grid-template-columns: 1fr; }
 }
 
+/* Send Message button style */
 .form-actions .btn{
   font-family: inherit;
   font-weight: 500;
@@ -541,6 +561,10 @@ body.home .hero{
   transform: translateY(-1px);
 }
 
+/* Contact page header alignment */
+.contact-header{ text-align:center; }
+
+/* Form status messages */
 .form-success,
 .form-error{
   margin: 14px auto 0;
@@ -573,7 +597,7 @@ body.home .hero{
 }
 
 /* =========================================================
-   Enter Overlay Video
+   Enter Page Video (for the overlay)
    ========================================================= */
 .enter-video{
   position: absolute;
@@ -589,6 +613,7 @@ body.home .hero{
   .enter-video{ object-position: 50% 35%; }
 }
 
+/* Ensure overlay + UI sit above enter video */
 .overlay,
 .top-left,
 .top-right,
@@ -597,7 +622,7 @@ body.home .hero{
 }
 
 /* =========================================================
-   Lightbox
+   Lightbox (Portfolio Enlarge)
    ========================================================= */
 body.lightbox-open{ overflow: hidden; }
 
@@ -671,6 +696,7 @@ body.lightbox-open{ overflow: hidden; }
 .lightbox-prev{ justify-self: start; }
 .lightbox-next{ justify-self: end; }
 
+/* Mobile lightbox layout */
 @media (max-width: 768px){
   .lightbox-dialog{
     grid-template-columns: 1fr;
@@ -702,15 +728,24 @@ body.lightbox-open{ overflow: hidden; }
 /* =========================================================
    About Page Tweaks
    ========================================================= */
+/* Currently have margin-top then immediately override it later.
+   Keeping only the final behavior (margin-top: 0) to match current output. */
 body.about-page .about-text{ margin-top: 0; }
+
 body.about-page .section-header{ margin-bottom: 24px; }
+
+/* Center stats vertically with paragraph */
 body.about-page .two-col{ align-items: center; }
+
+/* Tighten stats card vertical spacing */
 body.about-page .card{ padding-bottom: 14px; }
 
 /* =========================================================
    Mobile Home: Lock Page + Prevent Drag/Scroll
+   (Home only — does not affect other pages)
    ========================================================= */
 @media (max-width: 768px){
+  /* IMPORTANT: do NOT lock html overflow (breaks scrolling on other pages) */
   body.home{
     overflow: hidden !important;
     overscroll-behavior: none;
@@ -736,6 +771,7 @@ body.about-page .card{ padding-bottom: 14px; }
     width: 100vw;
   }
 
+  /* Footer must not add document height on mobile home */
   body.home .footer{
     position: absolute;
     left: 0;

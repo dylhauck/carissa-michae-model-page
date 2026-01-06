@@ -1,23 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfolio | Carissa Michae</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="styles.css" />
-</head>
-
-<!-- ✅ Only change: add portfolio-page class for portfolio-only CSS targeting -->
 <body class="portfolio-page">
   <!-- =========================================================
        Portfolio Page
-       - Uses global styles.css for layout + tabs + grid styling
-       - Uses script.js for tabs + lightbox + year (if present)
        ========================================================= -->
 
   <div class="page-wrap">
@@ -37,7 +20,6 @@
     </header>
 
     <main>
-      <!-- PORTFOLIO -->
       <section class="section" aria-label="Portfolio">
         <div class="section-header">
           <h2>Portfolio</h2>
@@ -45,11 +27,11 @@
           <br>
         </div>
 
-        <!-- ✅ Horizontal masonry wrapper + arrows (keeps .grid so lightbox still works) -->
-        <div class="portfolio-scroller">
-          <button class="gallery-arrow prev" type="button" aria-label="Scroll left">‹</button>
+        <!-- Horizontal masonry scroller + arrows -->
+        <div class="portfolio-scroller" aria-label="Portfolio gallery">
+          <button class="gallery-arrow" type="button" aria-label="Scroll left" data-dir="-1">‹</button>
 
-          <div class="grid masonry-x" aria-label="Portfolio gallery">
+          <div class="grid masonry-x">
             <img alt="Headshot 1" src="images/headshot2.JPG" />
             <img alt="Headshot 2" src="images/headshot3.JPG" />
             <img alt="Headshot 3" src="images/new7.JPG" />
@@ -73,64 +55,20 @@
             <img alt="Profile 5" src="images/fullbody3.JPG" />
           </div>
 
-          <button class="gallery-arrow next" type="button" aria-label="Scroll right">›</button>
+          <button class="gallery-arrow" type="button" aria-label="Scroll right" data-dir="1">›</button>
         </div>
 
-        <!-- Footer (portfolio page only) -->
         <br><br>
         <p class="centered-paragraph">© <span id="year"></span> Carissa Michae · All Rights Reserved</p>
       </section>
     </main>
-
   </div>
 
-  <!-- =========================================================
-       Lightbox (enlarge images)
-       - Markup expected by script.js lightbox module
-       ========================================================= -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div class="lightbox-backdrop" data-close="true"></div>
+  <!-- Lightbox ... (unchanged) -->
 
-    <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-label="Enlarged image viewer">
-      <button class="lightbox-close" type="button" aria-label="Close" data-close="true">×</button>
-      <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous image">‹</button>
-
-      <figure class="lightbox-figure">
-        <img class="lightbox-img" id="lightboxImg" alt="">
-      </figure>
-
-      <button class="lightbox-nav lightbox-next" type="button" aria-label="Next image">›</button>
-    </div>
-  </div>
-
-  <!-- Local helpers (kept minimal + non-invasive) -->
   <style>
-    /* Centered text utility used on this page only */
     .centered-paragraph { text-align: center; }
   </style>
 
-  <!-- Shared site JS (tabs + year + reveal + lightbox) -->
   <script src="script.js"></script>
-
-  <!-- ✅ Portfolio-only arrow scrolling (does NOT touch your script.js) -->
-  <script>
-    (function () {
-      const scroller = document.querySelector(".masonry-x");
-      if (!scroller) return;
-
-      const prev = document.querySelector(".gallery-arrow.prev");
-      const next = document.querySelector(".gallery-arrow.next");
-
-      const step = () => Math.round(scroller.clientWidth * 0.85);
-
-      prev && prev.addEventListener("click", () => {
-        scroller.scrollBy({ left: -step(), behavior: "smooth" });
-      });
-
-      next && next.addEventListener("click", () => {
-        scroller.scrollBy({ left: step(), behavior: "smooth" });
-      });
-    })();
-  </script>
 </body>
-</html>

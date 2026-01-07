@@ -12,7 +12,13 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body class="portfolio-page">
+<body>
+  <!-- =========================================================
+       Portfolio Page
+       - Uses global styles.css for layout + tabs + grid styling
+       - Uses script.js for tabs + lightbox + year (if present)
+       ========================================================= -->
+
   <div class="page-wrap">
 
     <header class="site-header">
@@ -30,49 +36,69 @@
     </header>
 
     <main>
+      <!-- PORTFOLIO -->
       <section class="section" aria-label="Portfolio">
         <div class="section-header">
           <h2>Portfolio</h2>
+          <p class="muted">Select a category to browse.</p>
           <p class="muted">Browse the full collection.</p>
         </div>
 
-        <!-- Horizontal Masonry + Arrows -->
-        <div class="masonry-x-shell" aria-label="Horizontal masonry gallery">
-          <button class="masonry-x-arrow masonry-x-prev" type="button" aria-label="Scroll left">‹</button>
-
-          <div class="masonry-x" id="masonryX">
-            <img alt="Headshot 1" src="images/headshot2.JPG" />
-            <img alt="Headshot 2" src="images/headshot3.JPG" />
-            <img alt="Headshot 3" src="images/new7.JPG" />
-            <img alt="Headshot 4" src="images/head1.jpeg" />
-            <img alt="Headshot 5" src="images/new3.jpeg" />
-            <img alt="Full body 1" src="images/fullbody1.JPG" />
-            <img alt="Full body 2" src="images/new2.jpeg" />
-            <img alt="Full body 3" src="images/new6.JPG" />
-            <img alt="Full body 4" src="images/enter6.JPEG" />
-            <img alt="Full body 5" src="images/enter.jpeg" />
-            <img alt="Full body 6" src="images/full1.png" />
-            <img alt="Full body 7" src="images/full2.jpg" />
-            <img alt="Full body 8" src="images/full3.jpeg" />
-            <img alt="Full body 9" src="images/full4.jpeg" />
-            <img alt="Full body 10" src="images/new4.JPG" />
-            <img alt="Full body 11" src="images/new1.JPG" />
-            <img alt="Profile 1" src="images/headshot1.JPEG" />
-            <img alt="Profile 2" src="images/enter3.JPG" />
-            <img alt="Profile 3" src="images/fullbody2.JPEG" />
-            <img alt="Profile 4" src="images/prof2.JPEG" />
-            <img alt="Profile 5" src="images/fullbody3.JPG" />
-          </div>
-
-          <button class="masonry-x-arrow masonry-x-next" type="button" aria-label="Scroll right">›</button>
+        <!-- Tabs -->
+        <div class="tabs" role="tablist" aria-label="Portfolio Categories">
+          <button class="tab active" role="tab" aria-selected="true" data-target="headshots">Headshots</button>
+          <button class="tab" role="tab" aria-selected="false" data-target="fullbody">Full-Body Shots</button>
+          <button class="tab" role="tab" aria-selected="false" data-target="profile">Profile Shots</button>
         </div>
 
+        <!-- Tab Panels -->
+        <div class="tab-panels">
+          <div class="panel active" id="headshots" role="tabpanel">
+            <div class="grid">
+        <div class="grid">
+              <img alt="Headshot 1" src="images/headshot2.JPG" />
+              <img alt="Headshot 2" src="images/headshot3.JPG" />
+              <img alt="Headshot 3" src="images/new7.JPG" />
+              <img alt="Headshot 4" src="images/head1.jpeg" />
+              <img alt="Headshot 5" src="images/new3.jpeg" />
+            </div>
+          </div>
+
+          <div class="panel" id="fullbody" role="tabpanel">
+            <div class="grid">
+              <img alt="Full body 1" src="images/fullbody1.JPG" />
+              <img alt="Full body 2" src="images/new2.jpeg" />
+              <img alt="Full body 3" src="images/new6.JPG" />
+@@ -75,54 +61,47 @@
+              <img alt="Full body 9" src="images/full4.jpeg" />
+              <img alt="Full body 10" src="images/new4.JPG" />
+              <img alt="Full body 11" src="images/new1.JPG" />
+            </div>
+          </div>
+
+          <div class="panel" id="profile" role="tabpanel">
+            <div class="grid">
+              <img alt="Profile 1" src="images/headshot1.JPEG" />
+              <img alt="Profile 2" src="images/enter3.JPG" />
+              <img alt="Profile 3" src="images/fullbody2.JPEG" />
+              <img alt="Profile 4" src="images/prof2.JPEG" />
+              <img alt="Profile 5" src="images/fullbody3.JPG" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer (portfolio page only) -->
+        <br><br>
         <p class="centered-paragraph">© <span id="year"></span> Carissa Michae · All Rights Reserved</p>
       </section>
     </main>
+
   </div>
 
-  <!-- Lightbox (enlarge images) -->
+  <!-- =========================================================
+       Lightbox (enlarge images)
+       - Markup expected by script.js lightbox module
+       ========================================================= -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <div class="lightbox-backdrop" data-close="true"></div>
 
@@ -88,29 +114,13 @@
     </div>
   </div>
 
+  <!-- Local helpers (kept minimal + non-invasive) -->
   <style>
+    /* Centered text utility used on this page only */
     .centered-paragraph { text-align: center; }
   </style>
 
+  <!-- Shared site JS (tabs + year + reveal + lightbox) -->
   <script src="script.js"></script>
-
-  <!-- Portfolio-only scroll arrows (does not touch other pages) -->
-  <script>
-    (function(){
-      const scroller = document.getElementById("masonryX");
-      if (!scroller) return;
-
-      const prev = document.querySelector(".masonry-x-prev");
-      const next = document.querySelector(".masonry-x-next");
-
-      function step(){
-        // scroll ~80% of the visible width
-        return Math.max(320, Math.floor(scroller.clientWidth * 0.8));
-      }
-
-      prev && prev.addEventListener("click", () => scroller.scrollBy({ left: -step(), behavior: "smooth" }));
-      next && next.addEventListener("click", () => scroller.scrollBy({ left:  step(), behavior: "smooth" }));
-    })();
-  </script>
 </body>
 </html>

@@ -10,6 +10,7 @@
   const tabs = document.querySelectorAll(".tab");
   const panels = document.querySelectorAll(".panel");
 
+  // If this page doesn't use tabs/panels, do nothing.
   if (!tabs.length || !panels.length) return;
 
   tabs.forEach((tab) => {
@@ -83,8 +84,7 @@
 
 /* =========================================================
    Lightbox (enlarge images + blur background + arrows + X)
-   - Keeps navigation within the CURRENT tab only
-   - Centers correctly on mobile (CSS handles layout)
+   - Works with tabs/panels (if present) OR a single grid page
    ========================================================= */
 (() => {
   // Required lightbox elements
@@ -95,13 +95,20 @@
   const btnPrev = lightbox.querySelector(".lightbox-prev");
   const btnNext = lightbox.querySelector(".lightbox-next");
 
-  // Helper: get currently active panel (tab content)
+  // Detect whether this page uses panels (tabs)
+  const hasPanels = !!document.querySelector(".panel");
+
   const getActivePanel = () => document.querySelector(".panel.active");
 
-  // Helper: get only images in the active panel (prevents skipping to other tabs)
   const getActiveImages = () => {
-    const panel = getActivePanel();
-    return panel ? Array.from(panel.querySelectorAll(".grid img")) : [];
+    // If tabs exist, stay inside the active panel
+    if (hasPanels) {
+      const panel = getActivePanel();
+      return panel ? Array.from(panel.querySelectorAll(".grid img")) : [];
+    }
+
+    // No tabs/panels: use all images in the grid(s) on the page
+    return Array.from(document.querySelectorAll(".grid img"));
   };
 
   let currentIndex = 0;
@@ -110,7 +117,7 @@
     const images = getActiveImages();
     if (!images.length) return;
 
-    // Wrap index within current tab only
+    // Wrap index within available images
     currentIndex = (index + images.length) % images.length;
 
     const img = images[currentIndex];
@@ -139,20 +146,25 @@
     openAt(currentIndex + 1);
   }
 
-  // Delegate clicks: open image only within the active panel
+  // Delegate clicks: open image depending on page structure
   document.addEventListener("click", (e) => {
     const target = e.target;
     if (!(target instanceof Element)) return;
 
-    // If the click is on a grid image inside the active panel, open it
-    if (target.matches(".panel.active .grid img")) {
-      const images = getActiveImages();
-      const idx = images.indexOf(target);
-      if (idx !== -1) openAt(idx);
+    // Tabs page: only open images inside the active panel
+    if (hasPanels) {
+      if (!target.matches(".panel.active .grid img")) return;
+    } else {
+      // No tabs: open any grid image
+      if (!target.matches(".grid img")) return;
     }
+
+    const images = getActiveImages();
+    const idx = images.indexOf(target);
+    if (idx !== -1) openAt(idx);
   });
 
-  // Add cursor hint on images (works even after tab switches)
+  // Cursor hint
   document.addEventListener("mouseover", (e) => {
     const target = e.target;
     if (!(target instanceof Element)) return;

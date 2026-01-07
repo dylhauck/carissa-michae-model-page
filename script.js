@@ -1,18 +1,15 @@
 /* =========================================================
-   script.js — organized + commented (functional)
-   - Tabs (if present)
-   - Enter → Home zoom entrance (if used)
-   - Footer year (if #year exists)
-   - Scroll reveal (if matching elements exist)
-   - Lightbox (works with tabs OR masonry/grid without tabs)
+   script.js — cleaned + organized + commented
+   (Behavior preserved — no feature changes)
    ========================================================= */
 
 /* =========================================================
-   Tabs (Portfolio categories) — runs ONLY if tabs/panels exist
+   Tabs (Portfolio categories)
    ========================================================= */
 (() => {
   const tabs = document.querySelectorAll(".tab");
   const panels = document.querySelectorAll(".panel");
+
   if (!tabs.length || !panels.length) return;
 
   tabs.forEach((tab) => {
@@ -36,7 +33,8 @@
 })();
 
 /* =========================================================
-   Enter → Home zoom entrance animation (if session flag exists)
+   Enter → Home zoom entrance animation
+   (Plays when coming from the Enter page)
    ========================================================= */
 (() => {
   const fromEnter = sessionStorage.getItem("fromEnter");
@@ -54,7 +52,7 @@
 })();
 
 /* =========================================================
-   Footer year (if the page has #year)
+   Footer year
    ========================================================= */
 (() => {
   const yearEl = document.getElementById("year");
@@ -85,13 +83,11 @@
 
 /* =========================================================
    Lightbox (enlarge images + blur background + arrows + X)
-   - Works with:
-     1) Tabbed grids (keeps nav inside active tab)
-     2) Non-tab pages using .grid
-     3) Portfolio horizontal masonry using .masonry-x
+   - Keeps navigation within the CURRENT tab only
+   - Centers correctly on mobile (CSS handles layout)
    ========================================================= */
 (() => {
-  // Required lightbox elements (present on portfolio page)
+  // Required lightbox elements
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightboxImg");
   if (!lightbox || !lightboxImg) return;
@@ -99,16 +95,13 @@
   const btnPrev = lightbox.querySelector(".lightbox-prev");
   const btnNext = lightbox.querySelector(".lightbox-next");
 
-  // If tabs exist, restrict navigation to active panel
+  // Helper: get currently active panel (tab content)
   const getActivePanel = () => document.querySelector(".panel.active");
 
-  // Get the currently valid image set for navigation
+  // Helper: get only images in the active panel (prevents skipping to other tabs)
   const getActiveImages = () => {
     const panel = getActivePanel();
-    if (panel) return Array.from(panel.querySelectorAll(".grid img"));
-
-    // No tabs/panels: use all gallery images present
-    return Array.from(document.querySelectorAll(".masonry-x img, .grid img"));
+    return panel ? Array.from(panel.querySelectorAll(".grid img")) : [];
   };
 
   let currentIndex = 0;
@@ -117,7 +110,7 @@
     const images = getActiveImages();
     if (!images.length) return;
 
-    // Wrap index within the current image set
+    // Wrap index within current tab only
     currentIndex = (index + images.length) % images.length;
 
     const img = images[currentIndex];
@@ -133,6 +126,8 @@
     lightbox.classList.remove("is-open");
     lightbox.setAttribute("aria-hidden", "true");
     document.body.classList.remove("lightbox-open");
+
+    // Clear src to reduce memory use on large images
     lightboxImg.src = "";
   }
 
@@ -144,24 +139,25 @@
     openAt(currentIndex + 1);
   }
 
-  // Click any gallery image (masonry or grid) to open
+  // Delegate clicks: open image only within the active panel
   document.addEventListener("click", (e) => {
     const target = e.target;
     if (!(target instanceof Element)) return;
 
-    if (target.matches(".masonry-x img, .grid img")) {
+    // If the click is on a grid image inside the active panel, open it
+    if (target.matches(".panel.active .grid img")) {
       const images = getActiveImages();
       const idx = images.indexOf(target);
       if (idx !== -1) openAt(idx);
     }
   });
 
-  // Cursor hint for images
+  // Add cursor hint on images (works even after tab switches)
   document.addEventListener("mouseover", (e) => {
     const target = e.target;
     if (!(target instanceof Element)) return;
 
-    if (target.matches(".masonry-x img, .grid img")) {
+    if (target.matches(".grid img")) {
       target.style.cursor = "zoom-in";
     }
   });
@@ -174,7 +170,7 @@
     if (target.getAttribute("data-close") === "true") close();
   });
 
-  // Arrow buttons
+  // Arrow buttons (guard in case markup changes)
   if (btnPrev) btnPrev.addEventListener("click", prev);
   if (btnNext) btnNext.addEventListener("click", next);
 

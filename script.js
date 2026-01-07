@@ -175,7 +175,6 @@
   document.addEventListener("mouseover", (e) => {
     const target = e.target;
     if (!(target instanceof Element)) return;
-    if (target.matches(".grid img")) target.style.cursor = "zoom-in";
 
     if (target.matches(".masonry-x img, .grid img")) {
       target.style.cursor = "zoom-in";

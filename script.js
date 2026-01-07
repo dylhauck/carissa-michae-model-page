@@ -92,30 +92,6 @@
 })();
 
 /* =========================================================
-   Portfolio horizontal gallery arrows (masonry-x)
-   - Works only if markup exists
-   ========================================================= */
-(() => {
-  const scroller = document.querySelector(".grid.masonry-x");
-  const arrows = document.querySelectorAll(".gallery-arrow");
-  if (!scroller || !arrows.length) return;
-
-  function scrollByAmount(dir) {
-    // Scroll roughly one column width + gap
-    const col = scroller.querySelector("img");
-    const colWidth = col ? col.getBoundingClientRect().width : 260;
-    scroller.scrollBy({ left: dir * (colWidth + 16), behavior: "smooth" });
-  }
-
-  arrows.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const dir = Number(btn.getAttribute("data-dir")) || 1;
-      scrollByAmount(dir);
-    });
-  });
-})();
-
-/* =========================================================
    Lightbox (enlarge images + blur background + arrows + X)
    - Works with tabbed panels OR a single grid (new layout)
    - Works with:
@@ -141,7 +117,6 @@
   const getActiveImages = () => {
     const panel = getActivePanel();
     if (panel) return Array.from(panel.querySelectorAll(".grid img"));
-    return Array.from(document.querySelectorAll(".grid img"));
 
     // No tabs/panels: use all gallery images present
     return Array.from(document.querySelectorAll(".masonry-x img, .grid img"));
@@ -172,8 +147,6 @@
     lightboxImg.src = "";
   }
 
-  function prev() { openAt(currentIndex - 1); }
-  function next() { openAt(currentIndex + 1); }
   function prev() {
     openAt(currentIndex - 1);
   }
@@ -190,17 +163,6 @@
     const target = e.target;
     if (!(target instanceof Element)) return;
 
-    const panel = getActivePanel();
-
-    if (panel) {
-      if (!target.matches(".panel.active .grid img")) return;
-      const images = getActiveImages();
-      const idx = images.indexOf(target);
-      if (idx !== -1) openAt(idx);
-      return;
-    }
-
-    if (target.matches(".grid img")) {
     if (target.matches(".masonry-x img, .grid img")) {
       const images = getActiveImages();
       const idx = images.indexOf(target);

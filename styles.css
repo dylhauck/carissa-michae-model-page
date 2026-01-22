@@ -80,6 +80,8 @@ main{
 .section{ padding:70px 0; }
 .section + .section{ border-top:1px solid var(--border); }
 
+/* NOTE: Currently center section headers globally.
+   Keeping as-is to avoid unintended changes. */
 .section-header h2{
   margin:0 0 10px;
   font-size:28px;
@@ -89,6 +91,7 @@ main{
 
 .muted{ color:var(--muted); margin:0; }
 
+/* Two-column layout (About page layout uses this) */
 .two-col{
   margin-top:20px;
   display:grid;
@@ -96,6 +99,7 @@ main{
   gap:26px;
 }
 
+/* Responsive base spacing */
 @media (max-width: 900px){
   .site-header{ padding:16px 18px; flex-direction:column; align-items:flex-start; }
   main{ padding:20px 18px 60px; }
@@ -110,7 +114,7 @@ main{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  justify-content:center;
+  justify-content:center; /* centered tabs */
 }
 
 .tab{
@@ -133,7 +137,7 @@ main{
 .panel.active{ display:block; }
 
 /* =========================================================
-   Image Grid (Default)
+   Image Grid (Portfolio default grid for non-portfolio pages)
    ========================================================= */
 .grid{
   display:grid;
@@ -150,15 +154,11 @@ main{
   border:1px solid var(--border);
   background:var(--soft);
   image-rendering:auto;
-
-  /* Prevent browser drag ghost (helps lightbox reliability) */
-  -webkit-user-drag: none;
-  user-select: none;
 }
 
 /* =========================================================
-   Portfolio Page: Horizontal 2-row scroller + inertia tuning
-   (Scoped so it ONLY affects portfolio.html)
+   Portfolio Page: Horizontal 2-row scroller (FIXED ALIGNMENT)
+   - Only applies if you add: <body class="portfolio-page">
    ========================================================= */
 body.portfolio-page .portfolio-rail{
   position: relative;
@@ -167,16 +167,19 @@ body.portfolio-page .portfolio-rail{
 
 /* Convert the grid into a horizontal 2-row rail */
 body.portfolio-page .grid{
-  /* horizontal flow */
-  grid-auto-flow: column;
+  /* Keep spacing consistent */
+  gap: 16px;
 
-  /* Each “tile column” width — keeps the same general sizing feel */
-  grid-auto-columns: clamp(220px, 24vw, 320px);
-
-  /* Exactly 2 rows */
+  /* 2 rows */
   grid-template-rows: repeat(2, auto);
 
-  /* Horizontal scrolling */
+  /* Horizontal flow */
+  grid-auto-flow: column;
+
+  /* IMPORTANT: fixed tile width to prevent empty gaps */
+  grid-auto-columns: 240px;
+
+  /* Scroll */
   overflow-x: auto;
   overflow-y: hidden;
 
@@ -185,95 +188,21 @@ body.portfolio-page .grid{
   overscroll-behavior-x: contain;
   scroll-behavior: smooth;
 
-  /* Snap tuning (feels premium, doesn’t fight the user) */
+  /* Snap (subtle) */
   scroll-snap-type: x proximity;
-  scroll-padding-inline: 60px;
+  scroll-padding-inline: 0;
 
-  /* Spacing so scrollbar doesn’t sit on content */
+  /* Pack tightly from the left (no weird spacing) */
+  justify-content: start;
+  align-content: start;
+
+  /* Keep scrollbar off images slightly */
   padding: 8px 0 14px;
 }
 
-/* Snap each image */
+/* Snap each image tile */
 body.portfolio-page .grid img{
   scroll-snap-align: start;
-}
-
-/* Optional: nicer scrollbar (doesn’t affect functionality) */
-body.portfolio-page .grid{
-  scrollbar-width: thin;
-}
-
-/* =========================================================
-   Portfolio arrows (sit in the margins, not on the images)
-   - Default (light background): black pill with white arrow
-   - Dark mode: white pill with dark arrow
-   ========================================================= */
-body.portfolio-page{
-  --arrow-bg: rgba(17,17,17,0.92);
-  --arrow-fg: #fff;
-  --arrow-border: rgba(0,0,0,0.12);
-}
-
-@media (prefers-color-scheme: dark){
-  body.portfolio-page{
-    --arrow-bg: rgba(255,255,255,0.92);
-    --arrow-fg: #111;
-    --arrow-border: rgba(255,255,255,0.18);
-  }
-}
-
-.portfolio-arrow{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 3;
-
-  width: 54px;
-  height: 54px;
-  border-radius: 999px;
-  border: 1px solid var(--arrow-border);
-  background: var(--arrow-bg);
-  color: var(--arrow-fg);
-
-  font-size: 34px;
-  line-height: 1;
-  cursor: pointer;
-
-  display: grid;
-  place-items: center;
-
-  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
-  transition: transform 160ms ease, opacity 160ms ease;
-}
-
-.portfolio-arrow:hover{
-  transform: translateY(-50%) scale(1.04);
-}
-
-.portfolio-arrow:active{
-  transform: translateY(-50%) scale(0.98);
-}
-
-/* Push into the “empty margins” */
-.portfolio-arrow-left{ left: -64px; }
-.portfolio-arrow-right{ right: -64px; }
-
-/* If viewport is tight, keep them visible without covering photos */
-@media (max-width: 1100px){
-  .portfolio-arrow-left{ left: -38px; }
-  .portfolio-arrow-right{ right: -38px; }
-}
-
-/* Mobile: smaller arrows */
-@media (max-width: 768px){
-  .portfolio-arrow{
-    width: 40px;
-    height: 40px;
-    font-size: 26px;
-    opacity: 0.95;
-  }
-  .portfolio-arrow-left{ left: -14px; }
-  .portfolio-arrow-right{ right: -14px; }
 }
 
 /* =========================================================
@@ -316,7 +245,7 @@ h3{ margin:18px 0 10px; font-size:16px; }
 .stat strong{ font-weight:600; }
 
 /* =========================================================
-   Contact Card
+   Contact Card (Non-form contact info blocks)
    ========================================================= */
 .contact-card{
   margin-top:18px;
@@ -352,12 +281,13 @@ h3{ margin:18px 0 10px; font-size:16px; }
   color:var(--muted);
 }
 
+/* Home-only footer blend on hero */
 body.home .footer{
   background: transparent;
   border-top: none;
   position: relative;
   z-index: 2;
-  margin-top: -70px;
+  margin-top: -70px;      /* pulls footer onto the image */
   padding-top: 40px;
   padding-bottom: 26px;
   color: rgba(255,255,255,0.8);
@@ -366,7 +296,7 @@ body.home .footer{
 }
 
 /* =========================================================
-   Cinematic "Zoom Out" Entrance
+   Cinematic "Zoom Out" Entrance (Enter -> Home)
    ========================================================= */
 .page-wrap{
   transform: scale(1);
@@ -403,6 +333,7 @@ body.home .footer{
   place-items: center;
 }
 
+/* Force full-screen hero on home */
 body.home .hero{
   min-height: 100vh;
   height: 100vh;
@@ -416,6 +347,7 @@ body.home .hero{
   filter: contrast(1.02) saturate(1.02);
 }
 
+/* Dark overlay on hero for readability */
 .hero::after{
   content:"";
   position:absolute;
@@ -461,6 +393,7 @@ body.home .hero{
   flex-wrap: wrap;
 }
 
+/* Buttons */
 .btn{
   display:inline-flex;
   align-items:center;
@@ -484,6 +417,27 @@ body.home .hero{
 .btn-ghost{
   background: rgba(0,0,0,0.45);
   color:#fff;
+}
+
+/* (Unused now but kept as a precaution) */
+.hero-scroll{
+  position:absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display:flex;
+  gap: 10px;
+  align-items:center;
+  color: rgba(255,255,255,0.75);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.hero-line{
+  width: 46px;
+  height: 1px;
+  background: rgba(255,255,255,0.65);
 }
 
 @media (max-width: 900px){
@@ -559,9 +513,10 @@ body.home .hero{
   border-color: #111;
 }
 
+/* Actions row (Send Message button) */
 .form-actions{
   display:flex;
-  justify-content:center;
+  justify-content:center;  /* intended behavior */
   padding-top: 8px;
 }
 
@@ -569,6 +524,7 @@ body.home .hero{
   .form-row{ grid-template-columns: 1fr; }
 }
 
+/* Send Message button style */
 .form-actions .btn{
   font-family: inherit;
   font-weight: 500;
@@ -588,8 +544,10 @@ body.home .hero{
   transform: translateY(-1px);
 }
 
+/* Contact page header alignment */
 .contact-header{ text-align:center; }
 
+/* Form status messages */
 .form-success,
 .form-error{
   margin: 14px auto 0;
@@ -611,7 +569,7 @@ body.home .hero{
   }
 
   body.contact-page main{
-    height: calc(100vh - 120px);
+    height: calc(100vh - 120px); /* adjust if header height changes */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -626,7 +584,7 @@ body.home .hero{
 }
 
 /* =========================================================
-   Enter Page Video
+   Enter Page Video (for the overlay)
    ========================================================= */
 .enter-video{
   position: absolute;
@@ -642,6 +600,7 @@ body.home .hero{
   .enter-video{ object-position: 50% 35%; }
 }
 
+/* Ensure overlay + UI sit above enter video */
 .overlay,
 .top-left,
 .top-right,
@@ -685,20 +644,14 @@ body.lightbox-open{ overflow: hidden; }
 }
 
 .lightbox-img{
-  display: block;                /* IMPORTANT: prevents weird inline img collapsing */
   max-width: min(1100px, 92vw);
   max-height: 86vh;
   width: auto;
   height: auto;
-  object-fit: contain;           /* IMPORTANT: ensures no “thin bar” rendering */
   border-radius: 14px;
   border: 1px solid rgba(255,255,255,0.18);
   box-shadow: 0 18px 60px rgba(0,0,0,0.45);
   background: rgba(0,0,0,0.15);
-
-  /* Prevent browser drag ghost inside lightbox */
-  -webkit-user-drag: none;
-  user-select: none;
 }
 
 .lightbox-close{
@@ -730,6 +683,7 @@ body.lightbox-open{ overflow: hidden; }
 .lightbox-prev{ justify-self: start; }
 .lightbox-next{ justify-self: end; }
 
+/* Mobile lightbox layout */
 @media (max-width: 768px){
   .lightbox-dialog{
     grid-template-columns: 1fr;
@@ -762,14 +716,21 @@ body.lightbox-open{ overflow: hidden; }
    About Page Tweaks
    ========================================================= */
 body.about-page .about-text{ margin-top: 0; }
+
 body.about-page .section-header{ margin-bottom: 24px; }
+
+/* Center stats vertically with paragraph */
 body.about-page .two-col{ align-items: center; }
+
+/* Tighten stats card vertical spacing */
 body.about-page .card{ padding-bottom: 14px; }
 
 /* =========================================================
    Mobile Home: Lock Page + Prevent Drag/Scroll
+   (Home only — does not affect other pages)
    ========================================================= */
 @media (max-width: 768px){
+  /* IMPORTANT: do NOT lock html overflow (breaks scrolling on other pages) */
   body.home{
     overflow: hidden !important;
     overscroll-behavior: none;
@@ -795,6 +756,7 @@ body.about-page .card{ padding-bottom: 14px; }
     width: 100vw;
   }
 
+  /* Footer must not add document height on mobile home */
   body.home .footer{
     position: absolute;
     left: 0;

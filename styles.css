@@ -103,14 +103,44 @@ main{
 }
 
 /* =========================================================
-   Image Grid (Portfolio)
+   Tabs (Portfolio categories)
+   ========================================================= */
+.tabs{
+  margin-top:22px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.tab{
+  border:1px solid var(--border);
+  background:#fff;
+  padding:10px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:500;
+}
+.tab:hover{ background:var(--soft); }
+.tab.active{
+  background:#111;
+  color:#fff;
+  border-color:#111;
+}
+
+.tab-panels{ margin-top:22px; }
+.panel{ display:none; }
+.panel.active{ display:block; }
+
+/* =========================================================
+   Image Grid (Default)
    ========================================================= */
 .grid{
   display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
   gap:16px;
 }
 
-/* Image styling (unchanged) */
 .grid img{
   width:100%;
   height:auto;
@@ -119,103 +149,144 @@ main{
   border-radius:14px;
   border:1px solid var(--border);
   background:var(--soft);
+  image-rendering:auto;
+
+  /* Prevent browser drag ghost (helps lightbox reliability) */
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 /* =========================================================
-   PORTFOLIO — Horizontal 2-Row Scroll + Arrows
+   Portfolio Page: Horizontal 2-row scroller + inertia tuning
+   (Scoped so it ONLY affects portfolio.html)
    ========================================================= */
-.h-gallery{
+body.portfolio-page .portfolio-rail{
   position: relative;
-
-  --arrow-size: 48px;
-  --arrow-gap: 14px;
-  --arrow-rail: calc(var(--arrow-size) + (var(--arrow-gap) * 2));
-
-  padding-left: var(--arrow-rail);
-  padding-right: var(--arrow-rail);
+  margin-top: 6px;
 }
 
-.h-grid{
-  display:grid;
+/* Convert the grid into a horizontal 2-row rail */
+body.portfolio-page .grid{
+  /* horizontal flow */
   grid-auto-flow: column;
-  grid-auto-columns: minmax(240px, 1fr);
-  grid-template-columns: none;
+
+  /* Each “tile column” width — keeps the same general sizing feel */
+  grid-auto-columns: clamp(220px, 24vw, 320px);
+
+  /* Exactly 2 rows */
   grid-template-rows: repeat(2, auto);
-  gap:16px;
 
-  overflow-x:auto;
-  overflow-y:hidden;
+  /* Horizontal scrolling */
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  /* Inertia tuning */
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
 
+  /* Snap tuning (feels premium, doesn’t fight the user) */
   scroll-snap-type: x proximity;
+  scroll-padding-inline: 60px;
+
+  /* Spacing so scrollbar doesn’t sit on content */
+  padding: 8px 0 14px;
 }
 
-.h-grid img{
+/* Snap each image */
+body.portfolio-page .grid img{
   scroll-snap-align: start;
 }
 
-/* Arrow buttons */
-.h-arrow{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  z-index:5;
-
-  width:var(--arrow-size);
-  height:var(--arrow-size);
-  border-radius:999px;
-
-  display:grid;
-  place-items:center;
-
-  font-size:28px;
-  cursor:pointer;
-
-  background:rgba(0,0,0,0.92);
-  color:#fff;
-  border:1px solid rgba(0,0,0,0.2);
-
-  transition:transform 180ms ease, opacity 180ms ease;
-}
-
-.h-arrow-left{ left:var(--arrow-gap); }
-.h-arrow-right{ right:var(--arrow-gap); }
-
-.h-arrow:hover{
-  transform:translateY(-50%) scale(1.06);
-}
-
-.h-arrow.is-disabled{
-  opacity:0.35;
-  pointer-events:none;
-}
-
-/* Dark background / dark mode support */
-@media (prefers-color-scheme: dark){
-  .h-arrow{
-    background:rgba(255,255,255,0.92);
-    color:#000;
-    border:1px solid rgba(255,255,255,0.22);
-    backdrop-filter:blur(8px);
-  }
-}
-
-/* Mobile sizing */
-@media (max-width:768px){
-  .h-gallery{
-    --arrow-size:36px;
-    --arrow-gap:10px;
-  }
-  .h-arrow{ font-size:22px; }
+/* Optional: nicer scrollbar (doesn’t affect functionality) */
+body.portfolio-page .grid{
+  scrollbar-width: thin;
 }
 
 /* =========================================================
-   Cards / Stats / Footer / Lightbox
-   (UNCHANGED FROM YOUR WORKING VERSION)
+   Portfolio arrows (sit in the margins, not on the images)
+   - Default (light background): black pill with white arrow
+   - Dark mode: white pill with dark arrow
    ========================================================= */
-/* — everything below this point is exactly as you had it — */
+body.portfolio-page{
+  --arrow-bg: rgba(17,17,17,0.92);
+  --arrow-fg: #fff;
+  --arrow-border: rgba(0,0,0,0.12);
+}
 
-/* Cards */
+@media (prefers-color-scheme: dark){
+  body.portfolio-page{
+    --arrow-bg: rgba(255,255,255,0.92);
+    --arrow-fg: #111;
+    --arrow-border: rgba(255,255,255,0.18);
+  }
+}
+
+.portfolio-arrow{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  border: 1px solid var(--arrow-border);
+  background: var(--arrow-bg);
+  color: var(--arrow-fg);
+
+  font-size: 34px;
+  line-height: 1;
+  cursor: pointer;
+
+  display: grid;
+  place-items: center;
+
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.portfolio-arrow:hover{
+  transform: translateY(-50%) scale(1.04);
+}
+
+.portfolio-arrow:active{
+  transform: translateY(-50%) scale(0.98);
+}
+
+/* Push into the “empty margins” */
+.portfolio-arrow-left{ left: -64px; }
+.portfolio-arrow-right{ right: -64px; }
+
+/* If viewport is tight, keep them visible without covering photos */
+@media (max-width: 1100px){
+  .portfolio-arrow-left{ left: -38px; }
+  .portfolio-arrow-right{ right: -38px; }
+}
+
+/* Mobile: smaller arrows */
+@media (max-width: 768px){
+  .portfolio-arrow{
+    width: 40px;
+    height: 40px;
+    font-size: 26px;
+    opacity: 0.95;
+  }
+  .portfolio-arrow-left{ left: -14px; }
+  .portfolio-arrow-right{ right: -14px; }
+}
+
+/* =========================================================
+   Typography / Lists
+   ========================================================= */
+h3{ margin:18px 0 10px; font-size:16px; }
+
+.bullets{ margin:0; padding-left:18px; color:#222; }
+.bullets li{ margin:8px 0; }
+
+/* =========================================================
+   Cards / Stats Blocks
+   ========================================================= */
 .card{
   border:1px solid var(--border);
   border-radius:16px;
@@ -223,7 +294,57 @@ main{
   background:#fff;
 }
 
-/* Footer */
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:12px;
+}
+
+.stat{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px;
+  background:var(--soft);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.stat span{ color:var(--muted); font-size:13px; }
+.stat strong{ font-weight:600; }
+
+/* =========================================================
+   Contact Card
+   ========================================================= */
+.contact-card{
+  margin-top:18px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:18px;
+  background:#fff;
+}
+
+.contact-row{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+}
+.contact-row:last-child{ border-bottom:none; }
+
+.contact-row span{ color:var(--muted); min-width:80px; }
+
+.contact-card a{ color:#111; font-weight:500; text-decoration:none; }
+.contact-card a:hover{ text-decoration:underline; }
+
+.social{ display:flex; gap:16px; flex-wrap:wrap; }
+
+/* =========================================================
+   Footer
+   ========================================================= */
 .footer{
   border-top:1px solid var(--border);
   padding:26px 18px;
@@ -231,30 +352,456 @@ main{
   color:var(--muted);
 }
 
-/* Lightbox */
-body.lightbox-open{ overflow:hidden; }
-.lightbox{ position:fixed; inset:0; z-index:99999; display:none; }
-.lightbox.is-open{ display:block; }
+body.home .footer{
+  background: transparent;
+  border-top: none;
+  position: relative;
+  z-index: 2;
+  margin-top: -70px;
+  padding-top: 40px;
+  padding-bottom: 26px;
+  color: rgba(255,255,255,0.8);
+  text-shadow: 0 1px 10px rgba(0,0,0,0.6);
+  text-align: center;
+}
 
-.lightbox-backdrop{
+/* =========================================================
+   Cinematic "Zoom Out" Entrance
+   ========================================================= */
+.page-wrap{
+  transform: scale(1);
+  transform-origin: center;
+}
+
+.page-wrap.enter-zoom{
+  animation: zoomOutIn 1100ms cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes zoomOutIn{
+  from{
+    transform: scale(2.05);
+    opacity: 0.85;
+    filter: blur(8px);
+  }
+  to{
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* =========================================================
+   Hero (Home)
+   ========================================================= */
+.hero{
+  position: relative;
+  height: 90svh;
+  min-height: 640px;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+body.home .hero{
+  min-height: 100vh;
+  height: 100vh;
+}
+
+.hero-media{
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,0.55);
-  backdrop-filter:blur(10px);
+  background: url("images/enter.jpeg") center 18% / cover no-repeat;
+  transform: scale(1.06);
+  filter: contrast(1.02) saturate(1.02);
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(0,0,0,0.10), rgba(0,0,0,0.70)),
+    rgba(0,0,0,0.18);
+}
+
+.hero-content{
+  position: relative;
+  z-index: 1;
+  width: min(1000px, calc(100% - 80px));
+  color: #fff;
+}
+
+.hero-eyebrow{
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.hero-title{
+  margin: 12px 0 10px;
+  font-size: clamp(44px, 6vw, 78px);
+  line-height: 0.95;
+  letter-spacing: -0.8px;
+  font-weight: 600;
+}
+
+.hero-subtitle{
+  margin: 0;
+  max-width: 560px;
+  color: rgba(255,255,255,0.86);
+  line-height: 1.7;
+}
+
+.hero-actions{
+  margin-top: 22px;
+  display:flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 12px 18px;
+  border-radius: 999px;
+  text-decoration:none;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-size: 13px;
+  border: 1px solid rgba(255,255,255,0.22);
+  transition: transform 220ms ease, background 220ms ease;
+}
+.btn:hover{ transform: translateY(-1px); }
+
+.btn-primary{
+  background: rgba(255,255,255,0.92);
+  color:#000;
+  border-color: rgba(255,255,255,0.0);
+}
+.btn-ghost{
+  background: rgba(0,0,0,0.45);
+  color:#fff;
+}
+
+@media (max-width: 900px){
+  .hero-content{ width: calc(100% - 36px); }
+  .hero{ min-height: 560px; }
+}
+
+/* =========================================================
+   Scroll Reveal Utility
+   ========================================================= */
+.reveal{
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+.reveal.in{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================================
+   Contact Form
+   ========================================================= */
+.contact-form{
+  margin-top: 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+  background: #fff;
+}
+
+.form-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 0;
+}
+
+.field label{
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 12px;
+  font: inherit;
+  background: var(--soft);
+  color: var(--text);
+  outline: none;
+}
+
+.field textarea{
+  resize: vertical;
+  min-height: 140px;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  background: #fff;
+  border-color: #111;
+}
+
+.form-actions{
+  display:flex;
+  justify-content:center;
+  padding-top: 8px;
+}
+
+@media (max-width: 700px){
+  .form-row{ grid-template-columns: 1fr; }
+}
+
+.form-actions .btn{
+  font-family: inherit;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 14px 48px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  transition: all 0.25s ease;
+}
+
+.form-actions .btn:hover{
+  background: #111;
+  color: #fff;
+  border-color: #111;
+  transform: translateY(-1px);
+}
+
+.contact-header{ text-align:center; }
+
+.form-success,
+.form-error{
+  margin: 14px auto 0;
+  text-align: center;
+  font-size: 13px;
+  max-width:420px;
+}
+
+.form-success{ color: #1a7f37; }
+.form-error{ color: #b42318; }
+
+/* =========================================================
+   Contact Page — Desktop Only Fit-to-Screen
+   ========================================================= */
+@media (min-width: 1024px){
+  body.contact-page{
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  body.contact-page main{
+    height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 40px;
+  }
+
+  body.contact-page .contact-form{
+    max-height: 100%;
+    overflow: auto;
+    margin: 0 auto;
+  }
+}
+
+/* =========================================================
+   Enter Page Video
+   ========================================================= */
+.enter-video{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 25%;
+  z-index: 0;
+}
+
+@media (max-width: 768px){
+  .enter-video{ object-position: 50% 35%; }
+}
+
+.overlay,
+.top-left,
+.top-right,
+.enter-container{
+  z-index: 2;
+}
+
+/* =========================================================
+   Lightbox (Portfolio Enlarge)
+   ========================================================= */
+body.lightbox-open{ overflow: hidden; }
+
+.lightbox{
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: none;
+}
+.lightbox.is-open{ display: block; }
+
+.lightbox-backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(10px);
 }
 
 .lightbox-dialog{
-  position:absolute;
-  inset:0;
-  display:grid;
-  grid-template-columns:70px 1fr 70px;
-  align-items:center;
-  padding:24px;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 70px 1fr 70px;
+  align-items: center;
+  padding: 24px;
+}
+
+.lightbox-figure{
+  margin: 0;
+  display: grid;
+  place-items: center;
 }
 
 .lightbox-img{
-  max-width:min(1100px,92vw);
-  max-height:86vh;
-  border-radius:14px;
-  box-shadow:0 18px 60px rgba(0,0,0,0.45);
+  display: block;                /* IMPORTANT: prevents weird inline img collapsing */
+  max-width: min(1100px, 92vw);
+  max-height: 86vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;           /* IMPORTANT: ensures no “thin bar” rendering */
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.45);
+  background: rgba(0,0,0,0.15);
+
+  /* Prevent browser drag ghost inside lightbox */
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.lightbox-close{
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lightbox-nav{
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 34px;
+  cursor: pointer;
+}
+
+.lightbox-prev{ justify-self: start; }
+.lightbox-next{ justify-self: end; }
+
+@media (max-width: 768px){
+  .lightbox-dialog{
+    grid-template-columns: 1fr;
+    padding: 14px;
+  }
+
+  .lightbox-figure{
+    align-self: center;
+    justify-self: center;
+    width: 100%;
+    display: grid;
+    place-items: center;
+  }
+
+  .lightbox-img{
+    max-width: 92vw;
+    max-height: 80vh;
+  }
+
+  .lightbox-nav{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .lightbox-prev{ left: 10px; }
+  .lightbox-next{ right: 10px; }
+}
+
+/* =========================================================
+   About Page Tweaks
+   ========================================================= */
+body.about-page .about-text{ margin-top: 0; }
+body.about-page .section-header{ margin-bottom: 24px; }
+body.about-page .two-col{ align-items: center; }
+body.about-page .card{ padding-bottom: 14px; }
+
+/* =========================================================
+   Mobile Home: Lock Page + Prevent Drag/Scroll
+   ========================================================= */
+@media (max-width: 768px){
+  body.home{
+    overflow: hidden !important;
+    overscroll-behavior: none;
+    touch-action: none;
+  }
+
+  body.home,
+  body.home #homeWrap{
+    width: 100vw;
+    max-width: 100vw;
+    height: 100dvh;
+  }
+
+  body.home #homeWrap{
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  body.home .hero{
+    height: 100dvh;
+    min-height: 100dvh;
+    width: 100vw;
+  }
+
+  body.home .footer{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 14px;
+    margin: 0;
+    padding: 0 18px;
+    border-top: 0;
+  }
 }

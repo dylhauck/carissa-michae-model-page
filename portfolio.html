@@ -15,8 +15,9 @@
 <body>
   <!-- =========================================================
        Portfolio Page
-       - Uses global styles.css for layout + tabs + grid styling
-       - Uses script.js for tabs + lightbox + year (if present)
+       - Uses global styles.css for layout + grid styling
+       - Uses script.js for year + reveal + lightbox
+       - Adds local arrow scroller logic (only for this page)
        ========================================================= -->
 
   <div class="page-wrap">
@@ -41,33 +42,49 @@
         <div class="section-header">
           <h2>Portfolio</h2>
           <p class="muted">Browse the full collection.</p>
-        </br>
+          </br>
         </div>
-        <div class="grid">
-              <img alt="Full body 1" src="images/fullbody1.JPG" />
-              <img alt="Full body 2" src="images/new2.jpeg" />
-              <img alt="Full body 3" src="images/new6.JPG" />
-              <img alt="Full body 4" src="images/enter6.JPEG" />
-              <img alt="Full body 5" src="images/enter.jpeg" />
-              <img alt="Full body 6" src="images/full1.png" />
-              <img alt="Full body 7" src="images/full2.jpg" />
-              <img alt="Full body 8" src="images/full3.jpeg" />
-              <img alt="Full body 9" src="images/full4.jpeg" />
-              <img alt="Full body 10" src="images/full5.jpeg" />
-              <img alt="Full body 11" src="images/new4.JPG" />
-              <img alt="Full body 10" src="images/new1.JPG" />
-              <img alt="Headshot 1" src="images/headshot2.JPG" />
-              <img alt="Headshot 2" src="images/headshot3.JPG" />
-              <img alt="Headshot 3" src="images/new7.JPG" />
-              <img alt="Headshot 4" src="images/head1.jpeg" />
-              <img alt="Headshot 5" src="images/head2.jpeg" />
-              <img alt="Headshot 6" src="images/new3.jpeg" />
-              <img alt="Profile 1" src="images/headshot1.JPEG" />
-              <img alt="Profile 2" src="images/enter3.JPG" />
-              <img alt="Profile 3" src="images/fullbody2.JPEG" />
-              <img alt="Profile 4" src="images/prof2.JPEG" />
-              <img alt="Profile 5" src="images/fullbody3.JPG" />
-            </div>
+
+        <!-- =========================================================
+             Horizontal 2-row gallery + arrows
+             - Buttons scroll the grid left/right
+             - Buttons auto-disable at the ends
+             ========================================================= -->
+        <div class="h-gallery" aria-label="Scrollable photo gallery">
+          <button class="h-arrow h-arrow-left" type="button" aria-label="Scroll left">
+            ‹
+          </button>
+
+          <div class="grid h-grid">
+            <img alt="Full body 1" src="images/fullbody1.JPG" />
+            <img alt="Full body 2" src="images/new2.jpeg" />
+            <img alt="Full body 3" src="images/new6.JPG" />
+            <img alt="Full body 4" src="images/enter6.JPEG" />
+            <img alt="Full body 5" src="images/enter.jpeg" />
+            <img alt="Full body 6" src="images/full1.png" />
+            <img alt="Full body 7" src="images/full2.jpg" />
+            <img alt="Full body 8" src="images/full3.jpeg" />
+            <img alt="Full body 9" src="images/full4.jpeg" />
+            <img alt="Full body 10" src="images/full5.jpeg" />
+            <img alt="Full body 11" src="images/new4.JPG" />
+            <img alt="Full body 12" src="images/new1.JPG" />
+            <img alt="Headshot 1" src="images/headshot2.JPG" />
+            <img alt="Headshot 2" src="images/headshot3.JPG" />
+            <img alt="Headshot 3" src="images/new7.JPG" />
+            <img alt="Headshot 4" src="images/head1.jpeg" />
+            <img alt="Headshot 5" src="images/head2.jpeg" />
+            <img alt="Headshot 6" src="images/new3.jpeg" />
+            <img alt="Profile 1" src="images/headshot1.JPEG" />
+            <img alt="Profile 2" src="images/enter3.JPG" />
+            <img alt="Profile 3" src="images/fullbody2.JPEG" />
+            <img alt="Profile 4" src="images/prof2.JPEG" />
+            <img alt="Profile 5" src="images/fullbody3.JPG" />
+          </div>
+
+          <button class="h-arrow h-arrow-right" type="button" aria-label="Scroll right">
+            ›
+          </button>
+        </div>
 
         <!-- Footer (portfolio page only) -->
         <br><br>
@@ -96,13 +113,68 @@
     </div>
   </div>
 
-  <!-- Local helpers (kept minimal + non-invasive) -->
+  <!-- Local helpers -->
   <style>
-    /* Centered text utility used on this page only */
     .centered-paragraph { text-align: center; }
   </style>
 
-  <!-- Shared site JS (tabs + year + reveal + lightbox) -->
+  <!-- Shared site JS (year/reveal/lightbox, etc.) -->
   <script src="script.js"></script>
+
+  <!-- =========================================================
+       Portfolio arrow scrolling (page-only)
+       - Auto-disables arrows at ends
+       - Smooth scroll step based on image width
+       ========================================================= -->
+  <script>
+    (function () {
+      const gallery = document.querySelector(".h-gallery");
+      if (!gallery) return;
+
+      const scroller = gallery.querySelector(".h-grid");
+      const leftBtn = gallery.querySelector(".h-arrow-left");
+      const rightBtn = gallery.querySelector(".h-arrow-right");
+
+      if (!scroller || !leftBtn || !rightBtn) return;
+
+      function getStep() {
+        const firstImg = scroller.querySelector("img");
+        const w = firstImg ? firstImg.getBoundingClientRect().width : 240;
+        return Math.round(w * 1.6);
+      }
+
+      function setDisabled(btn, disabled) {
+        btn.disabled = disabled;
+        btn.setAttribute("aria-disabled", disabled ? "true" : "false");
+        btn.classList.toggle("is-disabled", disabled);
+      }
+
+      function updateButtons() {
+        const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+
+        // small tolerance avoids flicker due to subpixel values
+        const atStart = scroller.scrollLeft <= 1;
+        const atEnd = scroller.scrollLeft >= (maxScroll - 1);
+
+        setDisabled(leftBtn, atStart);
+        setDisabled(rightBtn, atEnd);
+      }
+
+      leftBtn.addEventListener("click", () => {
+        scroller.scrollBy({ left: -getStep(), behavior: "smooth" });
+      });
+
+      rightBtn.addEventListener("click", () => {
+        scroller.scrollBy({ left: getStep(), behavior: "smooth" });
+      });
+
+      // Update on scroll + resize so disable state stays correct
+      scroller.addEventListener("scroll", updateButtons, { passive: true });
+      window.addEventListener("resize", updateButtons);
+
+      // Initial state
+      updateButtons();
+    })();
+  </script>
 </body>
 </html>

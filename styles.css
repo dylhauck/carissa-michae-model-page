@@ -1003,3 +1003,32 @@ body.about-page .card{ padding-bottom: 14px; }
     overflow: auto;
   }
 }
+
+/* =========================================================
+   DESKTOP — Portfolio page lock (no vertical scroll)
+   Keeps horizontal gallery scrolling working
+   ========================================================= */
+@media (min-width: 1024px){
+
+  body.portfolio-page{
+    min-height: 100vh;
+    overflow: hidden;            /* kills page up/down scroll */
+    display: flex;
+    flex-direction: column;      /* header, main, footer */
+  }
+
+  body.portfolio-page main{
+    flex: 1;
+    overflow: hidden;            /* prevents main from scrolling */
+  }
+
+  body.portfolio-page .footer{
+    flex: 0 0 auto;              /* footer stays visible */
+  }
+
+  /* Allow the gallery itself to keep scrolling horizontally */
+  body.portfolio-page .h-grid{
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+  }
+}

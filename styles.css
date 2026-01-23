@@ -561,3 +561,23 @@ body.home .footer{
   text-shadow: 0 1px 10px rgba(0,0,0,0.6);
   text-align: center;
 }
+
+/* =========================================================
+   FIX: Portfolio lightbox clicks blocked by arrow buttons
+   - Only arrows should be clickable
+   - Everything else in the gallery should allow clicks to reach images
+   ========================================================= */
+.h-gallery{
+  /* let clicks go "through" the container by default */
+  pointer-events: none;
+}
+
+.h-gallery .h-grid{
+  /* but the image scroller IS clickable */
+  pointer-events: auto;
+}
+
+.h-gallery .h-arrow{
+  /* arrows remain clickable */
+  pointer-events: auto;
+}

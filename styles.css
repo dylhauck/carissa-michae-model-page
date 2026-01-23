@@ -511,6 +511,30 @@ body.home .hero{
 .form-error{ color: #b42318; }
 
 /* =========================================================
+   Contact Page — Desktop Only Fit-to-Screen
+   ========================================================= */
+@media (min-width: 1024px){
+  body.contact-page{
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  body.contact-page main{
+    height: calc(100vh - 120px); /* adjust if header height changes */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 40px;
+  }
+
+  body.contact-page .contact-form{
+    max-height: 100%;
+    overflow: auto;
+    margin: 0 auto;
+  }
+}
+
+/* =========================================================
    Enter Page Video (for the overlay)
    ========================================================= */
 .enter-video{
@@ -950,4 +974,24 @@ body.about-page .card{ padding-bottom: 14px; }
   body.about-page .about-text{ font-size: 14px; line-height: 1.4; }
   body.about-page .two-col{ gap: 16px; }
   body.about-page .stats{ gap: 10px; }
+}
+
+/* =========================================================
+   DESKTOP — Make CONTACT title spacing match About + Portfolio
+   (Place at VERY bottom)
+   ========================================================= */
+@media (min-width: 901px){
+
+  /* If Contact uses a .section wrapper (it does in your screenshots),
+     kill the huge top padding ONLY for the first section */
+  body.contact-page main > .section:first-of-type{
+    padding-top: 0 !important;     /* overrides .section{ padding:70px 0; } */
+  }
+
+  /* Also remove any accidental margin pushing the title down */
+  body.contact-page .contact-header,
+  body.contact-page .section-header{
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
 }

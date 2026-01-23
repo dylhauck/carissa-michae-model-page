@@ -895,3 +895,83 @@ body.about-page .card{ padding-bottom: 14px; }
     padding-top: 20px !important;
   }
 }
+
+/* =========================================================
+   ABOUT — Desktop lock (NO scrolling, always fits)
+   Paste at VERY bottom (single source of truth)
+   ========================================================= */
+@media (min-width: 901px){
+
+  /* Lock the page to the viewport */
+  body.about-page{
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Make the whole page a fixed-height column:
+     header takes natural height, main takes the rest */
+  body.about-page .page-wrap{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  body.about-page .site-header{
+    flex: 0 0 auto;
+  }
+
+  body.about-page main{
+    flex: 1 1 auto;
+    overflow: hidden;         /* IMPORTANT: no scroll */
+    padding-bottom: 0;        /* remove extra height pressure */
+  }
+
+  /* First section becomes the “canvas” that must fit */
+  body.about-page main > .section:first-of-type{
+    height: 100%;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Keep the header area tight */
+  body.about-page .section-header{
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Make the 2-col content fill remaining space */
+  body.about-page .two-col{
+    flex: 1 1 auto;
+    overflow: hidden;         /* IMPORTANT: no scroll */
+    align-items: flex-start;
+    margin-top: 18px;         /* tight but readable */
+  }
+
+  /* Prevent text block from forcing scroll */
+  body.about-page .about-text{
+    overflow: hidden;
+  }
+
+  /* Keep paragraphs tight */
+  body.about-page .about-text p{
+    margin: 0 0 12px;
+  }
+}
+
+/* ---- Shorter desktop screens: tighten sizing so it still fits ---- */
+@media (min-width: 901px) and (max-height: 860px){
+  body.about-page .section-header h2{ font-size: 30px; }
+  body.about-page .two-col{ gap: 18px; margin-top: 14px; }
+  body.about-page .about-text{ font-size: 15px; line-height: 1.45; }
+  body.about-page .card{ padding: 14px; }
+  body.about-page .stat{ padding: 10px; }
+}
+
+@media (min-width: 901px) and (max-height: 780px){
+  body.about-page .section-header h2{ font-size: 28px; }
+  body.about-page .about-text{ font-size: 14px; line-height: 1.4; }
+  body.about-page .two-col{ gap: 16px; }
+  body.about-page .stats{ gap: 10px; }
+}

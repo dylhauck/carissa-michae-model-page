@@ -878,58 +878,32 @@ body.about-page .card{ padding-bottom: 14px; }
 }
 
 /* =========================================================
-   Desktop: Match Contact's tighter header→title spacing
-   (Portfolio + About only)
-   ========================================================= */
-@media (min-width: 901px){
-  body.portfolio-page main > .section:first-of-type,
-  body.about-page main > .section:first-of-type{
-    padding-top: 30px;   /* was 70px via .section */
-  }
-}
-
-/* =========================================================
-   Desktop: Make About + Portfolio spacing match Contact
-   (Contact doesn't use the big .section top padding)
+   DESKTOP — FINAL: Make About + Portfolio match Contact spacing
+   (Single source of truth — place at VERY bottom)
    ========================================================= */
 @media (min-width: 769px){
 
-  /* ABOUT: kill the big first-section top padding */
+  /* Portfolio page is detected by the .h-gallery gallery */
+  body:has(.h-gallery) main,
+  body.about-page main{
+    padding-top: 40px !important; /* match Contact’s main padding-top feel */
+  }
+
+  /* Remove the huge first-section top padding on these pages */
+  body:has(.h-gallery) main > .section:first-of-type,
   body.about-page main > .section:first-of-type{
-    padding-top: 6px;     /* was 70px */
+    padding-top: 0 !important;    /* kills .section{ padding:70px 0; } top */
   }
 
-  /* PORTFOLIO: kill the big first-section top padding */
-  body:has(.h-gallery) main > .section:first-of-type{
-    padding-top: 6px;     /* was 70px */
-  }
-
-  /* PORTFOLIO: remove the extra manual <br> space under the subtitle */
+  /* If you used a manual <br> under the subtitle in Portfolio, kill it */
   body:has(.h-gallery) .section-header br{
     display: none !important;
   }
-}
 
-/* =========================================================
-   Desktop: Match Contact-style tight header-to-title spacing
-   (Only About + Portfolio first section)
-   ========================================================= */
-@media (min-width: 769px){
-  /* reduce the "main" top padding a bit on these pages only */
-  body.about-page main,
-  body.portfolio-page main{
-    padding-top: 16px; /* was 30px globally */
-  }
-
-  /* kill the huge 70px top padding ONLY for the first section on these pages */
-  body.about-page main > .section:first-of-type,
-  body.portfolio-page main > .section:first-of-type{
-    padding-top: 20px; /* was 70px via .section */
-  }
-
-  /* make sure the header itself isn't adding extra space */
-  body.about-page .section-header,
-  body.portfolio-page .section-header{
-    margin-top: 0;
+  /* Ensure section header itself isn’t adding extra top spacing */
+  body:has(.h-gallery) .section-header,
+  body.about-page .section-header{
+    margin-top: 0 !important;
+    padding-top: 0 !important;
   }
 }

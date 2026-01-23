@@ -889,22 +889,22 @@ body.about-page .card{ padding-bottom: 14px; }
 }
 
 /* =========================================================
-   Desktop: Make Portfolio + About header-to-title spacing
-   match Contact (do NOT affect mobile)
+   Desktop: Make About + Portfolio spacing match Contact
+   (Contact doesn't use the big .section top padding)
    ========================================================= */
 @media (min-width: 769px){
 
-  /* ABOUT page: reduce only the FIRST section top padding */
+  /* ABOUT: kill the big first-section top padding */
   body.about-page main > .section:first-of-type{
-    padding-top: 30px; /* was 70px */
+    padding-top: 0;     /* was 70px */
   }
 
-  /* PORTFOLIO page: detect via .h-gallery and reduce FIRST section top padding */
+  /* PORTFOLIO: kill the big first-section top padding */
   body:has(.h-gallery) main > .section:first-of-type{
-    padding-top: 30px; /* was 70px */
+    padding-top: 0;     /* was 70px */
   }
 
-  /* PORTFOLIO page: remove the extra manual <br> spacing inside the header */
+  /* PORTFOLIO: remove the extra manual <br> space under the subtitle */
   body:has(.h-gallery) .section-header br{
     display: none !important;
   }

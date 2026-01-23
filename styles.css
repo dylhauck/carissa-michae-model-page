@@ -864,3 +864,27 @@ body.about-page .card{ padding-bottom: 14px; }
     bottom: -4px;
   }
 }
+
+@media (max-width: 768px){
+  .site-header{
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .brand-name{
+    font-size: 15px;
+  }
+
+  .brand-subtitle{
+    font-size: 11px;
+  }
+
+  .nav{
+    gap: 14px;
+  }
+
+  .nav-link{
+    padding: 6px 8px;
+    font-size: 13px;
+  }
+}

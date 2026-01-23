@@ -961,7 +961,15 @@ body.about-page .card{ padding-bottom: 14px; }
     display: grid;
     grid-template-rows: auto 1fr auto; /* header, main, footer */
   }
-   
+
+  body.contact-page main{
+    overflow: hidden;
+    padding: 40px 40px 24px !important; /* <-- THIS is the “tight” feel */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* IMPORTANT: do NOT center vertically */
+  }
 /* =========================================================
    DESKTOP — Contact: tighten header → title gap to match About/Portfolio
    (Put BELOW the lock block)

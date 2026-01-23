@@ -221,9 +221,16 @@ main{
 }
 
 /* =========================================================
-   Cards / Stats / Footer / Lightbox
+   Typography / Lists  ✅ RESTORED (previously working)
    ========================================================= */
-/* Cards */
+h3{ margin:18px 0 10px; font-size:16px; }
+
+.bullets{ margin:0; padding-left:18px; color:#222; }
+.bullets li{ margin:8px 0; }
+
+/* =========================================================
+   Cards / Stats Blocks ✅ RESTORED (fixes Stats & Features)
+   ========================================================= */
 .card{
   border:1px solid var(--border);
   border-radius:16px;
@@ -231,7 +238,179 @@ main{
   background:#fff;
 }
 
-/* Footer */
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:12px;
+}
+
+.stat{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px;
+  background:var(--soft);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.stat span{ color:var(--muted); font-size:13px; }
+.stat strong{ font-weight:600; }
+
+/* =========================================================
+   Contact Card (Non-form contact info blocks) ✅ RESTORED
+   ========================================================= */
+.contact-card{
+  margin-top:18px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:18px;
+  background:#fff;
+}
+
+.contact-row{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+}
+.contact-row:last-child{ border-bottom:none; }
+
+.contact-row span{ color:var(--muted); min-width:80px; }
+
+.contact-card a{ color:#111; font-weight:500; text-decoration:none; }
+.contact-card a:hover{ text-decoration:underline; }
+
+.social{ display:flex; gap:16px; flex-wrap:wrap; }
+
+/* =========================================================
+   Contact Form ✅ RESTORED (fixes Contact page layout)
+   ========================================================= */
+.contact-form{
+  margin-top: 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+  background: #fff;
+}
+
+.form-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 0;
+}
+
+.field label{
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 12px;
+  font: inherit;
+  background: var(--soft);
+  color: var(--text);
+  outline: none;
+}
+
+.field textarea{
+  resize: vertical;
+  min-height: 140px;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  background: #fff;
+  border-color: #111;
+}
+
+/* Actions row (Send Message button) */
+.form-actions{
+  display:flex;
+  justify-content:center;
+  padding-top: 8px;
+}
+
+@media (max-width: 700px){
+  .form-row{ grid-template-columns: 1fr; }
+}
+
+/* Send Message button style */
+.form-actions .btn{
+  font-family: inherit;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 14px 48px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  transition: all 0.25s ease;
+}
+
+.form-actions .btn:hover{
+  background: #111;
+  color: #fff;
+  border-color: #111;
+  transform: translateY(-1px);
+}
+
+/* Form status messages */
+.form-success,
+.form-error{
+  margin: 14px auto 0;
+  text-align: center;
+  font-size: 13px;
+  max-width:420px;
+}
+
+.form-success{ color: #1a7f37; }
+.form-error{ color: #b42318; }
+
+/* =========================================================
+   Contact Page — Desktop Only Fit-to-Screen ✅ RESTORED
+   ========================================================= */
+@media (min-width: 1024px){
+  body.contact-page{
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  body.contact-page main{
+    height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 40px;
+  }
+
+  body.contact-page .contact-form{
+    max-height: 100%;
+    overflow: auto;
+    margin: 0 auto;
+  }
+}
+
+/* =========================================================
+   Footer
+   ========================================================= */
 .footer{
   border-top:1px solid var(--border);
   padding:26px 18px;
@@ -239,7 +418,9 @@ main{
   color:var(--muted);
 }
 
-/* Lightbox */
+/* =========================================================
+   Lightbox (kept as in your snippet)
+   ========================================================= */
 body.lightbox-open{ overflow:hidden; }
 .lightbox{ position:fixed; inset:0; z-index:99999; display:none; }
 .lightbox.is-open{ display:block; }

@@ -720,3 +720,23 @@ body.about-page .card{ padding-bottom: 14px; }
     border-top: 0;
   }
 }
+
+/* =========================================================
+   PORTFOLIO — Force 2-row horizontal flow (CSS-only)
+   (Added — does NOT change other pages)
+   ========================================================= */
+
+/* Target ONLY the portfolio page grid by using the document title attribute via body+header links pattern */
+body .page-wrap main .section[aria-label="Portfolio"] .grid{
+  display: grid;
+  grid-auto-flow: column;                 /* fill left-to-right */
+  grid-auto-columns: minmax(240px, 1fr);  /* keep your sizing rule */
+  grid-template-columns: none;            /* disable normal columns */
+  grid-template-rows: repeat(2, auto);    /* exactly 2 rows */
+  gap: 16px;
+
+  overflow-x: auto;                       /* horizontal scroll */
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;      /* smooth iOS scroll */
+  padding-bottom: 6px;                    /* prevents scrollbar clipping */
+}

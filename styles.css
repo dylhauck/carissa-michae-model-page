@@ -975,24 +975,29 @@ body.about-page .card{ padding-bottom: 14px; }
 }
 
 /* =========================================================
-   DESKTOP — Contact page: lock layout to viewport (final)
-   Uses already-correct padding. No spacing changes.
+   DESKTOP — Contact page lock (footer-safe)
+   Replace the previous contact lock block with this
    ========================================================= */
 @media (min-width: 1024px){
 
-  /* Lock the page height */
   body.contact-page{
-    height: 100vh;
+    min-height: 100vh;
     overflow: hidden;
+    display: flex;
+    flex-direction: column; /* header, main, footer */
   }
 
-  /* Main fills remaining space under header */
   body.contact-page main{
-    height: calc(100vh - 120px); /* header + breathing room */
-    overflow: hidden;
+    flex: 1;              /* fills remaining space */
+    overflow: hidden;     /* prevents page scroll */
   }
 
-  /* Allow scrolling ONLY inside the form card if ever needed */
+  /* Footer stays visible (not clipped) */
+  body.contact-page .footer{
+    flex: 0 0 auto;
+  }
+
+  /* Only the form can scroll if it ever needs to */
   body.contact-page .contact-form{
     max-height: 100%;
     overflow: auto;

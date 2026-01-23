@@ -888,3 +888,45 @@ body.about-page .card{ padding-bottom: 14px; }
     font-size: 13px;
   }
 }
+
+/* =========================================================
+   Mobile Header — Compact + Centered
+   (Mobile only, safe override)
+   ========================================================= */
+@media (max-width: 768px){
+  .site-header{
+    padding: 8px 14px;          /* smaller overall */
+    gap: 8px;
+    align-items: center;        /* center everything */
+    text-align: center;
+  }
+
+  .brand{
+    align-items: center;
+  }
+
+  .brand-name{
+    font-size: 14px;            /* smaller but still readable */
+    line-height: 1.2;
+  }
+
+  .brand-subtitle{
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
+  .nav{
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .nav-link{
+    padding: 6px 6px;
+    font-size: 12.5px;
+  }
+
+  /* Tighten active underline spacing */
+  .nav a[aria-current="page"]::after{
+    bottom: -4px;
+  }
+}

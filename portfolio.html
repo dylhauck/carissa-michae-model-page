@@ -169,10 +169,20 @@
       setDisabled(rightBtn, atEnd);
     }
 
+    /* =========================================================
+       ADDED: step = exactly one image + the grid gap (mobile-friendly)
+       ========================================================= */
+    function getGapPx() {
+      const styles = getComputedStyle(scroller);
+      // column-gap in modern browsers; fallback to gap
+      const gap = styles.columnGap || styles.gap || "16px";
+      return parseFloat(gap) || 16;
+    }
+
     function getStep() {
       const firstImg = scroller.querySelector("img");
       const w = firstImg ? firstImg.getBoundingClientRect().width : 240;
-      return Math.round(w * 1.6);
+      return Math.round(w + getGapPx());
     }
 
     function smoothScrollTo(targetLeft, duration = 360) {
@@ -213,9 +223,40 @@
       smoothScrollTo(scroller.scrollLeft + delta);
     }
 
-    // Arrow buttons
-    leftBtn.addEventListener("click", () => smoothScrollBy(-getStep()));
-    rightBtn.addEventListener("click", () => smoothScrollBy(getStep()));
+    /* =========================================================
+       ADDED: snap to nearest image so arrows always land "picture by picture"
+       ========================================================= */
+    function snapToNearest(duration = 180) {
+      const imgs = Array.from(scroller.querySelectorAll("img"));
+      if (!imgs.length) return;
+
+      const current = scroller.scrollLeft;
+
+      let nearest = imgs[0].offsetLeft;
+      let best = Math.abs(nearest - current);
+
+      for (const img of imgs) {
+        const p = img.offsetLeft;
+        const d = Math.abs(p - current);
+        if (d < best) {
+          best = d;
+          nearest = p;
+        }
+      }
+
+      smoothScrollTo(nearest, duration);
+    }
+
+    // Arrow buttons (UPDATED to snap)
+    leftBtn.addEventListener("click", () => {
+      smoothScrollBy(-getStep());
+      setTimeout(() => snapToNearest(160), 180);
+    });
+
+    rightBtn.addEventListener("click", () => {
+      smoothScrollBy(getStep());
+      setTimeout(() => snapToNearest(160), 180);
+    });
 
     // Wheel/trackpad: make vertical wheel scroll horizontally *while pointer is over the gallery*
     // This removes the “glitchy” feeling a lot.
@@ -256,16 +297,20 @@
 
       switch (e.key) {
         case "ArrowLeft":
-          smoothScrollBy(-step * 0.55);
+          smoothScrollBy(-step);
+          setTimeout(() => snapToNearest(140), 160);
           break;
         case "ArrowRight":
-          smoothScrollBy(step * 0.55);
+          smoothScrollBy(step);
+          setTimeout(() => snapToNearest(140), 160);
           break;
         case "PageUp":
-          smoothScrollBy(-step * 1.2);
+          smoothScrollBy(-step * 2);
+          setTimeout(() => snapToNearest(160), 180);
           break;
         case "PageDown":
-          smoothScrollBy(step * 1.2);
+          smoothScrollBy(step * 2);
+          setTimeout(() => snapToNearest(160), 180);
           break;
         case "Home":
           smoothScrollTo(0, 420);
@@ -281,9 +326,13 @@
     });
 
     // Keep arrow disable state correct
-    scroller.addEventListener("scroll", () => {
-      if (!animating) updateButtons();
-    }, { passive: true });
+    scroller.addEventListener(
+      "scroll",
+      () => {
+        if (!animating) updateButtons();
+      },
+      { passive: true }
+    );
 
     window.addEventListener("resize", updateButtons);
 

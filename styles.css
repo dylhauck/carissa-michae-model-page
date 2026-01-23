@@ -1000,3 +1000,13 @@ body.about-page .card{ padding-bottom: 14px; }
     overflow: auto; /* keeps page locked but prevents clipping on smaller screens */
   }
 }
+
+/* =========================================================
+   DESKTOP — Contact: tighten header → title gap to match About/Portfolio
+   (Put BELOW the lock block)
+   ========================================================= */
+@media (min-width: 1024px){
+  body.contact-page main{
+    padding-top: 16px !important; /* was 40px in the lock block */
+  }
+}

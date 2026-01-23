@@ -752,7 +752,8 @@ body.about-page .card{ padding-bottom: 14px; }
   overflow-y:hidden;
   -webkit-overflow-scrolling: touch;
 
-  scroll-snap-type: x proximity;
+  scroll-snap-type: x mandatory; /* was proximity */
+  scroll-snap-stop: always; /* prevents stopping between stops */
 }
 
 .h-grid img{

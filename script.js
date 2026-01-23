@@ -34,6 +34,41 @@
 })();
 
 /* =========================================================
+   Enter key support for the Index "ENTER" overlay button
+   - Fixes cases where pressing Enter doesn't trigger the overlay transition
+   - Does NOT change any visuals or timing; it only triggers the same click
+   ========================================================= */
+(() => {
+  const overlay = document.getElementById("enterOverlay");
+  const enterBtn = document.getElementById("enterBtn");
+
+  // Only run on index (where overlay + button exist)
+  if (!overlay || !enterBtn) return;
+
+  // If user presses Enter while overlay is visible, trigger the same click handler
+  window.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter") return;
+
+    // Don't interfere if user is typing in an input/textarea/select
+    const t = e.target;
+    if (t && t instanceof Element) {
+      const tag = t.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+      if (t.isContentEditable) return;
+    }
+
+    // Only while overlay is still on-screen
+    if (overlay.style.display === "none") return;
+
+    // Prevent accidental form submits / browser default behaviors
+    e.preventDefault();
+
+    // Fire the existing click logic from index.html (no duplication here)
+    enterBtn.click();
+  });
+})();
+
+/* =========================================================
    Enter → Home zoom entrance animation
    (Plays when coming from the Enter page)
    ========================================================= */

@@ -909,3 +909,27 @@ body.about-page .card{ padding-bottom: 14px; }
     display: none !important;
   }
 }
+
+/* =========================================================
+   Desktop: Match Contact-style tight header-to-title spacing
+   (Only About + Portfolio first section)
+   ========================================================= */
+@media (min-width: 769px){
+  /* reduce the "main" top padding a bit on these pages only */
+  body.about-page main,
+  body.portfolio-page main{
+    padding-top: 16px; /* was 30px globally */
+  }
+
+  /* kill the huge 70px top padding ONLY for the first section on these pages */
+  body.about-page main > .section:first-of-type,
+  body.portfolio-page main > .section:first-of-type{
+    padding-top: 20px; /* was 70px via .section */
+  }
+
+  /* make sure the header itself isn't adding extra space */
+  body.about-page .section-header,
+  body.portfolio-page .section-header{
+    margin-top: 0;
+  }
+}

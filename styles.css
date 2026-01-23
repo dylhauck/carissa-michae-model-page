@@ -973,3 +973,28 @@ body.about-page .card{ padding-bottom: 14px; }
     margin-top: 0;
   }
 }
+
+/* =========================================================
+   DESKTOP — Contact page: lock layout to viewport (final)
+   Uses already-correct padding. No spacing changes.
+   ========================================================= */
+@media (min-width: 1024px){
+
+  /* Lock the page height */
+  body.contact-page{
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Main fills remaining space under header */
+  body.contact-page main{
+    height: calc(100vh - 120px); /* header + breathing room */
+    overflow: hidden;
+  }
+
+  /* Allow scrolling ONLY inside the form card if ever needed */
+  body.contact-page .contact-form{
+    max-height: 100%;
+    overflow: auto;
+  }
+}

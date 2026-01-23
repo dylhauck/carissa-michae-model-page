@@ -911,3 +911,23 @@ body.about-page .card{ padding-bottom: 14px; }
     align-items: center;
   }
 }
+/* =========================================================
+   Desktop — Lock Portfolio page to viewport (no scroll)
+   ========================================================= */
+@media (min-width: 1024px){
+  body.portfolio-page{
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  body.portfolio-page main{
+    height: calc(100vh - 120px); /* header height */
+    display: flex;
+    align-items: center;
+  }
+
+  /* Allow the horizontal gallery itself to scroll */
+  body.portfolio-page .h-grid{
+    overflow-x: auto;
+  }
+}

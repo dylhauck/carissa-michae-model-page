@@ -952,41 +952,6 @@ body.about-page .card{ padding-bottom: 14px; }
   body.about-page .stats{ gap: 10px; }
 }
 
-/* =========================================================
-   DESKTOP — SINGLE SOURCE OF TRUTH
-   Lock pages to viewport + make Contact padding match About/Portfolio
-   (Paste at VERY bottom)
-   ========================================================= */
-@media (min-width: 1024px){
-
-  /* Lock the page layout to the viewport: header / main / footer */
-  body.about-page,
-  body.portfolio-page,
-  body.contact-page{
-    height: 100vh;
-    overflow: hidden;
-    display: grid;
-    grid-template-rows: auto 1fr auto; /* header, main, footer */
-  }
-
-  /* MAIN area: consistent top spacing like your “perfect” About view */
-  body.about-page main,
-  body.portfolio-page main,
-  body.contact-page main{
-    overflow: hidden;
-    padding: 40px 40px 24px !important; /* <-- THIS is the “tight” feel */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; /* IMPORTANT: do NOT center vertically */
-  }
-
-  /* About + Portfolio: remove the huge first-section padding */
-  body.about-page main > .section:first-of-type,
-  body.portfolio-page main > .section:first-of-type{
-    padding-top: 0 !important; /* kills .section{ padding:70px 0 } on first section */
-  }
-
   /* Contact: keep the title visible + match the same spacing */
   body.contact-page .contact-header{
     margin: 0 0 16px !important;

@@ -108,6 +108,9 @@ main{
 .grid{
   display:grid;
   gap:16px;
+
+  /* FIX: restore columns so grids don’t collapse/act weird */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 /* Image styling (unchanged) */
@@ -223,12 +226,138 @@ main{
   background:#fff;
 }
 
+/* =========================================================
+   FIX: Stats & Features (RESTORED)
+   ========================================================= */
+h3{ margin:18px 0 10px; font-size:16px; }
+
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:12px;
+}
+
+.stat{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px;
+  background:var(--soft);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.stat span{ color:var(--muted); font-size:13px; }
+.stat strong{ font-weight:600; }
+
 /* Footer */
 .footer{
   border-top:1px solid var(--border);
   padding:26px 18px;
   text-align:center;
   color:var(--muted);
+}
+
+/* =========================================================
+   FIX: Contact Form (RESTORED)
+   ========================================================= */
+.contact-form{
+  margin-top: 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+  background: #fff;
+}
+
+.form-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 0;
+}
+
+.field label{
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 12px;
+  font: inherit;
+  background: var(--soft);
+  color: var(--text);
+  outline: none;
+}
+
+.field textarea{
+  resize: vertical;
+  min-height: 140px;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  background: #fff;
+  border-color: #111;
+}
+
+/* Actions row (Send Message button) */
+.form-actions{
+  display:flex;
+  justify-content:center;
+  padding-top: 8px;
+}
+
+@media (max-width: 700px){
+  .form-row{ grid-template-columns: 1fr; }
+}
+
+/* Form status messages */
+.form-success,
+.form-error{
+  margin: 14px auto 0;
+  text-align: center;
+  font-size: 13px;
+  max-width:420px;
+}
+
+.form-success{ color: #1a7f37; }
+.form-error{ color: #b42318; }
+
+/* Contact Page — Desktop Only Fit-to-Screen */
+@media (min-width: 1024px){
+  body.contact-page{
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  body.contact-page main{
+    height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 40px;
+  }
+
+  body.contact-page .contact-form{
+    max-height: 100%;
+    overflow: auto;
+    margin: 0 auto;
+  }
 }
 
 /* Lightbox */

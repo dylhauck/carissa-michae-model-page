@@ -896,12 +896,12 @@ body.about-page .card{ padding-bottom: 14px; }
 
   /* ABOUT: kill the big first-section top padding */
   body.about-page main > .section:first-of-type{
-    padding-top: 0;     /* was 70px */
+    padding-top: 6px;     /* was 70px */
   }
 
   /* PORTFOLIO: kill the big first-section top padding */
   body:has(.h-gallery) main > .section:first-of-type{
-    padding-top: 0;     /* was 70px */
+    padding-top: 6px;     /* was 70px */
   }
 
   /* PORTFOLIO: remove the extra manual <br> space under the subtitle */

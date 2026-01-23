@@ -1,5 +1,3 @@
-Script.js
-
 /* =========================================================
    script.js — cleaned + organized + commented
    (Behavior preserved — no feature changes)
@@ -148,21 +146,26 @@ Script.js
     openAt(currentIndex + 1);
   }
 
-  // Delegate clicks: open image depending on page structure
+  /* =========================================================
+     CLICK TO OPEN (FIXED)
+     - Use closest(".grid img") so clicks still work even if
+       the click lands on a wrapper/overlay/scroll container.
+     ========================================================= */
   document.addEventListener("click", (e) => {
     const target = e.target;
     if (!(target instanceof Element)) return;
 
+    const img = target.closest(".grid img");
+    if (!img) return;
+
     // Tabs page: only open images inside the active panel
     if (hasPanels) {
-      if (!target.matches(".panel.active .grid img")) return;
-    } else {
-      // No tabs: open any grid image
-      if (!target.matches(".grid img")) return;
+      const activePanel = getActivePanel();
+      if (!activePanel || !activePanel.contains(img)) return;
     }
 
     const images = getActiveImages();
-    const idx = images.indexOf(target);
+    const idx = images.indexOf(img);
     if (idx !== -1) openAt(idx);
   });
 
@@ -171,9 +174,8 @@ Script.js
     const target = e.target;
     if (!(target instanceof Element)) return;
 
-    if (target.matches(".grid img")) {
-      target.style.cursor = "zoom-in";
-    }
+    const img = target.closest(".grid img");
+    if (img) img.style.cursor = "zoom-in";
   });
 
   // Backdrop or X closes

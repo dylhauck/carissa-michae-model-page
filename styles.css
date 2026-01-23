@@ -899,7 +899,7 @@ body.about-page .card{ padding-bottom: 14px; }
 /* =========================================================
    Desktop — Lock About page to viewport (no scroll)
    ========================================================= */
-@media (min-width: 1024px){
+/* @media (min-width: 1024px){
   body.about-page{
     height: 100vh;
     overflow: hidden;
@@ -907,10 +907,10 @@ body.about-page .card{ padding-bottom: 14px; }
 
   body.about-page main{
     height: calc(100vh - 120px); /* header height */
-    display: flex;
+   /* display: flex;
     align-items: center;
   }
-}
+} */
 /* =========================================================
    Desktop — Lock Portfolio page to viewport (no scroll)
    ========================================================= */

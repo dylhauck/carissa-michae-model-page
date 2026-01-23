@@ -830,3 +830,37 @@ body.about-page .card{ padding-bottom: 14px; }
 .h-gallery .h-arrow{
   pointer-events: auto;
 }
+
+/* =========================================================
+   Mobile Header Refinement
+   ========================================================= */
+@media (max-width: 768px){
+  .site-header{
+    padding: 12px 16px;        /* was taller */
+    gap: 12px;
+  }
+
+  .brand-name{
+    font-size: 16px;           /* slightly smaller */
+    line-height: 1.2;
+  }
+
+  .brand-subtitle{
+    font-size: 12px;
+    margin-top: 2px;
+  }
+
+  .nav{
+    gap: 14px;                 /* tighter nav */
+  }
+
+  .nav-link{
+    font-size: 13px;
+    padding: 8px 8px;          /* reduces height */
+  }
+
+  /* Active underline closer to text */
+  .nav a[aria-current="page"]::after{
+    bottom: -4px;
+  }
+}

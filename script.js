@@ -195,3 +195,33 @@
     if (e.key === "ArrowRight") next();
   });
 })();
+
+/* =========================================================
+   Portfolio horizontal arrows (click to scroll)
+   - Safe: runs only if .h-gallery exists
+   ========================================================= */
+(() => {
+  const gallery = document.querySelector(".h-gallery");
+  if (!gallery) return;
+
+  const scroller = gallery.querySelector(".h-grid");
+  const leftBtn = gallery.querySelector(".h-arrow-left");
+  const rightBtn = gallery.querySelector(".h-arrow-right");
+
+  if (!scroller || !leftBtn || !rightBtn) return;
+
+  const getStep = () => {
+    // Scroll about 1.5 image widths per click
+    const firstImg = scroller.querySelector("img");
+    const imgWidth = firstImg ? firstImg.getBoundingClientRect().width : 240;
+    return Math.round(imgWidth * 1.6);
+  };
+
+  leftBtn.addEventListener("click", () => {
+    scroller.scrollBy({ left: -getStep(), behavior: "smooth" });
+  });
+
+  rightBtn.addEventListener("click", () => {
+    scroller.scrollBy({ left: getStep(), behavior: "smooth" });
+  });
+})();

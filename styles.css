@@ -895,25 +895,3 @@ body.about-page .card{ padding-bottom: 14px; }
     padding-top: 20px !important;
   }
 }
-
-/* =========================================================
-   Desktop — About lock (fix title getting clipped)
-   ========================================================= */
-@media (min-width: 1024px){
-  body.about-page{
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  body.about-page main{
-    height: calc(100vh - 120px); /* header height */
-    overflow: auto;              /* ✅ if content is barely too tall, it can scroll INSIDE main */
-    display: block;              /* ✅ stop flex centering from clipping the top */
-    padding-top: 0;              /* keep your tight spacing */
-  }
-
-  /* optional: add a tiny breathing room so titles never kiss the header */
-  body.about-page main > .section:first-of-type{
-    padding-top: 10px !important;
-  }
-}

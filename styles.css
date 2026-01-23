@@ -878,32 +878,21 @@ body.about-page .card{ padding-bottom: 14px; }
 }
 
 /* =========================================================
-   DESKTOP — FINAL: Make About + Portfolio match Contact spacing
-   (Single source of truth — place at VERY bottom)
+   Desktop: Make About + Portfolio match Contact header→title spacing
+   (Single source of truth)
    ========================================================= */
-@media (min-width: 769px){
-
-  /* Portfolio page is detected by the .h-gallery gallery */
-  body:has(.h-gallery) main,
-  body.about-page main{
-    padding-top: 40px !important; /* match Contact’s main padding-top feel */
+@media (min-width: 901px){
+  /* Contact is “tight” because it’s not getting the 70px .section padding.
+     So remove that ONLY for the first section on About + Portfolio. */
+  body.about-page main > .section:first-of-type,
+  body.portfolio-page main > .section:first-of-type{
+    padding-top: 0 !important;   /* overrides .section { padding:70px 0 } */
   }
 
-  /* Remove the huge first-section top padding on these pages */
-  body:has(.h-gallery) main > .section:first-of-type,
-  body.about-page main > .section:first-of-type{
-    padding-top: 0 !important;    /* kills .section{ padding:70px 0; } top */
+  /* Optional: if you still want it even tighter, uncomment:
+  body.about-page main,
+  body.portfolio-page main{
+    padding-top: 20px !important;
   }
-
-  /* If you used a manual <br> under the subtitle in Portfolio, kill it */
-  body:has(.h-gallery) .section-header br{
-    display: none !important;
-  }
-
-  /* Ensure section header itself isn’t adding extra top spacing */
-  body:has(.h-gallery) .section-header,
-  body.about-page .section-header{
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-  }
+  */
 }

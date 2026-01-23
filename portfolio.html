@@ -127,54 +127,169 @@
        - Smooth scroll step based on image width
        ========================================================= -->
   <script>
-    (function () {
-      const gallery = document.querySelector(".h-gallery");
-      if (!gallery) return;
+  (function () {
+    const gallery = document.querySelector(".h-gallery");
+    if (!gallery) return;
 
-      const scroller = gallery.querySelector(".h-grid");
-      const leftBtn = gallery.querySelector(".h-arrow-left");
-      const rightBtn = gallery.querySelector(".h-arrow-right");
+    const scroller = gallery.querySelector(".h-grid");
+    const leftBtn = gallery.querySelector(".h-arrow-left");
+    const rightBtn = gallery.querySelector(".h-arrow-right");
 
-      if (!scroller || !leftBtn || !rightBtn) return;
+    if (!scroller || !leftBtn || !rightBtn) return;
 
-      function getStep() {
-        const firstImg = scroller.querySelector("img");
-        const w = firstImg ? firstImg.getBoundingClientRect().width : 240;
-        return Math.round(w * 1.6);
+    // Make the scroller focusable so keyboard can target it
+    if (!scroller.hasAttribute("tabindex")) scroller.setAttribute("tabindex", "0");
+
+    let rafId = 0;
+    let animating = false;
+
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function clamp(n, min, max) {
+      return Math.max(min, Math.min(max, n));
+    }
+
+    function setDisabled(btn, disabled) {
+      btn.disabled = disabled;
+      btn.setAttribute("aria-disabled", disabled ? "true" : "false");
+      btn.classList.toggle("is-disabled", disabled);
+    }
+
+    function updateButtons() {
+      const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+      const x = scroller.scrollLeft;
+
+      // tolerance avoids flicker due to subpixel values
+      const atStart = x <= 1;
+      const atEnd = x >= (maxScroll - 1);
+
+      setDisabled(leftBtn, atStart);
+      setDisabled(rightBtn, atEnd);
+    }
+
+    function getStep() {
+      const firstImg = scroller.querySelector("img");
+      const w = firstImg ? firstImg.getBoundingClientRect().width : 240;
+      return Math.round(w * 1.6);
+    }
+
+    function smoothScrollTo(targetLeft, duration = 360) {
+      cancelAnimationFrame(rafId);
+
+      const start = scroller.scrollLeft;
+      const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+      const end = clamp(targetLeft, 0, maxScroll);
+
+      if (Math.abs(end - start) < 1) {
+        scroller.scrollLeft = end;
+        updateButtons();
+        return;
       }
 
-      function setDisabled(btn, disabled) {
-        btn.disabled = disabled;
-        btn.setAttribute("aria-disabled", disabled ? "true" : "false");
-        btn.classList.toggle("is-disabled", disabled);
+      animating = true;
+      const t0 = performance.now();
+
+      function tick(now) {
+        const t = clamp((now - t0) / duration, 0, 1);
+        const eased = easeOutCubic(t);
+        scroller.scrollLeft = start + (end - start) * eased;
+
+        updateButtons();
+
+        if (t < 1) {
+          rafId = requestAnimationFrame(tick);
+        } else {
+          animating = false;
+          updateButtons();
+        }
       }
 
-      function updateButtons() {
-        const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+      rafId = requestAnimationFrame(tick);
+    }
 
-        // small tolerance avoids flicker due to subpixel values
-        const atStart = scroller.scrollLeft <= 1;
-        const atEnd = scroller.scrollLeft >= (maxScroll - 1);
+    function smoothScrollBy(delta) {
+      smoothScrollTo(scroller.scrollLeft + delta);
+    }
 
-        setDisabled(leftBtn, atStart);
-        setDisabled(rightBtn, atEnd);
+    // Arrow buttons
+    leftBtn.addEventListener("click", () => smoothScrollBy(-getStep()));
+    rightBtn.addEventListener("click", () => smoothScrollBy(getStep()));
+
+    // Wheel/trackpad: make vertical wheel scroll horizontally *while pointer is over the gallery*
+    // This removes the “glitchy” feeling a lot.
+    scroller.addEventListener(
+      "wheel",
+      (e) => {
+        // If user is holding shift, browsers often already horizontal-scroll; still smooth it
+        // Also ignore if lightbox is open
+        if (document.body.classList.contains("lightbox-open")) return;
+
+        // Prevent page from scrolling vertically while interacting with the gallery
+        e.preventDefault();
+
+        const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        // Tame huge mouse-wheel deltas
+        const tuned = clamp(delta, -120, 120) * 2.2;
+
+        smoothScrollBy(tuned);
+      },
+      { passive: false }
+    );
+
+    // Keyboard support for the gallery (separate from lightbox)
+    // Works when the scroller is focused OR when mouse is over the gallery.
+    let hover = false;
+    gallery.addEventListener("mouseenter", () => (hover = true));
+    gallery.addEventListener("mouseleave", () => (hover = false));
+
+    window.addEventListener("keydown", (e) => {
+      if (document.body.classList.contains("lightbox-open")) return;
+
+      const active = document.activeElement;
+      const focusedScroller = active === scroller;
+      if (!focusedScroller && !hover) return;
+
+      const step = getStep();
+      let handled = true;
+
+      switch (e.key) {
+        case "ArrowLeft":
+          smoothScrollBy(-step * 0.55);
+          break;
+        case "ArrowRight":
+          smoothScrollBy(step * 0.55);
+          break;
+        case "PageUp":
+          smoothScrollBy(-step * 1.2);
+          break;
+        case "PageDown":
+          smoothScrollBy(step * 1.2);
+          break;
+        case "Home":
+          smoothScrollTo(0, 420);
+          break;
+        case "End":
+          smoothScrollTo(scroller.scrollWidth, 420);
+          break;
+        default:
+          handled = false;
       }
 
-      leftBtn.addEventListener("click", () => {
-        scroller.scrollBy({ left: -getStep(), behavior: "smooth" });
-      });
+      if (handled) e.preventDefault();
+    });
 
-      rightBtn.addEventListener("click", () => {
-        scroller.scrollBy({ left: getStep(), behavior: "smooth" });
-      });
+    // Keep arrow disable state correct
+    scroller.addEventListener("scroll", () => {
+      if (!animating) updateButtons();
+    }, { passive: true });
 
-      // Update on scroll + resize so disable state stays correct
-      scroller.addEventListener("scroll", updateButtons, { passive: true });
-      window.addEventListener("resize", updateButtons);
+    window.addEventListener("resize", updateButtons);
 
-      // Initial state
-      updateButtons();
-    })();
-  </script>
+    // Initial
+    updateButtons();
+  })();
+</script>
 </body>
 </html>

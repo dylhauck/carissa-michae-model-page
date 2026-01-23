@@ -952,6 +952,16 @@ body.about-page .card{ padding-bottom: 14px; }
   body.about-page .stats{ gap: 10px; }
 }
 
+@media (min-width: 1024px){
+
+  /* Lock the page layout to the viewport: header / main / footer */
+  body.contact-page{
+    height: 100vh;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* header, main, footer */
+  }
+   
 /* =========================================================
    DESKTOP — Contact: tighten header → title gap to match About/Portfolio
    (Put BELOW the lock block)

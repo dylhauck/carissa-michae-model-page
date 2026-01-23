@@ -137,7 +137,7 @@ main{
 .panel.active{ display:block; }
 
 /* =========================================================
-   Image Grid (Portfolio)
+   Image Grid (Portfolio default grid for non-portfolio pages)
    ========================================================= */
 .grid{
   display:grid;
@@ -154,6 +154,55 @@ main{
   border:1px solid var(--border);
   background:var(--soft);
   image-rendering:auto;
+}
+
+/* =========================================================
+   Portfolio Page: Horizontal 2-row scroller (FIXED ALIGNMENT)
+   - Only applies if you add: <body class="portfolio-page">
+   ========================================================= */
+body.portfolio-page .portfolio-rail{
+  position: relative;
+  margin-top: 6px;
+}
+
+/* Convert the grid into a horizontal 2-row rail */
+body.portfolio-page .grid{
+  /* Keep spacing consistent */
+  gap: 16px;
+
+  /* 2 rows */
+  grid-template-rows: repeat(2, auto);
+
+  /* Horizontal flow */
+  grid-auto-flow: column;
+
+  /* IMPORTANT: fixed tile width to prevent empty gaps */
+  grid-auto-columns: 240px;
+
+  /* Scroll */
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  /* Inertia tuning */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+
+  /* Snap (subtle) */
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: 0;
+
+  /* Pack tightly from the left (no weird spacing) */
+  justify-content: start;
+  align-content: start;
+
+  /* Keep scrollbar off images slightly */
+  padding: 8px 0 14px;
+}
+
+/* Snap each image tile */
+body.portfolio-page .grid img{
+  scroll-snap-align: start;
 }
 
 /* =========================================================
@@ -243,7 +292,7 @@ body.home .footer{
   padding-bottom: 26px;
   color: rgba(255,255,255,0.8);
   text-shadow: 0 1px 10px rgba(0,0,0,0.6);
-  text-align: center;     /* merged from duplicate block */
+  text-align: center;
 }
 
 /* =========================================================
@@ -467,7 +516,7 @@ body.home .hero{
 /* Actions row (Send Message button) */
 .form-actions{
   display:flex;
-  justify-content:center;  /* final intended behavior */
+  justify-content:center;  /* intended behavior */
   padding-top: 8px;
 }
 
@@ -620,8 +669,7 @@ body.lightbox-open{ overflow: hidden; }
   cursor: pointer;
 }
 
-/* FIX: scope nav button styling to lightbox only (prevents portfolio arrows from being hijacked) */
-.lightbox .lightbox-nav{
+.lightbox-nav{
   width: 52px;
   height: 52px;
   border-radius: 999px;
@@ -632,8 +680,8 @@ body.lightbox-open{ overflow: hidden; }
   cursor: pointer;
 }
 
-.lightbox .lightbox-prev{ justify-self: start; }
-.lightbox .lightbox-next{ justify-self: end; }
+.lightbox-prev{ justify-self: start; }
+.lightbox-next{ justify-self: end; }
 
 /* Mobile lightbox layout */
 @media (max-width: 768px){
@@ -655,21 +703,18 @@ body.lightbox-open{ overflow: hidden; }
     max-height: 80vh;
   }
 
-  /* FIX: scope mobile nav positioning to lightbox only */
-  .lightbox .lightbox-nav{
+  .lightbox-nav{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
   }
-  .lightbox .lightbox-prev{ left: 10px; }
-  .lightbox .lightbox-next{ right: 10px; }
+  .lightbox-prev{ left: 10px; }
+  .lightbox-next{ right: 10px; }
 }
 
 /* =========================================================
    About Page Tweaks
    ========================================================= */
-/* Currently have margin-top then immediately override it later.
-   Keeping only the final behavior (margin-top: 0) to match current output. */
 body.about-page .about-text{ margin-top: 0; }
 
 body.about-page .section-header{ margin-bottom: 24px; }
@@ -720,117 +765,5 @@ body.about-page .card{ padding-bottom: 14px; }
     margin: 0;
     padding: 0 18px;
     border-top: 0;
-  }
-}
-
-/* =========================================================
-   Portfolio Horizontal Scroll Arrows (page arrows)
-   FIX: keep arrows in empty margins, not on photos
-   ========================================================= */
-
-/* Ensure the portfolio section can position page arrows */
-body .section[aria-label="Portfolio"]{
-  position: relative;
-}
-
-/* Styles for your portfolio scroll arrows (supports common class names you’ve been using) */
-.portfolio-arrow,
-.scroll-arrow,
-.gallery-arrow,
-.portfolio-nav-arrow{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 5;
-
-  width: 54px;
-  height: 54px;
-  border-radius: 999px;
-  border: 0;
-  cursor: pointer;
-
-  display: grid;
-  place-items: center;
-
-  /* Light background: black pill + white arrow */
-  background: rgba(0,0,0,0.85);
-  color: #fff;
-
-  box-shadow: 0 10px 26px rgba(0,0,0,0.20);
-}
-
-/* Place in the empty margins (not on the images) */
-.portfolio-arrow.left,
-.scroll-arrow.left,
-.gallery-arrow.left,
-.portfolio-nav-arrow.left{
-  left: -72px;
-}
-
-.portfolio-arrow.right,
-.scroll-arrow.right,
-.gallery-arrow.right,
-.portfolio-nav-arrow.right{
-  right: -72px;
-}
-
-/* Arrow glyph sizing */
-.portfolio-arrow span,
-.scroll-arrow span,
-.gallery-arrow span,
-.portfolio-nav-arrow span{
-  font-size: 28px;
-  line-height: 1;
-}
-
-/* Hover */
-.portfolio-arrow:hover,
-.scroll-arrow:hover,
-.gallery-arrow:hover,
-.portfolio-nav-arrow:hover{
-  background: rgba(0,0,0,0.95);
-}
-
-/* Dark background: invert for contrast (white pill + dark arrow) */
-@media (prefers-color-scheme: dark){
-  .portfolio-arrow,
-  .scroll-arrow,
-  .gallery-arrow,
-  .portfolio-nav-arrow{
-    background: rgba(255,255,255,0.92);
-    color: #111;
-    box-shadow: 0 10px 26px rgba(0,0,0,0.55);
-  }
-}
-
-/* Mobile: smaller arrows and tuck closer */
-@media (max-width: 768px){
-  .portfolio-arrow,
-  .scroll-arrow,
-  .gallery-arrow,
-  .portfolio-nav-arrow{
-    width: 40px;
-    height: 40px;
-  }
-
-  .portfolio-arrow span,
-  .scroll-arrow span,
-  .gallery-arrow span,
-  .portfolio-nav-arrow span{
-    font-size: 22px;
-  }
-
-  .portfolio-arrow.left,
-  .scroll-arrow.left,
-  .gallery-arrow.left,
-  .portfolio-nav-arrow.left{
-    left: -46px;
-  }
-
-  .portfolio-arrow.right,
-  .scroll-arrow.right,
-  .gallery-arrow.right,
-  .portfolio-nav-arrow.right{
-    right: -46px;
   }
 }

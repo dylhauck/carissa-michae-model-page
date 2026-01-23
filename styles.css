@@ -876,3 +876,14 @@ body.about-page .card{ padding-bottom: 14px; }
     bottom: -4px !important;
   }
 }
+
+/* =========================================================
+   Desktop: Match Contact's tighter header→title spacing
+   (Portfolio + About only)
+   ========================================================= */
+@media (min-width: 901px){
+  body.portfolio-page main > .section:first-of-type,
+  body.about-page main > .section:first-of-type{
+    padding-top: 30px;   /* was 70px via .section */
+  }
+}

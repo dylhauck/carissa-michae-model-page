@@ -1,78 +1,62 @@
-# Carissa Micháe — Model Portfolio & Booking Site
+# Carissa Michae — Portfolio Website (Static)
 
-A cinematic, responsive portfolio website designed to showcase professional modeling work across **commercial, editorial, and lifestyle** categories. Built with visual storytelling, accessibility, and performance in mind.
+A clean, modern static website for **Carissa Michae** featuring:
+- Home (cinematic hero)
+- Portfolio (desktop locked 2-row horizontal gallery + mobile-optimized horizontal gallery)
+- About
+- Contact (Formspree email delivery + inline success/error messaging)
+
+Built with **HTML / CSS / JavaScript** and deployed via **GitHub Pages**.
 
 ---
 
-## ✨ Features
+## Live Site
+- https://dylhauck.github.io
 
-### Cinematic Enter Experience
-- Full-screen **background video**
-- Smooth **zoom-through transition** into the homepage
-- Overlay text and call-to-action remain readable across devices
-- Mobile-safe playback (`muted`, `autoplay`, `playsinline`)
+---
 
-### Home Page
-- Full-viewport hero layout
-- Cinematic typography and call-to-action buttons
-- Footer visually blends into the hero image
-- Mobile experience is **locked to viewport** (no drag, no scroll bleed)
+## Pages
+- `index.html` — Home
+- `portfolio.html` — Portfolio gallery + lightbox
+- `about.html` — About + stats layout
+- `contact.html` — Booking/contact form (Formspree)
+
+---
+
+## Features
 
 ### Portfolio
-- Categorized tabs:
-  - Headshots
-  - Full-Body Shots
-  - Profile Shots
-- Responsive image grid
-- **Lightbox viewer**:
-  - Click-to-enlarge
-  - Background blur
-  - Left / right navigation
-  - Close button
-  - Keyboard support
-  - Navigation stays within the active category
+- **Desktop:** locked layout (no vertical scrolling), **2-row horizontal** gallery
+- **Mobile:** optimized horizontal gallery sizing (smaller cards so multiple are visible before swiping)
+- **Arrows:** left/right buttons to scroll the gallery (auto-disables at ends)
+- **Scroll snapping:** makes the gallery move “picture-by-picture”
+- **Lightbox:** click any image to enlarge, use arrows or keyboard to navigate
 
-### About Page
-- Editorial-style biography
-- Vertically balanced two-column layout
-- Stats card aligned with text
-- Mobile spacing handled independently
+### Contact
+- Form submits via **Formspree**
+- Inline success + error messages
+- Button shows sending/sent state
+- Footer year auto-updates
 
-### Contact Page
-- Professional booking form powered by **Formspree**
-- Desktop-only fit-to-screen layout
-- Mobile scrolling preserved
-- Inline success and error messaging
+### Global UI
+- Sticky header with active-page underline
+- Scroll reveal animations
+- Cinematic “Enter → Home” zoom animation
 
 ---
 
-## 📱 Mobile vs Desktop Behavior
+## Project Structure
 
-This site intentionally behaves differently across devices.
-
-### Mobile
-- Enter page and home page are locked to the viewport
-- No dragging, panning, or scroll bleed
-- Lightbox and forms remain scroll-safe
-
-### Desktop
-- Natural scrolling where appropriate
-- Contact page fits screen height on large displays only
-
-These behaviors are handled via **media queries** and **page-specific body classes**, without affecting other pages.
-
----
-
-## 🧠 Accessibility & UX
-
-- Semantic HTML structure
-- ARIA attributes for:
-  - Tabs
-  - Dialogs (lightbox)
-  - Navigation
-- Keyboard navigation supported
-- Motion kept smooth and intentional (no infinite transforms)
-
----
-
-## 🗂️ Project Structure
+```txt
+/
+├─ index.html
+├─ portfolio.html
+├─ about.html
+├─ contact.html
+├─ styles.css
+├─ script.js
+└─ images/
+   ├─ enter.jpeg
+   ├─ fullbody1.JPG
+   ├─ new2.jpeg
+   ├─ ...

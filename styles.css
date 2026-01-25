@@ -1163,7 +1163,7 @@ body.about-page .card{ padding-bottom: 14px; }
   /* 2-row horizontal grid, but smaller cards */
   .h-grid{
     grid-auto-flow: column;
-    grid-template-rows: repeat(2, auto);
+    grid-template-rows: repeat(3, auto);
     grid-auto-columns: 118px;          /* <- smaller than desktop */
     gap: 12px;
 

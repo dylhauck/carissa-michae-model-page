@@ -1063,17 +1063,15 @@ body.about-page .card{ padding-bottom: 14px; }
 }
 
 /* =========================================================
-   MOBILE PORTFOLIO — single row, equal-size cards, no fade
+   MOBILE PORTFOLIO — single row, equal-size cards, NO fade
    ========================================================= */
 @media (max-width: 768px){
 
-  /* Give the portfolio section more usable width */
   body.portfolio-page main{
     padding-left: 14px;
     padding-right: 14px;
   }
 
-  /* Tighter title area */
   body.portfolio-page .section-header h2{
     font-size: 26px;
     margin-bottom: 6px;
@@ -1082,32 +1080,29 @@ body.about-page .card{ padding-bottom: 14px; }
     font-size: 13px;
   }
 
-  /* Remove arrow rails on mobile */
   .h-gallery{
     padding-left: 0;
     padding-right: 0;
   }
 
-  /* IMPORTANT: put the “breathing room” on the scroller, not inside the grid */
+  /* CANCEL .grid auto-fit columns (this is the key) */
+  .grid.h-grid{
+    grid-template-columns: none !important;
+  }
+
   .h-grid{
     grid-auto-flow: column;
     grid-template-rows: 1fr;
-    grid-auto-columns: 82vw;      /* consistent card width */
+    grid-auto-columns: 82vw;
     gap: 12px;
 
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
-
     scroll-snap-type: x mandatory;
 
-    padding: 0 14px;             /* edge breathing room */
-    margin: 0 -14px;             /* cancels main padding so it feels full-width */
-  }
-
-  /* Make every card exactly the same */
-  .h-grid > *{
-    width: 100%;
+    padding: 0 14px;
+    margin: 0 -14px;
   }
 
   .h-grid img{
@@ -1118,7 +1113,7 @@ body.about-page .card{ padding-bottom: 14px; }
     border-radius: 16px;
   }
 
-  /* Hide arrows on phones (optional but usually cleaner) */
+  /* Hide arrows on phones */
   .h-arrow{
     display: none;
   }

@@ -1224,3 +1224,15 @@ body.about-page .card{ padding-bottom: 14px; }
     display: none !important;
   }
 }
+
+/* =========================================================
+   MOBILE — Add breathing room between title and gallery
+   (Portfolio only)
+   ========================================================= */
+@media (max-width: 768px){
+
+  body.portfolio-page .h-gallery{
+    margin-top: 14px;   /* 👈 adjust: 12–18px sweet spot */
+  }
+
+}

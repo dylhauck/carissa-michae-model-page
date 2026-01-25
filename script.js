@@ -53,29 +53,6 @@
 })();
 
 /* =========================================================
-   Page-load zoom (About only)
-   - Matches the subtle animation you see on other pages
-   - Does NOT interfere with Enter → Home behavior
-   ========================================================= */
-(() => {
-  // Only run on About page
-  if (!document.body.classList.contains("about-page")) return;
-
-  const wrap = document.querySelector(".page-wrap");
-  if (!wrap) return;
-
-  // If Enter→Home animation already ran, don't double-animate
-  if (wrap.classList.contains("enter-zoom")) return;
-
-  // Trigger the same animation class
-  void wrap.offsetWidth; // force paint
-  wrap.classList.add("enter-zoom");
-
-  // Optional: remove after it finishes so it can re-trigger on next load
-  setTimeout(() => wrap.classList.remove("enter-zoom"), 1300);
-})();
-
-/* =========================================================
    Footer year
    ========================================================= */
 (() => {

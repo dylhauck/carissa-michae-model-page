@@ -1109,40 +1109,52 @@ body.about-page .card{ padding-bottom: 14px; }
 }
 
 /* =========================================================
-   MOBILE PORTFOLIO — 3-column grid (NO horizontal scroll)
+   MOBILE PORTFOLIO — 3-column grid (FORCE it, kill horizontal rules)
    Desktop untouched
    ========================================================= */
 @media (max-width: 768px){
 
-  /* Turn off arrows on mobile */
+  /* Hide arrows on mobile */
   body.portfolio-page .h-arrow{
     display: none !important;
   }
 
-  /* Remove arrow rails (desktop keeps them) */
+  /* Remove the arrow rails padding */
   body.portfolio-page .h-gallery{
     padding-left: 0 !important;
     padding-right: 0 !important;
-    margin-top: 14px; /* breathing room from title */
+    margin-top: 14px; /* space from title */
   }
 
-  /* Make the gallery a normal 3-column grid */
+  /* FORCE grid behavior (override the horizontal .h-grid rules) */
   body.portfolio-page .grid.h-grid{
     display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
+
+    /* 3 across */
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+
+    /* IMPORTANT: cancel the horizontal auto-column layout */
+    grid-auto-flow: row !important;
+    grid-auto-columns: unset !important;
+    grid-template-rows: unset !important;
+
     gap: 10px !important;
 
-    /* kill horizontal scroll behavior */
+    /* Kill horizontal scrolling behavior */
     overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
     scroll-snap-type: none !important;
+    scroll-snap-stop: normal !important;
+    -webkit-overflow-scrolling: auto !important;
   }
 
-  /* Uniform photo sizing */
+  /* Uniform thumbnails */
   body.portfolio-page .grid.h-grid img{
     width: 100% !important;
     height: auto !important;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
+    aspect-ratio: 1 / 1;       /* tighter + cleaner for 3-across */
+    object-fit: cover !important;
     border-radius: 12px;
   }
 }

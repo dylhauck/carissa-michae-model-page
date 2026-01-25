@@ -1063,134 +1063,6 @@ body.about-page .card{ padding-bottom: 14px; }
 }
 
 /* =========================================================
-   MOBILE PORTFOLIO — single row, equal-size cards, NO fade
-   ========================================================= */
-@media (max-width: 768px){
-
-  body.portfolio-page main{
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-
-  body.portfolio-page .section-header h2{
-    font-size: 26px;
-    margin-bottom: 6px;
-  }
-  body.portfolio-page .muted{
-    font-size: 13px;
-  }
-
-  .h-gallery{
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  /* CANCEL .grid auto-fit columns (this is the key) */
-  .grid.h-grid{
-    grid-template-columns: none !important;
-  }
-
-  .h-grid{
-    grid-auto-flow: column;
-    grid-template-rows: 1fr;
-    grid-auto-columns: 82vw;
-    gap: 12px;
-
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-
-    padding: 0 14px;
-    margin: 0 -14px;
-  }
-
-  .h-grid img{
-    width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    border-radius: 16px;
-  }
-
-  /* Hide arrows on phones */
-  .h-arrow{
-    display: none;
-  }
-}
-
-/* =========================================================
-   FIX: .grid + .h-grid conflict (Safari first-card sizing bug)
-   ========================================================= */
-.grid.h-grid{
-  grid-template-columns: none !important; /* cancels auto-fit columns */
-}
-
-/* =========================================================
-   MOBILE PORTFOLIO — Desktop-style (2-row horizontal grid + arrows)
-   Smaller cards so it doesn't feel oversized
-   ========================================================= */
-@media (max-width: 768px){
-
-  /* Tighten overall spacing */
-  body.portfolio-page main{
-    padding: 16px 12px 40px;
-  }
-
-  /* Title area similar to desktop but scaled */
-  body.portfolio-page .section-header h2{
-    font-size: 24px;
-    margin: 0 0 6px;
-  }
-  body.portfolio-page .muted{
-    font-size: 13px;
-  }
-
-  /* Desktop-style arrow rails, but smaller */
-  .h-gallery{
-    --arrow-size: 34px;
-    --arrow-gap: 10px;
-    --arrow-rail: calc(var(--arrow-size) + (var(--arrow-gap) * 2));
-    padding-left: var(--arrow-rail);
-    padding-right: var(--arrow-rail);
-  }
-
-  /* IMPORTANT: stop .grid auto-fit columns from fighting .h-grid */
-  .grid.h-grid{
-    grid-template-columns: none !important;
-  }
-
-  /* 2-row horizontal grid, but smaller cards */
-  .h-grid{
-    grid-auto-flow: column;
-    grid-template-rows: repeat(5, auto);
-    grid-auto-columns: 72px;          /* <- smaller than desktop */
-    gap: 12px;
-
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-
-    scroll-snap-type: x mandatory;
-    scroll-snap-stop: always;
-  }
-
-  .h-grid img{
-    width: 100%;
-    aspect-ratio: 3 / 4;              /* matches desktop look */
-    object-fit: cover;
-    border-radius: 14px;
-  }
-
-  /* Keep arrows visible on mobile (scaled down) */
-  .h-arrow{
-    width: var(--arrow-size);
-    height: var(--arrow-size);
-    font-size: 22px;
-  }
-}
-
-/* =========================================================
    MOBILE — Match desktop header→title spacing
    (Portfolio + About + Contact only)
    Paste at VERY bottom
@@ -1234,5 +1106,43 @@ body.about-page .card{ padding-bottom: 14px; }
   body.portfolio-page .h-gallery{
     margin-top: 14px;   /* 👈 adjust: 12–18px sweet spot */
   }
+}
 
+/* =========================================================
+   MOBILE PORTFOLIO — 3-column grid (NO horizontal scroll)
+   Desktop untouched
+   ========================================================= */
+@media (max-width: 768px){
+
+  /* Turn off arrows on mobile */
+  body.portfolio-page .h-arrow{
+    display: none !important;
+  }
+
+  /* Remove arrow rails (desktop keeps them) */
+  body.portfolio-page .h-gallery{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-top: 14px; /* breathing room from title */
+  }
+
+  /* Make the gallery a normal 3-column grid */
+  body.portfolio-page .grid.h-grid{
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 10px !important;
+
+    /* kill horizontal scroll behavior */
+    overflow: visible !important;
+    scroll-snap-type: none !important;
+  }
+
+  /* Uniform photo sizing */
+  body.portfolio-page .grid.h-grid img{
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 12px;
+  }
 }

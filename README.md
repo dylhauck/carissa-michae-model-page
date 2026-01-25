@@ -1,51 +1,77 @@
-# Carissa Michae — Portfolio Website (Static)
+# ✨ Carissa Michae — Portfolio Website ✨
 
-A clean, modern static website for **Carissa Michae** featuring:
-- Home (cinematic hero)
-- Portfolio (desktop locked 2-row horizontal gallery + mobile-optimized horizontal gallery)
-- About
-- Contact (Formspree email delivery + inline success/error messaging)
+A sleek, cinematic **model portfolio website** for **Carissa Michae**, designed to feel premium, editorial, and intentional across **desktop and mobile**.
 
-Built with **HTML / CSS / JavaScript** and deployed via **GitHub Pages**.
+Built with **HTML · CSS · JavaScript** and deployed via **GitHub Pages**.
 
 ---
 
-## Live Site
-- https://dylhauck.github.io
+## 🌐 Live Site
+👉 **https://dylhauck.github.io**
 
 ---
 
-## Pages
-- `index.html` — Home
-- `portfolio.html` — Portfolio gallery + lightbox
-- `about.html` — About + stats layout
-- `contact.html` — Booking/contact form (Formspree)
+## 📂 Pages Overview
+
+| Page | Description |
+|----|----|
+| 🏠 `index.html` | Cinematic hero landing experience |
+| 📸 `portfolio.html` | Horizontal gallery + lightbox |
+| 👤 `about.html` | About + stats layout (locked on desktop) |
+| ✉️ `contact.html` | Booking form with Formspree |
 
 ---
 
-## Features
+## 🚀 Features
 
-### Portfolio
-- **Desktop:** locked layout (no vertical scrolling), **2-row horizontal** gallery
-- **Mobile:** optimized horizontal gallery sizing (smaller cards so multiple are visible before swiping)
-- **Arrows:** left/right buttons to scroll the gallery (auto-disables at ends)
-- **Scroll snapping:** makes the gallery move “picture-by-picture”
-- **Lightbox:** click any image to enlarge, use arrows or keyboard to navigate
+### 📸 Portfolio Gallery
+- **Desktop**
+  - Locked layout (no vertical scrolling)
+  - **2-row horizontal gallery**
+  - Always-visible horizontal scrollbar
+  - Arrow navigation + keyboard support
+- **Mobile**
+  - Horizontal swipe gallery
+  - Optimized card sizing (multiple images visible at once)
+  - Smooth scroll snapping (image-by-image)
+  - Clean, minimal UI (no fades or gimmicks)
 
-### Contact
-- Form submits via **Formspree**
-- Inline success + error messages
-- Button shows sending/sent state
+### 🔍 Lightbox
+- Click any image to enlarge
+- Arrow navigation (on-screen + keyboard)
+- Background blur
+- Fully responsive
+
+### ✉️ Contact Form
+- Powered by **Formspree**
+- Inline success + error states
+- “Sending…” → “Sent ✓” button feedback
 - Footer year auto-updates
 
-### Global UI
-- Sticky header with active-page underline
+### 🎥 Motion & Polish
 - Scroll reveal animations
-- Cinematic “Enter → Home” zoom animation
+- Cinematic **Enter → Home zoom transition**
+- Sticky navigation with active page indicator
 
 ---
 
-## Project Structure
+## 🧠 Tech Stack
+
+- **HTML5**
+- **CSS3**
+  - CSS Grid & Flexbox
+  - Scroll snap
+  - Media queries (desktop + mobile tuned separately)
+- **Vanilla JavaScript**
+  - Gallery scrolling logic
+  - Lightbox behavior
+  - Form handling
+- **Formspree** (email delivery)
+- **GitHub Pages** (hosting)
+
+---
+
+## 🗂️ Project Structure
 
 ```txt
 /
@@ -59,4 +85,5 @@ Built with **HTML / CSS / JavaScript** and deployed via **GitHub Pages**.
    ├─ enter.jpeg
    ├─ fullbody1.JPG
    ├─ new2.jpeg
-   ├─ ...
+   ├─ headshot1.JPG
+   └─ ...

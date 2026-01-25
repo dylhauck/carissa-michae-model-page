@@ -1164,7 +1164,7 @@ body.about-page .card{ padding-bottom: 14px; }
   .h-grid{
     grid-auto-flow: column;
     grid-template-rows: repeat(2, auto);
-    grid-auto-columns: 118px;          /* <- smaller than desktop */
+    grid-auto-columns: 100px;          /* <- smaller than desktop */
     gap: 12px;
 
     overflow-x: auto;

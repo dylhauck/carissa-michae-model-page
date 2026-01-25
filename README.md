@@ -1,4 +1,4 @@
-# ✨ Carissa Michae — Portfolio Website ✨
+# ✨ Carissa Micháe — Portfolio Website ✨
 
 A sleek, cinematic **model portfolio website** for **Carissa Michae**, designed to feel premium, editorial, and intentional across **desktop and mobile**.
 

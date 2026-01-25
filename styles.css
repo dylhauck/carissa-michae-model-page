@@ -1125,3 +1125,67 @@ body.about-page .card{ padding-bottom: 14px; }
 .grid.h-grid{
   grid-template-columns: none !important; /* cancels auto-fit columns */
 }
+
+/* =========================================================
+   MOBILE PORTFOLIO — Desktop-style (2-row horizontal grid + arrows)
+   Smaller cards so it doesn't feel oversized
+   ========================================================= */
+@media (max-width: 768px){
+
+  /* Tighten overall spacing */
+  body.portfolio-page main{
+    padding: 16px 12px 40px;
+  }
+
+  /* Title area similar to desktop but scaled */
+  body.portfolio-page .section-header h2{
+    font-size: 24px;
+    margin: 0 0 6px;
+  }
+  body.portfolio-page .muted{
+    font-size: 13px;
+  }
+
+  /* Desktop-style arrow rails, but smaller */
+  .h-gallery{
+    --arrow-size: 34px;
+    --arrow-gap: 10px;
+    --arrow-rail: calc(var(--arrow-size) + (var(--arrow-gap) * 2));
+    padding-left: var(--arrow-rail);
+    padding-right: var(--arrow-rail);
+  }
+
+  /* IMPORTANT: stop .grid auto-fit columns from fighting .h-grid */
+  .grid.h-grid{
+    grid-template-columns: none !important;
+  }
+
+  /* 2-row horizontal grid, but smaller cards */
+  .h-grid{
+    grid-auto-flow: column;
+    grid-template-rows: repeat(2, auto);
+    grid-auto-columns: 165px;          /* <- smaller than desktop */
+    gap: 12px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+
+    scroll-snap-type: x mandatory;
+    scroll-snap-stop: always;
+  }
+
+  .h-grid img{
+    width: 100%;
+    aspect-ratio: 3 / 4;              /* matches desktop look */
+    object-fit: cover;
+    border-radius: 14px;
+  }
+
+  /* Keep arrows visible on mobile (scaled down) */
+  .h-arrow{
+    width: var(--arrow-size);
+    height: var(--arrow-size);
+    font-size: 22px;
+  }
+}

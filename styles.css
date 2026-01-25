@@ -1189,3 +1189,38 @@ body.about-page .card{ padding-bottom: 14px; }
     font-size: 22px;
   }
 }
+
+/* =========================================================
+   MOBILE — Match desktop header→title spacing
+   (Portfolio + About + Contact only)
+   Paste at VERY bottom
+   ========================================================= */
+@media (max-width: 768px){
+
+  /* 1) Reduce main’s top padding on these pages */
+  body.portfolio-page main,
+  body.about-page main,
+  body.contact-page main{
+    padding-top: 12px !important; /* tighten like desktop */
+  }
+
+  /* 2) Remove the big "section" top padding only for the FIRST section */
+  body.portfolio-page main > .section:first-of-type,
+  body.about-page main > .section:first-of-type,
+  body.contact-page main > .section:first-of-type{
+    padding-top: 0 !important;   /* kills the 70px */
+  }
+
+  /* 3) Make sure the title block itself isn't adding extra spacing */
+  body.portfolio-page .section-header,
+  body.about-page .section-header,
+  body.contact-page .section-header{
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  /* 4) Remove the manual line break that adds space on Portfolio */
+  body.portfolio-page .section-header br{
+    display: none !important;
+  }
+}

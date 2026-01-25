@@ -1123,3 +1123,10 @@ body.about-page .card{ padding-bottom: 14px; }
     display: none;
   }
 }
+
+/* =========================================================
+   FIX: .grid + .h-grid conflict (Safari first-card sizing bug)
+   ========================================================= */
+.grid.h-grid{
+  grid-template-columns: none !important; /* cancels auto-fit columns */
+}

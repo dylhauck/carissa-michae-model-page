@@ -1149,22 +1149,19 @@ body.about-page .card{ padding-bottom: 14px; }
     -webkit-overflow-scrolling: auto !important;
   }
 
-  /* ✅ UPDATED: show full photo on mobile (no crop) while keeping 3-across grid */
-  body.portfolio-page .grid.h-grid img{
-    width: 100% !important;
-    height: auto !important;
+  /* Uniform thumbnails (NO letterboxing, all same rectangle size) */
+body.portfolio-page .grid.h-grid img{
+  width: 100% !important;
+  height: auto !important;
 
-    /* Keep a consistent tile size so the grid stays aligned */
-    aspect-ratio: 4 / 5;
+  /* Pick your rectangle — this matches your “model card” vibe */
+  aspect-ratio: 4 / 5;          /* rectangular + consistent */
+  object-fit: cover !important;  /* fills the rectangle (no empty space) */
+  object-position: center;
 
-    /* Show the whole photo instead of cropping */
-    object-fit: contain !important;
-    object-position: center;
-
-    /* Keep your styling feel */
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    background: #fff;      /* frame behind the image */
-    padding: 6px;          /* “photo frame” so contain doesn’t look empty */
-  }
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--soft);       /* harmless; image covers anyway */
+  padding: 0;                    /* IMPORTANT: no “frame” */
+}
 }

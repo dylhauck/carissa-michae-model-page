@@ -1155,7 +1155,7 @@ body.about-page .card{ padding-bottom: 14px; }
   height: auto !important;
 
   /* Pick your rectangle — this matches your “model card” vibe */
-  aspect-ratio: 4 / 5;          /* rectangular + consistent */
+  aspect-ratio: 3 / 4;          /* rectangular + consistent */
   object-fit: cover !important;  /* fills the rectangle (no empty space) */
   object-position: center;
 

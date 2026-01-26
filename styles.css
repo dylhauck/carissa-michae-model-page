@@ -1150,7 +1150,7 @@ body.about-page .card{ padding-bottom: 14px; }
   }
 
   /* Uniform thumbnails (NO letterboxing, all same rectangle size) */
-body.portfolio-page .grid.h-grid img{
+  body.portfolio-page .grid.h-grid img{
   width: 100% !important;
   height: auto !important;
 
@@ -1163,5 +1163,5 @@ body.portfolio-page .grid.h-grid img{
   border: 1px solid var(--border);
   background: var(--soft);       /* harmless; image covers anyway */
   padding: 0;                    /* IMPORTANT: no “frame” */
-}
+   }
 }

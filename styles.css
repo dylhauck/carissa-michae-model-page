@@ -2071,3 +2071,49 @@ body.portfolio-page .h-arrow:disabled{
     animation: none !important;
   }
 }
+
+/* =========================================================
+   PORTFOLIO — GOLD CHROME ANIMATED ARROW GLYPH
+   (THIS affects ONLY the arrow symbol itself)
+   ========================================================= */
+
+body.portfolio-page .h-arrow{
+  font-weight: 600; /* keeps the arrow bold */
+}
+
+/* Gold chrome text */
+body.portfolio-page .h-arrow{
+  color: transparent !important;
+
+  background: linear-gradient(
+    120deg,
+    #2a1800,
+    #a86d00,
+    #ffd36a,
+    #fff6cc,
+    #ffd36a,
+    #a86d00,
+    #2a1800
+  );
+
+  background-size: 240% 100%;
+  background-position: 0% 50%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  animation: goldArrowSweep 4.2s linear infinite;
+}
+
+/* Gold sweep animation — SAME motion philosophy as title */
+@keyframes goldArrowSweep{
+  0%   { background-position:   0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Disabled arrows: stop animation + mute */
+body.portfolio-page .h-arrow.is-disabled,
+body.portfolio-page .h-arrow:disabled{
+  animation: none !important;
+  filter: grayscale(1) brightness(0.75);
+}

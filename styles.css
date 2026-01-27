@@ -1709,3 +1709,66 @@ body.portfolio-page .grid.h-grid img{
     animation: goldChromeGlow 3.2s ease-in-out infinite !important;
   }
 }
+
+/* =========================================================
+   GOLD CHROME — REAL animated sweep (TITLE-style)
+   Uses wrapper because <img> background animation is unreliable on desktop
+   ========================================================= */
+
+/* Wrapper becomes the border host */
+body.portfolio-page .grid.h-grid .gold-frame{
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;          /* keeps corners clean */
+}
+
+/* Keep your image behavior exactly the same */
+body.portfolio-page .grid.h-grid .gold-frame img{
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* The animated gold chrome border */
+body.portfolio-page .grid.h-grid .gold-frame::before{
+  content:"";
+  position: absolute;
+  inset: 0;
+  padding: 4px;              /* THICKNESS — change 4px → 5px/6px if you want thicker */
+  border-radius: 16px;
+
+  background: linear-gradient(
+    120deg,
+    #2a1800,
+    #a86d00,
+    #ffd36a,
+    #fff6cc,
+    #ffd36a,
+    #a86d00,
+    #2a1800
+  );
+  background-size: 260% 260%;
+  animation: goldChromeSweep 4.2s linear infinite;
+
+  /* Mask so only the “border ring” shows */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  pointer-events: none;
+}
+
+/* Extra depth like luxury metal */
+body.portfolio-page .grid.h-grid .gold-frame{
+  box-shadow: 0 10px 26px rgba(0,0,0,0.35);
+}
+
+@keyframes goldChromeSweep{
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}

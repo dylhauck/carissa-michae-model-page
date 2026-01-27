@@ -2117,3 +2117,49 @@ body.portfolio-page .h-arrow:disabled{
   animation: none !important;
   filter: grayscale(1) brightness(0.75);
 }
+
+/* =========================================================
+   PORTFOLIO — Gold chrome animated ARROW GLYPH (reliable)
+   Applies ONLY to the character, not the button
+   ========================================================= */
+
+body.portfolio-page .h-arrow .arrow-glyph{
+  display: inline-block;
+  font-weight: 700;
+  line-height: 1;
+
+  /* Gold chrome gradient */
+  background: linear-gradient(
+    120deg,
+    #2a1800,
+    #a86d00,
+    #ffd36a,
+    #fff6cc,
+    #ffd36a,
+    #a86d00,
+    #2a1800
+  );
+  background-size: 240% 100%;
+  background-position: 0% 50%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  /* REQUIRED on Safari/Chrome for text gradients */
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+
+  animation: goldArrowSweep 4.2s linear infinite;
+}
+
+@keyframes goldArrowSweep{
+  0%   { background-position:   0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Disabled arrows: mute glyph */
+body.portfolio-page .h-arrow.is-disabled .arrow-glyph,
+body.portfolio-page .h-arrow:disabled .arrow-glyph{
+  animation: none !important;
+  filter: grayscale(1) brightness(0.8);
+}

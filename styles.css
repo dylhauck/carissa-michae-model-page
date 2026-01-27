@@ -1619,16 +1619,22 @@ body.portfolio-page .h-grid img{
 
 /* =========================================================
    PORTFOLIO — FORCE gold chrome border (FINAL OVERRIDE)
+   (Desktop-safe animation: shimmer via animated glow, not bg-position)
    Paste at VERY BOTTOM
    ========================================================= */
 body.portfolio-page .grid.h-grid img{
-  /* kill any previous border/background */
+  /* keep your same shape/fit */
+  border-radius: 14px !important;
+  object-fit: cover !important;
+  object-position: center;
+
+  /* keep thickness + gold chrome “rim” */
   border: 4px solid transparent !important;
   background-color: transparent !important;
 
-  /* the trick: gradient border using background-clip */
+  /* chrome-gold rim (static gradient border that always renders) */
   background-image:
-    linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.10)), /* subtle inner tint */
+    linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.10)),
     linear-gradient(
       120deg,
       #2a1800,
@@ -1642,19 +1648,46 @@ body.portfolio-page .grid.h-grid img{
 
   background-origin: padding-box, border-box !important;
   background-clip: padding-box, border-box !important;
+  background-size: 100% 100%, 100% 100% !important;
 
-  /* make the gold feel “chrome” */
-  background-size: 100% 100%, 260% 260% !important;
-  animation: goldChromeShimmer 4.2s linear infinite !important;
+  /* RELIABLE animation: gold “alive” glow (works on desktop + mobile) */
+  animation: goldChromeGlow 3.2s ease-in-out infinite !important;
 
-  /* prevent the border from looking cut off */
-  border-radius: 14px !important;
-
-  /* optional depth */
-  box-shadow: 0 10px 26px rgba(0,0,0,0.35) !important;
+  /* base depth */
+  box-shadow:
+    0 0 0 1px rgba(255, 225, 160, 0.20),
+    0 10px 26px rgba(0,0,0,0.35) !important;
 }
 
-@keyframes goldChromeShimmer{
-  0%   { background-position: 0% 50%, 0% 50%; }
-  100% { background-position: 0% 50%, 200% 50%; }
+/* Gold chrome “shimmer” feel via pulsing highlights */
+@keyframes goldChromeGlow{
+  0%{
+    box-shadow:
+      0 0 0 1px rgba(255, 225, 160, 0.18),
+      0 0 12px rgba(255, 210, 120, 0.10),
+      0 10px 26px rgba(0,0,0,0.35);
+    filter: saturate(1.05) contrast(1.02);
+  }
+  50%{
+    box-shadow:
+      0 0 0 1px rgba(255, 245, 205, 0.42),
+      0 0 18px rgba(255, 222, 140, 0.28),
+      0 0 34px rgba(255, 195, 95, 0.18),
+      0 16px 36px rgba(0,0,0,0.45);
+    filter: saturate(1.12) contrast(1.06);
+  }
+  100%{
+    box-shadow:
+      0 0 0 1px rgba(255, 225, 160, 0.18),
+      0 0 12px rgba(255, 210, 120, 0.10),
+      0 10px 26px rgba(0,0,0,0.35);
+    filter: saturate(1.05) contrast(1.02);
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body.portfolio-page .grid.h-grid img{
+    animation: none !important;
+  }
 }

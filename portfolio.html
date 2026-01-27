@@ -83,9 +83,11 @@
             <img alt="Profile 4" src="images/prof2.JPEG" />
             <img alt="Profile 5" src="images/fullbody3.JPG" />
           </div>
-          <div class="chrome-scroll" aria-hidden="true">
-  <div class="chrome-thumb"></div>
-</div>
+
+          <!-- Custom chrome scrollbar (added only) -->
+          <div class="chrome-scroll" aria-label="Gallery scrollbar">
+            <div class="chrome-thumb" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+          </div>
 
           <button class="h-arrow h-arrow-right" type="button" aria-label="Scroll right">
             ›
@@ -344,8 +346,9 @@
 
     // Initial
     updateButtons();
-        // =========================================================
-    // Custom chrome scrollbar (always animates + tracks scroll)
+
+    // =========================================================
+    // Custom chrome scrollbar (sync + DRAG)
     // =========================================================
     const chromeTrack = gallery.querySelector(".chrome-scroll");
     const chromeThumb = gallery.querySelector(".chrome-thumb");
@@ -356,7 +359,6 @@
       const maxScroll = scroller.scrollWidth - scroller.clientWidth;
       const trackW = chromeTrack.clientWidth;
 
-      // If no scroll needed, hide bar
       if (maxScroll <= 1){
         chromeTrack.style.display = "none";
         return;
@@ -365,18 +367,82 @@
       }
 
       const ratio = scroller.clientWidth / scroller.scrollWidth;
-      const thumbW = Math.max(60, Math.round(trackW * ratio)); // minimum size
+      const thumbW = Math.max(60, Math.round(trackW * ratio));
       const progress = scroller.scrollLeft / maxScroll;
       const maxLeft = trackW - thumbW;
       const left = Math.round(maxLeft * progress);
 
       chromeThumb.style.width = thumbW + "px";
       chromeThumb.style.transform = `translateX(${left}px)`;
+      chromeThumb.setAttribute("aria-valuenow", String(Math.round(progress * 100)));
+    }
+
+    // Click on track jumps thumb
+    if (chromeTrack && chromeThumb){
+      chromeTrack.addEventListener("pointerdown", (e) => {
+        if (e.target === chromeThumb) return;
+
+        const rect = chromeTrack.getBoundingClientRect();
+        const trackX = e.clientX - rect.left;
+
+        const thumbRect = chromeThumb.getBoundingClientRect();
+        const thumbW = thumbRect.width;
+
+        const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+        const maxLeft = chromeTrack.clientWidth - thumbW;
+
+        const clampedLeft = Math.max(0, Math.min(maxLeft, trackX - thumbW/2));
+        scroller.scrollLeft = (clampedLeft / maxLeft) * maxScroll;
+      });
+
+      // Drag thumb like a real scrollbar
+      let dragging = false;
+      let dragStartX = 0;
+      let startLeft = 0;
+
+      chromeThumb.addEventListener("pointerdown", (e) => {
+        e.preventDefault();
+        chromeThumb.setPointerCapture(e.pointerId);
+
+        dragging = true;
+        dragStartX = e.clientX;
+
+        const t = chromeThumb.getBoundingClientRect();
+        const r = chromeTrack.getBoundingClientRect();
+        startLeft = t.left - r.left;
+
+        chromeThumb.style.animationPlayState = "paused";
+      });
+
+      chromeThumb.addEventListener("pointermove", (e) => {
+        if (!dragging) return;
+
+        const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+        const trackW = chromeTrack.clientWidth;
+
+        const thumbW = chromeThumb.getBoundingClientRect().width;
+        const maxLeft = trackW - thumbW;
+
+        const dx = e.clientX - dragStartX;
+        const newLeft = Math.max(0, Math.min(maxLeft, startLeft + dx));
+
+        const progress = maxLeft > 0 ? (newLeft / maxLeft) : 0;
+        scroller.scrollLeft = progress * maxScroll;
+      });
+
+      function endDrag(){
+        dragging = false;
+        chromeThumb.style.animationPlayState = "";
+      }
+
+      chromeThumb.addEventListener("pointerup", endDrag);
+      chromeThumb.addEventListener("pointercancel", endDrag);
     }
 
     scroller.addEventListener("scroll", updateChromeBar, { passive: true });
     window.addEventListener("resize", updateChromeBar);
     updateChromeBar();
+
   })();
 </script>
 </body>

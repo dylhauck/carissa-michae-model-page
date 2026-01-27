@@ -1469,3 +1469,37 @@ body.portfolio-page .grid.h-grid img{
   /* keep your image behavior */
   object-fit: cover !important;
 }
+
+/* =========================================================
+   PORTFOLIO — Chrome Silver Footer Text
+   Matches Portfolio title EXACTLY
+   ========================================================= */
+
+body.portfolio-page .centered-paragraph{
+  font-weight: 500;
+  letter-spacing: 0.6px;
+
+  /* Chrome silver gradient */
+  background: linear-gradient(
+    135deg,
+    #6e6e6e 0%,
+    #bfc0c0 12%,
+    #ffffff 25%,
+    #d9d9d9 38%,
+    #f5f5f5 50%,
+    #cfcfcf 62%,
+    #ffffff 75%,
+    #b0b0b0 88%,
+    #6e6e6e 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  /* Chrome shine depth */
+  text-shadow:
+    0 1px 1px rgba(255,255,255,0.35),
+    0 -1px 1px rgba(0,0,0,0.35),
+    0 0 10px rgba(255,255,255,0.15);
+}

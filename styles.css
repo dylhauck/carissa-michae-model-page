@@ -1520,3 +1520,33 @@ body.portfolio-page .centered-paragraph{
   0%   { background-position: 0% 50%; }
   100% { background-position: 200% 50%; }
 }
+
+/* =========================================================
+   GOLD CHROME — Animated shimmer (matches silver chrome)
+   ========================================================= */
+
+/* Gold chrome border for portfolio images */
+body.portfolio-page .h-grid img{
+  border: 3px solid transparent;
+  border-radius: 16px;
+
+  background:
+    linear-gradient(#000, #000) padding-box,
+    linear-gradient(
+      120deg,
+      #5c3a00,
+      #cfa24a,
+      #fff1b8,
+      #cfa24a,
+      #7a4a00
+    ) border-box;
+
+  background-size: 100% 100%, 240% 240%;
+  animation: goldChromeShimmer 4.5s linear infinite;
+}
+
+/* Gold shimmer animation */
+@keyframes goldChromeShimmer{
+  0%   { background-position: 0% 50%, 0% 50%; }
+  100% { background-position: 0% 50%, 200% 50%; }
+}

@@ -2498,42 +2498,5 @@ body.home .hero-title{
     0 10px 28px rgba(0,0,0,0.55);
 }
 
-/* =========================================================
-   Animated gold "alive" pulse (outline only)
-   ========================================================= */
-body.home .hero-title{
-  animation:
-    chromeSweep 4.2s ease-in-out infinite,
-    goldOutlinePulse 3.4s ease-in-out infinite;
-}
-
-@keyframes goldOutlinePulse{
-  0%{
-    text-shadow:
-      0 0 1px rgba(255,215,140,0.45),
-      0 0 3px rgba(180,135,55,0.65),
-      0 0 6px rgba(255,225,165,0.65),
-      0 10px 28px rgba(0,0,0,0.55);
-  }
-  50%{
-    text-shadow:
-      0 0 2px rgba(255,240,200,0.9),
-      0 0 6px rgba(255,200,95,0.95),
-      0 0 12px rgba(255,235,180,0.9),
-      0 14px 36px rgba(0,0,0,0.65);
-  }
-  100%{
-    text-shadow:
-      0 0 1px rgba(255,215,140,0.45),
-      0 0 3px rgba(180,135,55,0.65),
-      0 0 6px rgba(255,225,165,0.65),
-      0 10px 28px rgba(0,0,0,0.55);
-  }
-}
-
-/* Reduced motion safety */
-@media (prefers-reduced-motion: reduce){
-  body.home .hero-title{
-    animation: none !important;
-  }
+0,0,0,0.55);
 }

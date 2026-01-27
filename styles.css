@@ -1469,10 +1469,3 @@ body.portfolio-page .grid.h-grid img{
   /* keep your image behavior */
   object-fit: cover !important;
 }
-
-/* Prevent any container from clipping the thicker border */
-body.portfolio-page .grid,
-body.portfolio-page .h-grid,
-body.portfolio-page .h-gallery{
-  overflow: visible !important;
-}

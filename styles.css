@@ -1034,35 +1034,6 @@ body.about-page .card{ padding-bottom: 14px; }
 }
 
 /* =========================================================
-   DESKTOP — Always show horizontal scrollbar for Portfolio
-   ========================================================= */
-@media (min-width: 1024px){
-
-  body.portfolio-page .h-grid{
-    scrollbar-gutter: stable both-edges;
-    overflow-x: scroll !important;   /* force scrollbar to exist */
-  }
-
-  /* WebKit (Chrome / Edge / Safari) */
-  body.portfolio-page .h-grid::-webkit-scrollbar{
-    height: 10px;
-  }
-
-  body.portfolio-page .h-grid::-webkit-scrollbar-track{
-    background: transparent;
-  }
-
-  body.portfolio-page .h-grid::-webkit-scrollbar-thumb{
-    background: rgba(0,0,0,0.25);
-    border-radius: 999px;
-  }
-
-  body.portfolio-page .h-grid::-webkit-scrollbar-thumb:hover{
-    background: rgba(0,0,0,0.45);
-  }
-}
-
-/* =========================================================
    MOBILE — Match desktop header→title spacing
    (Portfolio + About + Contact only)
    Paste at VERY bottom

@@ -1872,4 +1872,68 @@ body.portfolio-page .chrome-scroll .chrome-thumb{
 @media (max-width: 768px){
   body.portfolio-page .chrome-scroll{ display:none; }
 }
-*/
+
+/* =========================================================
+   PORTFOLIO — Hide native scrollbar UI (keep scroll working)
+   ========================================================= */
+body.portfolio-page .h-grid{
+  scrollbar-width: none;              /* Firefox */
+  -ms-overflow-style: none;           /* old Edge/IE */
+}
+body.portfolio-page .h-grid::-webkit-scrollbar{
+  width: 0;
+  height: 0;                          /* Chrome/Safari */
+}
+
+/* =========================================================
+   PORTFOLIO — Custom chrome scrollbar (thin)
+   ========================================================= */
+body.portfolio-page .chrome-scroll{
+  margin: 12px auto 0;
+  width: min(900px, 92%);
+  height: 6px;                        /* 👈 THINNER */
+  border-radius: 999px;
+  position: relative;
+
+  background: rgba(255,255,255,0.10);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14);
+  backdrop-filter: blur(8px);
+}
+
+body.portfolio-page .chrome-thumb{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  border-radius: 999px;
+  cursor: grab;
+
+  /* same chrome vibe as title */
+  background: linear-gradient(
+    90deg,
+    #0d0f12 0%,
+    #f7fbff 10%,
+    #aeb7c2 22%,
+    #ffffff 32%,
+    #7d8793 44%,
+    #ffffff 56%,
+    #b7c0cb 68%,
+    #ffffff 80%,
+    #1a1d22 100%
+  );
+  background-size: 220% 100%;
+  animation: chromeSweep 4.2s ease-in-out infinite;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.35),
+    0 3px 10px rgba(0,0,0,0.45);
+}
+
+body.portfolio-page .chrome-thumb:active{ cursor: grabbing; }
+
+/* Optional: slightly taller thumb hit-area without looking thicker */
+body.portfolio-page .chrome-scroll::before{
+  content:"";
+  position:absolute;
+  inset:-6px 0; /* bigger touch area */
+}

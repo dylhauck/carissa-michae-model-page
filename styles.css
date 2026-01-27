@@ -1427,3 +1427,52 @@ body.portfolio-page .h-grid img{
     /* depth shadow */
     0 16px 42px rgba(0,0,0,0.65);
 }
+
+/* =========================================================
+   PORTFOLIO — Gold Chrome Photo Outline (thicker + not clipped)
+   Paste at VERY BOTTOM of styles.css
+   ========================================================= */
+body.portfolio-page .grid img,
+body.portfolio-page .h-grid img,
+body.portfolio-page .grid.h-grid img{
+  /* THICKNESS (increase if you want even bolder) */
+  border: 6px solid transparent !important;
+
+  /* keep your rounding */
+  border-radius: 16px !important;
+
+  /* Gold chrome border (same “shine” philosophy as the title) */
+  background:
+    /* preserves the photo content area */
+    linear-gradient(transparent, transparent) padding-box,
+
+    /* gold chrome border gradient */
+    linear-gradient(
+      135deg,
+      #2b1a00 0%,
+      #8a5a00 10%,
+      #ffd36a 20%,
+      #fff2b8 30%,
+      #c48a14 42%,
+      #fff7cf 52%,
+      #b06f00 65%,
+      #ffe39a 78%,
+      #7a4a00 90%,
+      #2b1a00 100%
+    ) border-box !important;
+
+  /* adds “metal pop” / depth without changing layout */
+  box-shadow:
+    0 0 0 1px rgba(255, 230, 160, 0.35),   /* crisp edge */
+    0 10px 22px rgba(0,0,0,0.35) !important; /* depth */
+
+  /* keep your image behavior */
+  object-fit: cover !important;
+}
+
+/* Prevent any container from clipping the thicker border */
+body.portfolio-page .grid,
+body.portfolio-page .h-grid,
+body.portfolio-page .h-gallery{
+  overflow: visible !important;
+}

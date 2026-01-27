@@ -1243,3 +1243,54 @@ body.portfolio-page .section{
     object-position: 50% 30%;
   }
 }
+
+/* =========================================================
+   PORTFOLIO — Background video (Desktop + Mobile)
+   Force same “centered” feel as Home
+   ========================================================= */
+body.portfolio-page{
+  position: relative;
+}
+
+body.portfolio-page .portfolio-bg{
+  position: fixed;     /* stay behind everything */
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* make sure your content sits above the video */
+body.portfolio-page .page-wrap{
+  position: relative;
+  z-index: 2;
+}
+
+/* the video fill behavior */
+body.portfolio-page .portfolio-bg-video{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  /* THIS is the “centering” control */
+  object-position: 50% 25%;
+}
+
+/* Optional: tweak desktop separately if needed */
+@media (min-width: 1024px){
+  body.portfolio-page .portfolio-bg-video{
+    object-position: 50% 20%; /* adjust until it matches home */
+  }
+}
+
+/* Dim overlay so it looks premium */
+body.portfolio-page .portfolio-bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(0,0,0,0.12), rgba(0,0,0,0.70)),
+    rgba(0,0,0,0.18);
+}

@@ -1294,3 +1294,23 @@ body.portfolio-page .portfolio-bg::after{
     radial-gradient(circle at 50% 35%, rgba(0,0,0,0.12), rgba(0,0,0,0.70)),
     rgba(0,0,0,0.18);
 }
+
+/* =========================================================
+   PORTFOLIO — Arrow disabled state (force grey)
+   ========================================================= */
+body.portfolio-page .h-arrow.is-disabled,
+body.portfolio-page .h-arrow:disabled{
+  opacity: 0.35 !important;
+  pointer-events: none !important;
+  transform: translateY(-50%) scale(1) !important;
+  filter: grayscale(1) !important;
+}
+
+/* Keep dark-mode inversion from overriding disabled look */
+@media (prefers-color-scheme: dark){
+  body.portfolio-page .h-arrow.is-disabled,
+  body.portfolio-page .h-arrow:disabled{
+    opacity: 0.35 !important;
+    filter: grayscale(1) !important;
+  }
+}

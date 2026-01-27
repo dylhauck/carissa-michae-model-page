@@ -2397,3 +2397,76 @@ body.home .hero-subtitle{
     animation: none !important;
   }
 }
+
+/* =========================================================
+   HOME — Buttons: animate the SILVER CHROME inside (background fill)
+   (Text stays readable)
+   ========================================================= */
+body.home .hero-actions .btn{
+  /* animated chrome fill */
+  background: linear-gradient(
+    90deg,
+    #0d0f12 0%,
+    #f7fbff 10%,
+    #aeb7c2 22%,
+    #ffffff 32%,
+    #7d8793 44%,
+    #ffffff 56%,
+    #b7c0cb 68%,
+    #ffffff 80%,
+    #1a1d22 100%
+  ) !important;
+
+  background-size: 220% 100% !important;
+  animation: chromeSweep 4.2s ease-in-out infinite !important;
+
+  /* keep label readable on shiny fill */
+  color: #0b0b0b !important;
+
+  /* keep your button shape; don’t fight your other border rules */
+  border-color: rgba(255,255,255,0.25) !important;
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body.home .hero-actions .btn{
+    animation: none !important;
+  }
+}
+
+/* =========================================================
+   HOME — Footer: chrome shiny animated text (like Portfolio)
+   ========================================================= */
+body.home .footer{
+  color: transparent !important;
+
+  background: linear-gradient(
+    90deg,
+    #0d0f12 0%,
+    #f7fbff 10%,
+    #aeb7c2 22%,
+    #ffffff 32%,
+    #7d8793 44%,
+    #ffffff 56%,
+    #b7c0cb 68%,
+    #ffffff 80%,
+    #1a1d22 100%
+  );
+
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  animation: chromeSweep 4.2s ease-in-out infinite;
+
+  /* helps it pop on the image */
+  text-shadow:
+    0 1px 10px rgba(255,255,255,0.12),
+    0 10px 30px rgba(0,0,0,0.55);
+}
+
+@media (prefers-reduced-motion: reduce){
+  body.home .footer{
+    animation: none !important;
+  }
+}

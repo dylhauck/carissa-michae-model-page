@@ -1503,3 +1503,20 @@ body.portfolio-page .centered-paragraph{
     0 -1px 1px rgba(0,0,0,0.35),
     0 0 10px rgba(255,255,255,0.15);
 }
+
+/* =========================================================
+   PORTFOLIO — Sync chrome shimmer animation (title + subtitle + footer)
+   ========================================================= */
+
+/* Apply shimmer animation to subtitle + footer chrome text */
+body.portfolio-page .section-header .muted,
+body.portfolio-page .centered-paragraph{
+  background-size: 220% 220%;
+  animation: chromeShimmer 3.2s linear infinite;
+}
+
+/* Keyframes used by the moving chrome look */
+@keyframes chromeShimmer{
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}

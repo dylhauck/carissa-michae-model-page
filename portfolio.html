@@ -344,6 +344,39 @@
 
     // Initial
     updateButtons();
+        // =========================================================
+    // Custom chrome scrollbar (always animates + tracks scroll)
+    // =========================================================
+    const chromeTrack = gallery.querySelector(".chrome-scroll");
+    const chromeThumb = gallery.querySelector(".chrome-thumb");
+
+    function updateChromeBar(){
+      if (!chromeTrack || !chromeThumb) return;
+
+      const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+      const trackW = chromeTrack.clientWidth;
+
+      // If no scroll needed, hide bar
+      if (maxScroll <= 1){
+        chromeTrack.style.display = "none";
+        return;
+      } else {
+        chromeTrack.style.display = "";
+      }
+
+      const ratio = scroller.clientWidth / scroller.scrollWidth;
+      const thumbW = Math.max(60, Math.round(trackW * ratio)); // minimum size
+      const progress = scroller.scrollLeft / maxScroll;
+      const maxLeft = trackW - thumbW;
+      const left = Math.round(maxLeft * progress);
+
+      chromeThumb.style.width = thumbW + "px";
+      chromeThumb.style.transform = `translateX(${left}px)`;
+    }
+
+    scroller.addEventListener("scroll", updateChromeBar, { passive: true });
+    window.addEventListener("resize", updateChromeBar);
+    updateChromeBar();
   })();
 </script>
 </body>

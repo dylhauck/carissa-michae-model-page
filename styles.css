@@ -2472,36 +2472,6 @@ body.home .footer{
 }
 
 /* =========================================================
-   HOME — Gold Chrome Outline for Hero Title
-   (Presence, Poise, Story.)
-   Keeps silver chrome fill intact
-   ========================================================= */
-
-body.home .hero-title{
-  position: relative;
-
-  /* keep your existing silver chrome animation */
-  background-size: 220% 100%;
-
-  /* GOLD CHROME OUTLINE via layered shadows */
-  text-shadow:
-    /* inner warm edge */
-    0 0 1px rgba(255,215,140,0.65),
-
-    /* primary gold rim */
-    0 0 3px rgba(190,145,60,0.85),
-
-    /* highlight shine */
-    0 0 6px rgba(255,235,185,0.85),
-
-    /* depth */
-    0 10px 28px rgba(0,0,0,0.55);
-}
-
-0,0,0,0.55);
-}
-
-/* =========================================================
    HOME — FORCE: silver chrome fill + gold outline ONLY
    Paste at VERY BOTTOM of styles.css
    ========================================================= */

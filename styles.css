@@ -1943,3 +1943,131 @@ body.portfolio-page .chrome-scroll::before{
   position:absolute;
   inset:-6px 0; /* bigger touch area */
 }
+
+/* =========================================================
+   PORTFOLIO — Arrows: Gold chrome OUTLINE + Chrome INSIDE (Animated)
+   Paste at VERY BOTTOM (single source of truth)
+   ========================================================= */
+body.portfolio-page .h-arrow{
+  position: absolute; /* keep your existing layout */
+  overflow: hidden;   /* keep the chrome contained */
+  border: 0 !important;         /* kill the old border */
+  background: transparent !important; /* we will paint via pseudo elements */
+  color: #0d0f12;     /* arrow glyph color on chrome fill */
+  isolation: isolate; /* ensure pseudo layers stack cleanly */
+}
+
+/* OUTER GOLD CHROME RING */
+body.portfolio-page .h-arrow::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  padding: 3px; /* ring thickness (2–4px sweet spot) */
+
+  /* gold chrome gradient */
+  background: linear-gradient(
+    120deg,
+    #2a1800,
+    #a86d00,
+    #ffd36a,
+    #fff6cc,
+    #ffd36a,
+    #a86d00,
+    #2a1800
+  );
+  background-size: 260% 260%;
+  animation: goldArrowSweep 4.2s linear infinite;
+
+  /* cut out the center so only the ring shows */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  pointer-events:none;
+  z-index: 0;
+}
+
+/* INNER CHROME FILL (TITLE-STYLE) */
+body.portfolio-page .h-arrow::after{
+  content:"";
+  position:absolute;
+  inset: 3px; /* must match ::before padding above */
+  border-radius:999px;
+
+  background: linear-gradient(
+    90deg,
+    #0d0f12 0%,
+    #f7fbff 10%,
+    #aeb7c2 22%,
+    #ffffff 32%,
+    #7d8793 44%,
+    #ffffff 56%,
+    #b7c0cb 68%,
+    #ffffff 80%,
+    #1a1d22 100%
+  );
+  background-size: 220% 100%;
+  animation: chromeArrowSweep 4.2s ease-in-out infinite;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.35),
+    0 10px 22px rgba(0,0,0,0.35);
+
+  pointer-events:none;
+  z-index: 1;
+}
+
+/* Make the arrow glyph sit above the chrome layers */
+body.portfolio-page .h-arrow{
+  font-weight: 700;
+  text-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+body.portfolio-page .h-arrow > *{ position: relative; z-index: 2; }
+/* (Your arrows are text nodes, not spans, so z-index comes from the button itself) */
+body.portfolio-page .h-arrow{ z-index: 5; } /* keep above gallery */
+
+/* Hover polish */
+@media (hover:hover){
+  body.portfolio-page .h-arrow:hover{
+    transform: translateY(-50%) scale(1.08) !important;
+    filter: brightness(1.06) contrast(1.06);
+  }
+}
+
+/* Disabled state: keep your greyed behavior but still looks “metal” */
+body.portfolio-page .h-arrow.is-disabled::before,
+body.portfolio-page .h-arrow:disabled::before{
+  opacity: 0.45;
+  filter: grayscale(1);
+}
+body.portfolio-page .h-arrow.is-disabled::after,
+body.portfolio-page .h-arrow:disabled::after{
+  opacity: 0.55;
+  filter: grayscale(1);
+}
+body.portfolio-page .h-arrow.is-disabled,
+body.portfolio-page .h-arrow:disabled{
+  color: rgba(255,255,255,0.65);
+}
+
+/* Animations */
+@keyframes goldArrowSweep{
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+@keyframes chromeArrowSweep{
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body.portfolio-page .h-arrow::before,
+  body.portfolio-page .h-arrow::after{
+    animation: none !important;
+  }
+}

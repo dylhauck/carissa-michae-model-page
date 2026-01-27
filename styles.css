@@ -1813,3 +1813,64 @@ body.portfolio-page .h-grid::-webkit-scrollbar-thumb:hover{
     animation: none;
   }
 }
+
+/* =========================================================
+   PORTFOLIO — Custom Chrome Scrollbar (ALWAYS animates)
+   Put at VERY BOTTOM
+   ========================================================= */
+
+body.portfolio-page .chrome-scroll{
+  margin: 14px auto 0;
+  height: 12px;
+  width: min(980px, 92%);
+  border-radius: 999px;
+  position: relative;
+
+  background: rgba(255,255,255,0.10);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.12),
+    0 10px 22px rgba(0,0,0,0.35);
+
+  overflow: hidden;
+}
+
+body.portfolio-page .chrome-scroll .chrome-thumb{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 20%;
+  border-radius: 999px;
+
+  /* SAME chrome gradient as title */
+  background: linear-gradient(
+    90deg,
+    #0d0f12 0%,
+    #f7fbff 10%,
+    #aeb7c2 22%,
+    #ffffff 32%,
+    #7d8793 44%,
+    #ffffff 56%,
+    #b7c0cb 68%,
+    #ffffff 80%,
+    #1a1d22 100%
+  );
+
+  background-size: 220% 100%;
+  animation: chromeSweep 4.2s ease-in-out infinite;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.35),
+    0 6px 16px rgba(0,0,0,0.45);
+}
+
+@media (prefers-reduced-motion: reduce){
+  body.portfolio-page .chrome-scroll .chrome-thumb{ animation: none; }
+}
+
+/* Hide custom bar on mobile if you prefer (optional) */
+/*
+@media (max-width: 768px){
+  body.portfolio-page .chrome-scroll{ display:none; }
+}
+*/

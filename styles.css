@@ -2341,3 +2341,16 @@ body.home .hero-actions .btn > *{
   body.home .hero-actions .btn{ animation: none !important; }
   body.home .hero-actions .btn::before{ animation: none !important; }
 }
+
+/* =========================================================
+   FIX — FORCE silver chrome animation inside hero buttons
+   (Does NOT touch gold outline logic)
+   ========================================================= */
+body.home .hero-actions .btn{
+  background-size: 260% 100% !important;
+  animation-name: chromeSweep !important;
+  animation-duration: 4.2s !important;
+  animation-timing-function: ease-in-out !important;
+  animation-iteration-count: infinite !important;
+  animation-play-state: running !important;
+}

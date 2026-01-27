@@ -1869,7 +1869,6 @@ body.portfolio-page .chrome-scroll .chrome-thumb{
 }
 
 /* Hide custom bar on mobile if you prefer (optional) */
-/*
 @media (max-width: 768px){
   body.portfolio-page .chrome-scroll{ display:none; }
 }

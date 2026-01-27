@@ -1167,13 +1167,15 @@ body.about-page .card{ padding-bottom: 14px; }
 }
 
 /* =========================================================
-   PORTFOLIO — Video Background (Desktop + Mobile)
+   PORTFOLIO — Background Video (Desktop + Mobile)
+   Place at VERY BOTTOM, OUTSIDE media queries
    ========================================================= */
 body.portfolio-page{
   position: relative;
+  background: transparent;
 }
 
-/* Fixed video layer behind the whole page */
+/* The video layer */
 body.portfolio-page .portfolio-bg{
   position: fixed;
   inset: 0;
@@ -1182,15 +1184,6 @@ body.portfolio-page .portfolio-bg{
   overflow: hidden;
 }
 
-/* Dim overlay */
-body.portfolio-page .portfolio-bg::after{
-  content:"";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.45); /* dim amount (0.35–0.55 sweet spot) */
-}
-
-/* Video sizing */
 body.portfolio-page .portfolio-bg-video{
   width: 100%;
   height: 100%;
@@ -1198,14 +1191,22 @@ body.portfolio-page .portfolio-bg-video{
   object-position: center;
 }
 
-/* Bring your actual site content above the video */
+/* Dim overlay */
+body.portfolio-page .portfolio-bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.45);
+}
+
+/* Make your actual content sit above the video */
 body.portfolio-page .page-wrap{
   position: relative;
   z-index: 1;
 }
 
-/* Optional: make the portfolio gallery area slightly “glass” so photos pop */
-body.portfolio-page main{
-  position: relative;
-  z-index: 1;
+/* Ensure content containers aren’t painting a white background */
+body.portfolio-page main,
+body.portfolio-page .section{
+  background: transparent;
 }

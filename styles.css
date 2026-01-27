@@ -1210,3 +1210,36 @@ body.portfolio-page main,
 body.portfolio-page .section{
   background: transparent;
 }
+
+/* =========================================================
+   PORTFOLIO — Background video centering (match Home)
+   ========================================================= */
+.portfolio-bg{
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.portfolio-bg-video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  /* 👇 THIS is the key line */
+  object-position: 50% 20%;
+}
+
+/* Slightly adjust for shorter desktop screens */
+@media (max-width: 1200px){
+  .portfolio-bg-video{
+    object-position: 50% 25%;
+  }
+}
+
+/* Mobile fine-tune (optional, matches Home feel) */
+@media (max-width: 768px){
+  .portfolio-bg-video{
+    object-position: 50% 30%;
+  }
+}

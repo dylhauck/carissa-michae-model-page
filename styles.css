@@ -1373,3 +1373,36 @@ body.portfolio-page .section-header h2{
 @media (prefers-reduced-motion: reduce){
   body.portfolio-page .section-header h2{ animation: none; }
 }
+
+/* =========================================================
+   PORTFOLIO — GOLD CHROME IMAGE OUTLINE
+   Desktop + Mobile
+   ========================================================= */
+body.portfolio-page .h-grid img{
+  position: relative;
+  border-radius: 14px;
+
+  /* Remove old border */
+  border: none !important;
+
+  /* Gold chrome outline via layered box-shadow */
+  box-shadow:
+    0 0 0 1px rgba(255,215,140,0.45),
+    0 0 0 2px rgba(160,120,40,0.55),
+    0 8px 28px rgba(0,0,0,0.55);
+
+  /* subtle polish */
+  filter: contrast(1.04) saturate(1.06);
+  transition: transform 280ms ease, box-shadow 280ms ease;
+}
+
+/* Hover polish (desktop only) */
+@media (hover:hover){
+  body.portfolio-page .h-grid img:hover{
+    transform: translateY(-2px) scale(1.015);
+    box-shadow:
+      0 0 0 1px rgba(255,235,180,0.8),
+      0 0 0 2px rgba(210,165,70,0.9),
+      0 18px 44px rgba(0,0,0,0.65);
+  }
+}

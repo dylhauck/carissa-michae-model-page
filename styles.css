@@ -2354,3 +2354,46 @@ body.home .hero-actions .btn{
   animation-iteration-count: infinite !important;
   animation-play-state: running !important;
 }
+
+/* =========================================================
+   HOME — Make hero text silver chrome animated
+   (EXCLUDES button text because we do NOT target .btn)
+   ========================================================= */
+body.home .hero-eyebrow,
+body.home .hero-title,
+body.home .hero-subtitle{
+  color: transparent !important;
+
+  background: linear-gradient(
+    90deg,
+    #0d0f12 0%,
+    #f7fbff 10%,
+    #aeb7c2 22%,
+    #ffffff 32%,
+    #7d8793 44%,
+    #ffffff 56%,
+    #b7c0cb 68%,
+    #ffffff 80%,
+    #1a1d22 100%
+  );
+
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  animation: chromeSweep 4.2s ease-in-out infinite;
+
+  /* keeps it readable on the hero image */
+  text-shadow:
+    0 1px 10px rgba(255,255,255,0.12),
+    0 10px 30px rgba(0,0,0,0.55);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body.home .hero-eyebrow,
+  body.home .hero-title,
+  body.home .hero-subtitle{
+    animation: none !important;
+  }
+}

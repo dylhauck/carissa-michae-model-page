@@ -2163,3 +2163,91 @@ body.portfolio-page .h-arrow:disabled .arrow-glyph{
   animation: none !important;
   filter: grayscale(1) brightness(0.8);
 }
+
+/* =========================================================
+   PORTFOLIO — Desktop transparent header + chrome text
+   Desktop ONLY
+   ========================================================= */
+@media (min-width: 1024px){
+
+  /* Make header transparent */
+  body.portfolio-page .site-header{
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border-bottom: none !important;
+  }
+
+  /* Chrome brand name */
+  body.portfolio-page .brand-name{
+    background: linear-gradient(
+      90deg,
+      #0d0f12 0%,
+      #f7fbff 10%,
+      #aeb7c2 22%,
+      #ffffff 32%,
+      #7d8793 44%,
+      #ffffff 56%,
+      #b7c0cb 68%,
+      #ffffff 80%,
+      #1a1d22 100%
+    );
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: chromeSweep 4.2s ease-in-out infinite;
+    text-shadow:
+      0 1px 10px rgba(255,255,255,0.18),
+      0 10px 30px rgba(0,0,0,0.55);
+  }
+
+  /* Subtitle — lighter chrome */
+  body.portfolio-page .brand-subtitle{
+    background: linear-gradient(
+      115deg,
+      #8f9aa6,
+      #ffffff,
+      #bfc7cf,
+      #ffffff,
+      #8f9aa6
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: chromeSweep 5.2s linear infinite;
+    text-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  }
+
+  /* Nav links → chrome */
+  body.portfolio-page .nav-link{
+    background: linear-gradient(
+      90deg,
+      #0d0f12,
+      #f7fbff,
+      #aeb7c2,
+      #ffffff,
+      #7d8793,
+      #ffffff,
+      #b7c0cb,
+      #ffffff,
+      #1a1d22
+    );
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: chromeSweep 4.8s ease-in-out infinite;
+    text-shadow: 0 8px 22px rgba(0,0,0,0.55);
+  }
+
+  /* Active page underline still visible */
+  body.portfolio-page .nav a[aria-current="page"]::after{
+    background: linear-gradient(
+      90deg,
+      #bfc7cf,
+      #ffffff,
+      #bfc7cf
+    );
+  }
+}

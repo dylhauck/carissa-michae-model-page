@@ -1436,7 +1436,7 @@ body.portfolio-page .grid img,
 body.portfolio-page .h-grid img,
 body.portfolio-page .grid.h-grid img{
   /* THICKNESS (increase if you want even bolder) */
-  border: 6px solid transparent !important;
+  border: 4px solid transparent !important;
 
   /* keep your rounding */
   border-radius: 16px !important;

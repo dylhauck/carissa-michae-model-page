@@ -1616,3 +1616,45 @@ body.portfolio-page .h-grid img{
   0%   { background-position: 0% 50%, 0% 50%; }
   100% { background-position: 0% 50%, 200% 50%; }
 }
+
+/* =========================================================
+   PORTFOLIO — FORCE gold chrome border (FINAL OVERRIDE)
+   Paste at VERY BOTTOM
+   ========================================================= */
+body.portfolio-page .grid.h-grid img{
+  /* kill any previous border/background */
+  border: 4px solid transparent !important;
+  background-color: transparent !important;
+
+  /* the trick: gradient border using background-clip */
+  background-image:
+    linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.10)), /* subtle inner tint */
+    linear-gradient(
+      120deg,
+      #2a1800,
+      #a86d00,
+      #ffd36a,
+      #fff6cc,
+      #ffd36a,
+      #a86d00,
+      #2a1800
+    ) !important;
+
+  background-origin: padding-box, border-box !important;
+  background-clip: padding-box, border-box !important;
+
+  /* make the gold feel “chrome” */
+  background-size: 100% 100%, 260% 260% !important;
+  animation: goldChromeShimmer 4.2s linear infinite !important;
+
+  /* prevent the border from looking cut off */
+  border-radius: 14px !important;
+
+  /* optional depth */
+  box-shadow: 0 10px 26px rgba(0,0,0,0.35) !important;
+}
+
+@keyframes goldChromeShimmer{
+  0%   { background-position: 0% 50%, 0% 50%; }
+  100% { background-position: 0% 50%, 200% 50%; }
+}

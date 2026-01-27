@@ -807,6 +807,12 @@ body.about-page .card{ padding-bottom: 14px; }
   pointer-events: auto;
 }
 
+/* Allow custom scrollbar to receive pointer events (needed for dragging) */
+.h-gallery .chrome-scroll,
+.h-gallery .chrome-thumb{
+  pointer-events: auto;
+}
+
 /* =========================================================
    Mobile Header — Smaller + Centered (SINGLE SOURCE OF TRUTH)
    ========================================================= */

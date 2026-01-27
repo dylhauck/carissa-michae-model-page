@@ -1406,3 +1406,24 @@ body.portfolio-page .h-grid img{
       0 18px 44px rgba(0,0,0,0.65);
   }
 }
+
+/* =========================================================
+   PORTFOLIO — THICK GOLD CHROME (OUTER, UNCLIPPED)
+   ========================================================= */
+body.portfolio-page .h-grid img{
+  /* Ensure chrome can render outside image edge */
+  outline: none;
+
+  box-shadow:
+    /* inner glow */
+    0 0 0 1px rgba(255,215,140,0.55),
+
+    /* primary gold edge */
+    0 0 0 3px rgba(190,145,60,0.85),
+
+    /* highlight rim (shine) */
+    0 0 0 5px rgba(255,235,185,0.9),
+
+    /* depth shadow */
+    0 16px 42px rgba(0,0,0,0.65);
+}

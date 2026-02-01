@@ -2472,51 +2472,45 @@ body.home .footer{
 }
 
 /* =========================================================
-   HOME — GOLD CHROME OUTLINE ONLY (NO FILL)
+   HOME — GOLD CHROME OUTLINE (TRUE OUTLINE, NO FILL OVERLAP)
    Affects ONLY "Presence, Poise, Story."
    ========================================================= */
 
 body.home .hero-title{
-  /* KEEP silver chrome fill exactly as-is */
-  color: transparent !important;
-  -webkit-text-fill-color: transparent !important;
+  position: relative;
+}
 
-  /* Gold outline only */
+/* Gold outline layer */
+body.home .hero-title::after{
+  content: attr(data-text); /* uses the same text */
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  /* Outline only */
+  color: transparent;
   -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: #cfa24a;
+  -webkit-text-stroke-color: #ffd36a;
 
-  /* 🔑 CRITICAL FIX — prevents outline bleeding into fill */
-  paint-order: stroke fill;
-
-  /* DO NOT add glow that bleeds inward */
-  text-shadow: none !important;
-
-  /* Animate ONLY the stroke color */
+  /* Gold chrome animation */
   animation: goldStrokeSweep 4.2s linear infinite;
+
+  /* REQUIRED so it doesn’t affect silver fill */
+  z-index: -1;
 }
 
-/* Gold chrome animation for the STROKE ONLY */
+/* Gold chrome animation */
 @keyframes goldStrokeSweep{
-  0%{
-    -webkit-text-stroke-color: #7a4a00;
-  }
-  25%{
-    -webkit-text-stroke-color: #ffd36a;
-  }
-  50%{
-    -webkit-text-stroke-color: #fff6cc;
-  }
-  75%{
-    -webkit-text-stroke-color: #ffd36a;
-  }
-  100%{
-    -webkit-text-stroke-color: #7a4a00;
-  }
+  0%   { -webkit-text-stroke-color: #7a4a00; }
+  25%  { -webkit-text-stroke-color: #ffd36a; }
+  50%  { -webkit-text-stroke-color: #fff6cc; }
+  75%  { -webkit-text-stroke-color: #ffd36a; }
+  100% { -webkit-text-stroke-color: #7a4a00; }
 }
 
-/* Respect reduced motion */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce){
-  body.home .hero-title{
+  body.home .hero-title::after{
     animation: none;
   }
 }

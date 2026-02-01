@@ -2625,3 +2625,32 @@ body.portfolio-page .h-arrow .arrow-glyph{
     padding-bottom: env(safe-area-inset-bottom);
   }
 }
+
+/* =========================================================
+   PORTFOLIO — Mobile header active underline
+   Animated silver chrome
+   ========================================================= */
+@media (max-width: 768px){
+
+  body.portfolio-page .nav a[aria-current="page"]::after{
+    height: 2px;
+    border-radius: 2px;
+
+    /* Silver chrome gradient (same family as title) */
+    background: linear-gradient(
+      90deg,
+      #0d0f12 0%,
+      #f7fbff 10%,
+      #aeb7c2 22%,
+      #ffffff 32%,
+      #7d8793 44%,
+      #ffffff 56%,
+      #b7c0cb 68%,
+      #ffffff 80%,
+      #1a1d22 100%
+    );
+
+    background-size: 220% 100%;
+    animation: chromeSweep 4.2s ease-in-out infinite;
+  }
+}

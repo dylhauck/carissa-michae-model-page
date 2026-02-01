@@ -2477,17 +2477,22 @@ body.home .footer{
    ========================================================= */
 
 body.home .hero-title{
-  /* KEEP your silver fill exactly as-is */
+  /* KEEP silver chrome fill exactly as-is */
+  color: transparent !important;
   -webkit-text-fill-color: transparent !important;
 
   /* Gold outline only */
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: #cfa24a;
 
-  /* Animate ONLY the outline */
-  animation:
-    chromeSweep 4.2s ease-in-out infinite,
-    goldStrokeSweep 4.2s linear infinite;
+  /* 🔑 CRITICAL FIX — prevents outline bleeding into fill */
+  paint-order: stroke fill;
+
+  /* DO NOT add glow that bleeds inward */
+  text-shadow: none !important;
+
+  /* Animate ONLY the stroke color */
+  animation: goldStrokeSweep 4.2s linear infinite;
 }
 
 /* Gold chrome animation for the STROKE ONLY */
@@ -2512,6 +2517,6 @@ body.home .hero-title{
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce){
   body.home .hero-title{
-    animation: chromeSweep 4.2s ease-in-out infinite;
+    animation: none;
   }
 }

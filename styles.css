@@ -2700,3 +2700,49 @@ body.portfolio-page .h-arrow .arrow-glyph{
 
   animation: none !important;                  /* stop gold sweep on glyph */
 }
+
+/* =========================================================
+   PORTFOLIO — MOBILE HEADER FIX
+   Transparent header + animated silver chrome text
+   (layout untouched)
+   ========================================================= */
+@media (max-width: 768px){
+
+  /* Header container — transparent ONLY */
+  body.portfolio-page .site-header{
+    background: transparent !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Brand + nav text — silver chrome animated */
+  body.portfolio-page .brand-name,
+  body.portfolio-page .brand-subtitle,
+  body.portfolio-page .nav-link{
+    color: transparent !important;
+
+    background: linear-gradient(
+      90deg,
+      #0d0f12 0%,
+      #f7fbff 10%,
+      #aeb7c2 22%,
+      #ffffff 32%,
+      #7d8793 44%,
+      #ffffff 56%,
+      #b7c0cb 68%,
+      #ffffff 80%,
+      #1a1d22 100%
+    );
+
+    background-size: 220% 100%;
+    background-position: 0% 50%;
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    animation: chromeSweep 4.2s ease-in-out infinite;
+
+    text-shadow:
+      0 1px 10px rgba(255,255,255,0.12),
+      0 10px 30px rgba(0,0,0,0.45);
+  }
+}

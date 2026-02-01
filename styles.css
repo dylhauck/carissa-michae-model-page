@@ -2664,29 +2664,3 @@ body.home .hero-title::after{
     animation: none;
   }
 }
-
-/* =========================================================
-   HOME — FORCE silver chrome ANIMATION inside hero buttons
-   (Does NOT affect gold outline or text)
-   ========================================================= */
-
-body.home .hero-actions .btn{
-  /* re-assert animated chrome fill */
-  background-size: 260% 100% !important;
-  background-position: 0% 50% !important;
-
-  animation: chromeSweep 4.2s ease-in-out infinite !important;
-  animation-play-state: running !important;
-}
-
-/* Safety: ensure outline animation stays separate */
-body.home .hero-actions .btn::before{
-  animation: goldChromeSweep 4.2s linear infinite !important;
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce){
-  body.home .hero-actions .btn{
-    animation: none !important;
-  }
-}

@@ -2687,17 +2687,16 @@ body.home .hero-actions .btn{
 }
 
 /* =========================================================
-   PORTFOLIO — Desktop ONLY
-   FIX: Arrow glyph black (NOT the button)
+   PORTFOLIO — ONLY make the arrow glyph BLACK
+   (does NOT touch the button chrome fill or gold ring)
    ========================================================= */
-@media (min-width: 1024px){
+body.portfolio-page .h-arrow .arrow-glyph{
+  background: none !important;                 /* kills gold gradient */
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
 
-  /* Force ONLY the arrow character to black */
-  body.portfolio-page .h-arrow{
-    color: #000 !important;            /* arrow glyph */
-    -webkit-text-fill-color: #000 !important;
-    background: none !important;       /* prevents text gradient */
-    animation: none !important;        /* glyph does NOT animate */
-  }
+  color: #000 !important;                      /* arrow becomes black */
+  -webkit-text-fill-color: #000 !important;    /* required in Chrome/Safari */
 
+  animation: none !important;                  /* stop gold sweep on glyph */
 }

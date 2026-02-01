@@ -2593,48 +2593,6 @@ body.home .hero-actions .btn{
 }
 
 /* =========================================================
-   PORTFOLIO — Desktop arrows: solid black (NO chrome / NO gold)
-   Desktop ONLY
-   ========================================================= */
-@media (min-width: 1024px){
-
-  body.portfolio-page .h-arrow{
-    /* kill all chrome layers */
-    background: #000 !important;
-    border: 1px solid rgba(255,255,255,0.15) !important;
-
-    /* arrow glyph color */
-    color: #fff !important;
-
-    /* remove pseudo chrome layers */
-    box-shadow: none !important;
-    filter: none !important;
-  }
-
-  body.portfolio-page .h-arrow::before,
-  body.portfolio-page .h-arrow::after{
-    content: none !important;
-    animation: none !important;
-    background: none !important;
-  }
-
-  /* keep hover behavior clean + intentional */
-  body.portfolio-page .h-arrow:hover{
-    background: #000 !important;
-    transform: translateY(-50%) scale(1.06);
-    opacity: 0.95;
-  }
-
-  /* disabled state stays muted */
-  body.portfolio-page .h-arrow.is-disabled,
-  body.portfolio-page .h-arrow:disabled{
-    background: #000 !important;
-    opacity: 0.35 !important;
-    color: #fff !important;
-  }
-}
-
-/* =========================================================
    PORTFOLIO (MOBILE) — Keep mobile header layout,
    ONLY make it transparent + animated chrome text
    Paste at VERY BOTTOM so it overrides anything earlier

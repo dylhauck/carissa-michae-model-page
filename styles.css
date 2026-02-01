@@ -2585,3 +2585,43 @@ body.portfolio-page .h-arrow .arrow-glyph{
     box-shadow: none !important;
   }
 }
+
+/* =========================================================
+   PORTFOLIO — Mobile: remove white bottom gap
+   Force video to fill full viewport
+   ========================================================= */
+@media (max-width: 768px){
+
+  /* Ensure body itself is transparent */
+  body.portfolio-page{
+    background: transparent !important;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  /* Make page-wrap fill the viewport exactly */
+  body.portfolio-page .page-wrap{
+    min-height: 100dvh;
+    background: transparent !important;
+  }
+
+  /* Kill any white background from main/sections */
+  body.portfolio-page main,
+  body.portfolio-page .section{
+    background: transparent !important;
+  }
+
+  /* Force background video to truly fill screen */
+  body.portfolio-page .portfolio-bg,
+  body.portfolio-page .portfolio-bg-video{
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+  }
+
+  /* Footer should NOT push layout or add white space */
+  body.portfolio-page .footer{
+    background: transparent !important;
+    margin: 0 !important;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}

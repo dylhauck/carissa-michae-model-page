@@ -2475,3 +2475,43 @@ body.home .hero-actions .btn > *{
   body.home .hero-actions .btn{ animation: none !important; }
   body.home .hero-actions .btn::before{ animation: none !important; }
 }
+
+/* =========================================================
+   HOME — FORCE hero button chrome fill to animate (FINAL OVERRIDE)
+   Paste at VERY BOTTOM of styles.css
+   ========================================================= */
+
+body.home .hero-actions .btn{
+  background-image: linear-gradient(
+    90deg,
+    #0d0f12 0%,
+    #f7fbff 10%,
+    #aeb7c2 22%,
+    #ffffff 32%,
+    #7d8793 44%,
+    #ffffff 56%,
+    #b7c0cb 68%,
+    #ffffff 80%,
+    #1a1d22 100%
+  ) !important;
+
+  background-repeat: no-repeat !important;
+  background-size: 320% 100% !important;
+  background-position: 0% 50% !important;
+
+  animation: chromeBtnSweep 4.2s ease-in-out infinite !important;
+  will-change: background-position;
+}
+
+@keyframes chromeBtnSweep{
+  0%   { background-position:   0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position:   0% 50%; }
+}
+
+/* If your OS/browser is set to Reduce Motion, this will still keep it animating */
+@media (prefers-reduced-motion: reduce){
+  body.home .hero-actions .btn{
+    animation: chromeBtnSweep 4.2s ease-in-out infinite !important;
+  }
+}

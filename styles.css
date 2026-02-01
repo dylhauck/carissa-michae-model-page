@@ -2251,105 +2251,6 @@ body.portfolio-page .h-arrow:disabled .arrow-glyph{
     );
   }
 }
-/* =========================================================
-   HOME — Hero buttons: gold chrome outline + chrome fill (animated)
-   Affects ONLY the 3 hero buttons in the screenshot
-   ========================================================= */
-body.home .hero-actions .btn{
-  position: relative;
-  isolation: isolate;          /* keeps the border ring clean */
-  overflow: hidden;
-  border: 1px solid transparent !important;  /* let our ring be the border */
-  color: #0b0f14 !important;                 /* keep text readable */
-  background: linear-gradient(
-    90deg,
-    #0d0f12 0%,
-    #f7fbff 10%,
-    #aeb7c2 22%,
-    #ffffff 32%,
-    #7d8793 44%,
-    #ffffff 56%,
-    #b7c0cb 68%,
-    #ffffff 80%,
-    #1a1d22 100%
-  ) !important;
-
-  /* ✅ FORCE obvious animated movement */
-  background-size: 320% 100% !important;
-  background-position: 0% 50% !important;
-  animation: chromeSweep 4.2s ease-in-out infinite !important;
-
-  box-shadow:
-    0 10px 24px rgba(0,0,0,0.22),
-    inset 0 0 0 1px rgba(255,255,255,0.22);
-}
-
-/* Gold chrome outline ring (animated) */
-body.home .hero-actions .btn::before{
-  content:"";
-  position: absolute;
-  inset: 0;
-  padding: 2px;                 /* outline thickness */
-  border-radius: 999px;
-
-  background: linear-gradient(
-    120deg,
-    #2a1800,
-    #a86d00,
-    #ffd36a,
-    #fff6cc,
-    #ffd36a,
-    #a86d00,
-    #2a1800
-  );
-  background-size: 260% 260%;
-  animation: goldChromeSweep 4.2s linear infinite;
-
-  /* mask so only the border ring shows */
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Keep the button content above the ring */
-body.home .hero-actions .btn > *{
-  position: relative;
-  z-index: 1;
-}
-
-/* Hover polish (desktop only) */
-@media (hover:hover){
-  body.home .hero-actions .btn:hover{
-    transform: translateY(-2px) scale(1.01);
-    box-shadow:
-      0 18px 44px rgba(0,0,0,0.35),
-      inset 0 0 0 1px rgba(255,255,255,0.28);
-  }
-}
-
-/* Gold animation keyframes (safe to re-declare) */
-@keyframes goldChromeSweep{
-  0%   { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
-}
-
-/* ✅ Chrome animation keyframes (fill animation) */
-@keyframes chromeSweep{
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce){
-  body.home .hero-actions .btn{ animation: none !important; }
-  body.home .hero-actions .btn::before{ animation: none !important; }
-}
 
 /* =========================================================
    HOME — Make hero text silver chrome animated
@@ -2473,4 +2374,104 @@ body.home .hero-title::after{
   body.home .hero-title::after{
     animation: none;
   }
+}
+
+/* =========================================================
+   HOME — Hero buttons: gold chrome outline + chrome fill (animated)
+   Affects ONLY the 3 hero buttons in the screenshot
+   ========================================================= */
+body.home .hero-actions .btn{
+  position: relative;
+  isolation: isolate;          /* keeps the border ring clean */
+  overflow: hidden;
+  border: 1px solid transparent !important;  /* let our ring be the border */
+  color: #0b0f14 !important;                 /* keep text readable */
+  background: linear-gradient(
+    90deg,
+    #0d0f12 0%,
+    #f7fbff 10%,
+    #aeb7c2 22%,
+    #ffffff 32%,
+    #7d8793 44%,
+    #ffffff 56%,
+    #b7c0cb 68%,
+    #ffffff 80%,
+    #1a1d22 100%
+  ) !important;
+
+  /* ✅ FORCE obvious animated movement */
+  background-size: 320% 100% !important;
+  background-position: 0% 50% !important;
+  animation: chromeSweep 4.2s ease-in-out infinite !important;
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,0.22),
+    inset 0 0 0 1px rgba(255,255,255,0.22);
+}
+
+/* Gold chrome outline ring (animated) */
+body.home .hero-actions .btn::before{
+  content:"";
+  position: absolute;
+  inset: 0;
+  padding: 2px;                 /* outline thickness */
+  border-radius: 999px;
+
+  background: linear-gradient(
+    120deg,
+    #2a1800,
+    #a86d00,
+    #ffd36a,
+    #fff6cc,
+    #ffd36a,
+    #a86d00,
+    #2a1800
+  );
+  background-size: 260% 260%;
+  animation: goldChromeSweep 4.2s linear infinite;
+
+  /* mask so only the border ring shows */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Keep the button content above the ring */
+body.home .hero-actions .btn > *{
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover polish (desktop only) */
+@media (hover:hover){
+  body.home .hero-actions .btn:hover{
+    transform: translateY(-2px) scale(1.01);
+    box-shadow:
+      0 18px 44px rgba(0,0,0,0.35),
+      inset 0 0 0 1px rgba(255,255,255,0.28);
+  }
+}
+
+/* Gold animation keyframes (safe to re-declare) */
+@keyframes goldChromeSweep{
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ✅ Chrome animation keyframes (fill animation) */
+@keyframes chromeSweep{
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body.home .hero-actions .btn{ animation: none !important; }
+  body.home .hero-actions .btn::before{ animation: none !important; }
 }

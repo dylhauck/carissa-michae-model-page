@@ -2727,3 +2727,19 @@ body.home .hero-actions .btn{
     }
   }
 }
+
+/* =========================================================
+   PORTFOLIO — Desktop ONLY
+   FIX: Arrow glyph black (NOT the button)
+   ========================================================= */
+@media (min-width: 1024px){
+
+  /* Force ONLY the arrow character to black */
+  body.portfolio-page .h-arrow{
+    color: #000 !important;            /* arrow glyph */
+    -webkit-text-fill-color: #000 !important;
+    background: none !important;       /* prevents text gradient */
+    animation: none !important;        /* glyph does NOT animate */
+  }
+
+}

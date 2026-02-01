@@ -2253,6 +2253,82 @@ body.portfolio-page .h-arrow:disabled .arrow-glyph{
 }
 
 /* =========================================================
+   PORTFOLIO — Mobile header match Desktop
+   Transparent header + silver chrome animated text
+   Paste at VERY BOTTOM of styles.css
+   ========================================================= */
+@media (max-width: 768px){
+
+  /* Make header transparent (same as desktop behavior) */
+  body.portfolio-page .site-header{
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border-bottom: none !important;
+
+    /* Undo the "mobile centered column" header */
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    text-align: left !important;
+
+    padding: 18px 40px !important; /* same as your desktop base */
+    gap: 24px !important;
+  }
+
+  /* Undo the "mobile centered brand" layout */
+  body.portfolio-page .site-header .brand{
+    flex-direction: row !important;
+    align-items: center !important;
+    width: auto !important;
+  }
+
+  /* Undo the "mobile centered nav" layout */
+  body.portfolio-page .site-header .nav{
+    width: auto !important;
+    justify-content: flex-end !important;
+    gap: 22px !important;
+  }
+
+  body.portfolio-page .site-header .nav-link{
+    font-size: 14px !important;
+    padding: 10px 12px !important;
+  }
+
+  /* --- Chrome animated text (same vibe as your desktop portfolio header) --- */
+  body.portfolio-page .brand-name,
+  body.portfolio-page .brand-subtitle,
+  body.portfolio-page .nav-link{
+    color: transparent !important;
+    background: linear-gradient(
+      90deg,
+      #0d0f12 0%,
+      #f7fbff 10%,
+      #aeb7c2 22%,
+      #ffffff 32%,
+      #7d8793 44%,
+      #ffffff 56%,
+      #b7c0cb 68%,
+      #ffffff 80%,
+      #1a1d22 100%
+    ) !important;
+
+    background-size: 220% 100% !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    animation: chromeSweep 4.2s ease-in-out infinite !important;
+
+    text-shadow:
+      0 1px 10px rgba(255,255,255,0.18),
+      0 10px 30px rgba(0,0,0,0.55) !important;
+  }
+
+  /* Keep the active underline visible on transparent header */
+  body.portfolio-page .nav a[aria-current="page"]::after{
+    background: linear-gradient(90deg, #bfc7cf, #ffffff, #bfc7cf) !important;
+  }
+}
+
+/* =========================================================
    HOME — Make hero text silver chrome animated
    (EXCLUDES button text because we do NOT target .btn)
    ========================================================= */

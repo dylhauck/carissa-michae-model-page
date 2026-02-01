@@ -2472,55 +2472,47 @@ body.home .footer{
 }
 
 /* =========================================================
-   HOME — Hero title: SILVER fill + GOLD outline (CORRECT)
-   Fixes comma / y / punctuation clipping
+   HOME — GOLD CHROME OUTLINE (TRUE OUTLINE, NO FILL OVERLAP)
+   Affects ONLY "Presence, Poise, Story."
    ========================================================= */
 
 body.home .hero-title{
   position: relative;
-  z-index: 1;
-
-  /* KEEP your silver chrome fill */
-  color: transparent !important;
-  -webkit-text-fill-color: transparent !important;
-
-  background: linear-gradient(
-    90deg,
-    #0d0f12 0%,
-    #f7fbff 10%,
-    #aeb7c2 22%,
-    #ffffff 32%,
-    #7d8793 44%,
-    #ffffff 56%,
-    #b7c0cb 68%,
-    #ffffff 80%,
-    #1a1d22 100%
-  );
-
-  background-size: 220% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-
-  animation: chromeSweep 4.2s ease-in-out infinite;
 }
 
-/* GOLD OUTLINE = separate layer */
-body.home .hero-title::before{
-  content: attr(data-text);
+/* Gold outline layer */
+body.home .hero-title::after{
+  content: attr(data-text); /* uses the same text */
   position: absolute;
   inset: 0;
-  z-index: -1;
+  pointer-events: none;
 
+  /* Outline only */
   color: transparent;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #ffd36a;
 
-  /* gold stroke only */
-  -webkit-text-stroke: 2px #cfa24a;
-
-  /* animated gold */
+  /* Gold chrome animation */
   animation: goldStrokeSweep 4.2s linear infinite;
 
-  pointer-events: none;
+  /* REQUIRED so it doesn’t affect silver fill */
+  z-index: -1;
+}
+
+/* Gold chrome animation */
+@keyframes goldStrokeSweep{
+  0%   { -webkit-text-stroke-color: #7a4a00; }
+  25%  { -webkit-text-stroke-color: #ffd36a; }
+  50%  { -webkit-text-stroke-color: #fff6cc; }
+  75%  { -webkit-text-stroke-color: #ffd36a; }
+  100% { -webkit-text-stroke-color: #7a4a00; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body.home .hero-title::after{
+    animation: none;
+  }
 }
 
 /* =========================================================

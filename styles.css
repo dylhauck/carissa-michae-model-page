@@ -2654,3 +2654,37 @@ body.portfolio-page .h-arrow .arrow-glyph{
     animation: chromeSweep 4.2s ease-in-out infinite;
   }
 }
+
+/* =========================================================
+   PORTFOLIO — Mobile: remove bottom white gap
+   Force video to cover full viewport
+   ========================================================= */
+@media (max-width: 768px){
+
+  /* Ensure the page itself fills the viewport */
+  body.portfolio-page{
+    min-height: 100dvh;
+    background: transparent !important;
+  }
+
+  /* Make the wrapper stretch fully */
+  body.portfolio-page .page-wrap{
+    min-height: 100dvh;
+  }
+
+  /* Kill any default section/footer spacing causing overflow */
+  body.portfolio-page main{
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  body.portfolio-page .section{
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* Ensure the video truly spans top → bottom */
+  body.portfolio-page .portfolio-bg{
+    height: 100dvh;
+  }
+}

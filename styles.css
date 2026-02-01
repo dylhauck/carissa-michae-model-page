@@ -2478,35 +2478,25 @@ body.home .footer{
 
 body.home .hero-title{
   position: relative;
-  display: inline-block;     /* keeps pseudo perfectly aligned */
-  isolation: isolate;        /* keeps z-index:-1 behind fill but above overlays */
-  z-index: 0;                /* establishes stacking context */
-
-  /* IMPORTANT: make sure the REAL text has NO stroke (prevents messy commas/y) */
-  -webkit-text-stroke: 0 transparent !important;
 }
 
 /* Gold outline layer */
 body.home .hero-title::after{
-  content: attr(data-text);
+  content: attr(data-text); /* uses the same text */
   position: absolute;
   inset: 0;
   pointer-events: none;
 
   /* Outline only */
   color: transparent;
-  -webkit-text-fill-color: transparent;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: #ffd36a;
 
   /* Gold chrome animation */
   animation: goldStrokeSweep 4.2s linear infinite;
 
-  /* Behind the silver fill BUT still in the same isolate context */
+  /* REQUIRED so it doesn’t affect silver fill */
   z-index: -1;
-
-  /* helps Chrome/WebKit render cleaner edges */
-  transform: translateZ(0);
 }
 
 /* Gold chrome animation */

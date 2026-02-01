@@ -2470,3 +2470,102 @@ body.home .footer{
     animation: none !important;
   }
 }
+
+/* =========================================================
+   HOME — Gold animated chrome OUTLINE for hero title ONLY
+   (Does NOT touch the silver fill / chromeSweep)
+   Paste at VERY BOTTOM
+   ========================================================= */
+
+/* Add a second animation ONLY for the outline (keep chromeSweep intact) */
+body.home .hero-title{
+  /* Keep your existing silver fill animation; add outline animation */
+  animation:
+    chromeSweep 4.2s ease-in-out infinite,
+    goldOutlineChrome 4.2s linear infinite;
+
+  /* Gold outline built from shadows (no -webkit-text-stroke, so fill stays perfect) */
+  text-shadow:
+    /* tight outline ring */
+    2px 0   0 rgba(120, 70, 10, 0.95),
+   -2px 0   0 rgba(120, 70, 10, 0.95),
+    0   2px 0 rgba(120, 70, 10, 0.95),
+    0  -2px 0 rgba(120, 70, 10, 0.95),
+
+    /* highlight rim (chrome “shine”) */
+    1px 1px 0 rgba(255, 233, 175, 0.95),
+   -1px 1px 0 rgba(255, 233, 175, 0.95),
+    1px -1px 0 rgba(255, 233, 175, 0.95),
+   -1px -1px 0 rgba(255, 233, 175, 0.95),
+
+    /* soft gold glow */
+    0 0 14px rgba(255, 210, 120, 0.22),
+    0 0 26px rgba(255, 200, 95, 0.16),
+
+    /* keep your existing depth shadow */
+    0 14px 40px rgba(0,0,0,0.55);
+}
+
+/* Animated “chrome” sweep feel on the OUTLINE only (via shadow color/brightness shifts) */
+@keyframes goldOutlineChrome{
+  0%{
+    text-shadow:
+      2px 0   0 rgba(95, 55,  8, 0.92),
+     -2px 0   0 rgba(95, 55,  8, 0.92),
+      0   2px 0 rgba(95, 55,  8, 0.92),
+      0  -2px 0 rgba(95, 55,  8, 0.92),
+
+      1px 1px 0 rgba(255, 225, 155, 0.75),
+     -1px 1px 0 rgba(255, 225, 155, 0.75),
+      1px -1px 0 rgba(255, 225, 155, 0.75),
+     -1px -1px 0 rgba(255, 225, 155, 0.75),
+
+      0 0 12px rgba(255, 205, 110, 0.16),
+      0 0 22px rgba(255, 190,  85, 0.10),
+
+      0 14px 40px rgba(0,0,0,0.55);
+  }
+
+  50%{
+    text-shadow:
+      2px 0   0 rgba(185, 120, 25, 0.98),
+     -2px 0   0 rgba(185, 120, 25, 0.98),
+      0   2px 0 rgba(185, 120, 25, 0.98),
+      0  -2px 0 rgba(185, 120, 25, 0.98),
+
+      1px 1px 0 rgba(255, 246, 210, 1.00),
+     -1px 1px 0 rgba(255, 246, 210, 1.00),
+      1px -1px 0 rgba(255, 246, 210, 1.00),
+     -1px -1px 0 rgba(255, 246, 210, 1.00),
+
+      0 0 18px rgba(255, 222, 145, 0.28),
+      0 0 34px rgba(255, 200,  95, 0.18),
+
+      0 16px 44px rgba(0,0,0,0.58);
+  }
+
+  100%{
+    text-shadow:
+      2px 0   0 rgba(95, 55,  8, 0.92),
+     -2px 0   0 rgba(95, 55,  8, 0.92),
+      0   2px 0 rgba(95, 55,  8, 0.92),
+      0  -2px 0 rgba(95, 55,  8, 0.92),
+
+      1px 1px 0 rgba(255, 225, 155, 0.75),
+     -1px 1px 0 rgba(255, 225, 155, 0.75),
+      1px -1px 0 rgba(255, 225, 155, 0.75),
+     -1px -1px 0 rgba(255, 225, 155, 0.75),
+
+      0 0 12px rgba(255, 205, 110, 0.16),
+      0 0 22px rgba(255, 190,  85, 0.10),
+
+      0 14px 40px rgba(0,0,0,0.55);
+  }
+}
+
+/* Respect reduced motion (outline stops animating, fill can still animate if you want) */
+@media (prefers-reduced-motion: reduce){
+  body.home .hero-title{
+    animation: chromeSweep 4.2s ease-in-out infinite;
+  }
+}

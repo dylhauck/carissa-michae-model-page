@@ -2514,3 +2514,49 @@ body.home .hero-title::after{
     animation: none;
   }
 }
+
+/* =========================================================
+   HOME — FORCE animated SILVER CHROME fill inside hero buttons
+   (Does not touch the gold ring ::before)
+   Paste at VERY BOTTOM so it wins.
+   ========================================================= */
+
+body.home .hero-actions .btn{
+  /* ensure we’re animating the actual button background */
+  background-image: linear-gradient(
+    90deg,
+    #0d0f12 0%,
+    #f7fbff 10%,
+    #aeb7c2 22%,
+    #ffffff 32%,
+    #7d8793 44%,
+    #ffffff 56%,
+    #b7c0cb 68%,
+    #ffffff 80%,
+    #1a1d22 100%
+  ) !important;
+
+  background-size: 260% 100% !important;
+  background-position: 0% 50% !important;
+
+  /* force animation to run even if something else overwrote it */
+  animation-name: chromeSweep !important;
+  animation-duration: 4.2s !important;
+  animation-timing-function: ease-in-out !important;
+  animation-iteration-count: infinite !important;
+  animation-play-state: running !important;
+}
+
+/* If chromeSweep got redefined somewhere weird, redefine it safely */
+@keyframes chromeSweep{
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body.home .hero-actions .btn{
+    animation: none !important;
+  }
+}

@@ -2576,3 +2576,12 @@ body.portfolio-page .h-arrow .arrow-glyph{
       0 10px 30px rgba(0,0,0,0.45);
   }
 }
+
+@media (max-width: 768px){
+  body.portfolio-page .site-header{
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+  }
+}

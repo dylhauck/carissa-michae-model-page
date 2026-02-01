@@ -2472,62 +2472,34 @@ body.home .footer{
 }
 
 /* =========================================================
-   HOME — Hero title: KEEP silver fill, add gold outline (clean)
-   Fixes commas / y gaps + prevents outline from ruining fill
+   HOME — GOLD CHROME OUTLINE (TRUE OUTLINE, NO FILL OVERLAP)
+   Affects ONLY "Presence, Poise, Story."
    ========================================================= */
 
 body.home .hero-title{
   position: relative;
-  display: inline-block;
-  isolation: isolate;
-
-  /* IMPORTANT: kill ANY stroke on the real text (prevents WebKit gaps) */
-  -webkit-text-stroke: 0 transparent !important;
-
-  /* KEEP your silver chrome fill (unchanged behavior) */
-  color: transparent !important;
-  -webkit-text-fill-color: transparent !important;
-
-  background: linear-gradient(
-    90deg,
-    #0d0f12 0%,
-    #f7fbff 10%,
-    #aeb7c2 22%,
-    #ffffff 32%,
-    #7d8793 44%,
-    #ffffff 56%,
-    #b7c0cb 68%,
-    #ffffff 80%,
-    #1a1d22 100%
-  );
-  background-size: 220% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-
-  animation: chromeSweep 4.2s ease-in-out infinite;
 }
 
-/* Outline layer (separate paint pass, does NOT touch fill) */
+/* Gold outline layer */
 body.home .hero-title::after{
-  content: attr(data-text);
+  content: attr(data-text); /* uses the same text */
   position: absolute;
   inset: 0;
-  z-index: -1;              /* behind fill, BUT stays inside isolate */
   pointer-events: none;
 
+  /* Outline only */
   color: transparent;
-  -webkit-text-fill-color: transparent;
-
   -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: #cfa24a;
+  -webkit-text-stroke-color: #ffd36a;
 
+  /* Gold chrome animation */
   animation: goldStrokeSweep 4.2s linear infinite;
 
-  /* helps WebKit render clean edges */
-  transform: translateZ(0);
+  /* REQUIRED so it doesn’t affect silver fill */
+  z-index: -1;
 }
 
-/* Animate stroke color only (safe + reliable) */
+/* Gold chrome animation */
 @keyframes goldStrokeSweep{
   0%   { -webkit-text-stroke-color: #7a4a00; }
   25%  { -webkit-text-stroke-color: #ffd36a; }
@@ -2538,7 +2510,9 @@ body.home .hero-title::after{
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce){
-  body.home .hero-title::after{ animation: none !important; }
+  body.home .hero-title::after{
+    animation: none;
+  }
 }
 
 /* =========================================================

@@ -2256,12 +2256,15 @@ body.portfolio-page .h-arrow:disabled .arrow-glyph{
    HOME — Hero buttons: gold chrome outline + chrome fill (animated)
    Affects ONLY the 3 hero buttons in the screenshot
    ========================================================= */
+
+/* ✅ SINGLE SOURCE OF TRUTH (keep ONLY this one .btn block) */
 body.home .hero-actions .btn{
   position: relative;
   isolation: isolate;          /* keeps the border ring clean */
   overflow: hidden;
   border: 1px solid transparent !important;  /* let our ring be the border */
-  color: #0b0f14 !important;                 /* keep text readable */
+
+  /* animated chrome fill */
   background: linear-gradient(
     90deg,
     #0d0f12 0%,
@@ -2275,8 +2278,18 @@ body.home .hero-actions .btn{
     #1a1d22 100%
   ) !important;
 
-  background-size: 220% 100% !important;
-  animation: chromeSweep 4.2s ease-in-out infinite;
+  /* ✅ MAKE IT MOVE RELIABLY */
+  background-size: 260% 100% !important;
+  background-position: 0% 50% !important;
+  animation: chromeSweep 4.2s ease-in-out infinite !important;
+  animation-play-state: running !important;
+
+  /* keep label readable on shiny fill */
+  color: #0b0b0b !important;
+
+  /* keep your button shape; don’t fight your other border rules */
+  border-color: rgba(255,255,255,0.25) !important;
+
   box-shadow:
     0 10px 24px rgba(0,0,0,0.22),
     inset 0 0 0 1px rgba(255,255,255,0.22);
@@ -2301,6 +2314,7 @@ body.home .hero-actions .btn::before{
     #2a1800
   );
   background-size: 260% 260%;
+  background-position: 0% 50%;
   animation: goldChromeSweep 4.2s linear infinite;
 
   /* mask so only the border ring shows */
@@ -2342,6 +2356,142 @@ body.home .hero-actions .btn > *{
   body.home .hero-actions .btn::before{ animation: none !important; }
 }
 
+/* =========================================================
+   HOME — Make hero text silver chrome animated
+   (EXCLUDES button text because we do NOT target .btn)
+   ========================================================= */
+body.home .hero-eyebrow,
+body.home .hero-title,
+body.home .hero-subtitle{
+  color: transparent !important;
+
+  background: linear-gradient(
+    90deg,
+    #0d0f12 0%,
+    #f7fbff 10%,
+    #aeb7c2 22%,
+    #ffffff 32%,
+    #7d8793 44%,
+    #ffffff 56%,
+    #b7c0cb 68%,
+    #ffffff 80%,
+    #1a1d22 100%
+  );
+
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  animation: chromeSweep 4.2s ease-in-out infinite;
+
+  /* keeps it readable on the hero image */
+  text-shadow:
+    0 1px 10px rgba(255,255,255,0.12),
+    0 10px 30px rgba(0,0,0,0.55);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body.home .hero-eyebrow,
+  body.home .hero-title,
+  body.home .hero-subtitle{
+    animation: none !important;
+  }
+}
+
+/* =========================================================
+   HOME — Footer: chrome shiny animated text (like Portfolio)
+   ========================================================= */
+body.home .footer{
+  color: transparent !important;
+
+  background: linear-gradient(
+    90deg,
+    #0d0f12 0%,
+    #f7fbff 10%,
+    #aeb7c2 22%,
+    #ffffff 32%,
+    #7d8793 44%,
+    #ffffff 56%,
+    #b7c0cb 68%,
+    #ffffff 80%,
+    #1a1d22 100%
+  );
+
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  animation: chromeSweep 4.2s ease-in-out infinite;
+
+  /* helps it pop on the image */
+  text-shadow:
+    0 1px 10px rgba(255,255,255,0.12),
+    0 10px 30px rgba(0,0,0,0.55);
+}
+
+@media (prefers-reduced-motion: reduce){
+  body.home .footer{
+    animation: none !important;
+  }
+}
+
+/* =========================================================
+   HOME — GOLD CHROME OUTLINE (TRUE OUTLINE, NO FILL OVERLAP)
+   Affects ONLY "Presence, Poise, Story."
+   ========================================================= */
+
+body.home .hero-title{
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+  z-index: 0;
+
+  /* ✅ IMPORTANT: ensure the REAL text has NO stroke */
+  -webkit-text-stroke: 0 transparent !important;
+}
+
+/* Gold outline layer */
+body.home .hero-title::after{
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  /* Outline only */
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  /* ✅ slightly thinner stroke = stops “eating” commas/y edges */
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: #ffd36a;
+
+  /* Gold chrome animation */
+  animation: goldStrokeSweep 4.2s linear infinite;
+
+  /* behind silver fill but inside same stacking context */
+  z-index: -1;
+
+  /* cleaner render */
+  transform: translateZ(0);
+
+  /* ✅ prevent extra glow/shadow thickening the outline */
+  text-shadow: none !important;
+}
+
+/* Gold chrome animation */
+@keyframes goldStrokeSweep{
+  0%   { -webkit-text-stroke-color: #7a4a00; }
+  25%  { -webkit-text-stroke-color: #ffd36a; }
+  50%  { -webkit-text-stroke-color: #fff6cc; }
+  75%  { -webkit-text-stroke-color: #ffd36a; }
+  100% { -webkit-text-stroke-color: #7a4a00; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body.home .hero-title::after{ animation: none; }
+}
 /* =========================================================
    FIX — FORCE silver chrome animation inside hero buttons
    (Does NOT touch gold outline logic)

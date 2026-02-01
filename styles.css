@@ -2472,15 +2472,17 @@ body.home .footer{
 }
 
 /* =========================================================
-   HOME — FORCE: silver chrome fill + gold outline ONLY
+   HOME — Silver chrome fill + GOLD outline (outline is separate layer)
    Paste at VERY BOTTOM of styles.css
    ========================================================= */
 body.home .hero-title{
-  /* kill any previous solid fill */
+  position: relative;
+  display: inline-block;
+
+  /* silver chrome animated fill */
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
 
-  /* SILVER chrome animated fill (inside letters) */
   background: linear-gradient(
     90deg,
     #0d0f12 0%,
@@ -2495,15 +2497,28 @@ body.home .hero-title{
   ) !important;
 
   background-size: 220% 100% !important;
-  background-position: 0% 50% !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
 
   animation: chromeSweep 4.2s ease-in-out infinite !important;
 
-  /* GOLD outline ONLY (does not fill) */
-  -webkit-text-stroke: 2px rgba(255, 215, 140, 0.95) !important;
-
-  /* IMPORTANT: remove gold glow that “fills” the letters */
+  /* depth only (NOT gold glow) */
   text-shadow: 0 14px 40px rgba(0,0,0,0.55) !important;
+}
+
+/* GOLD OUTLINE layer (no fill) */
+body.home .hero-title::before{
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  -webkit-text-stroke: 2px rgba(255, 215, 140, 0.95);
+
+  /* keep outline crisp */
+  text-shadow: none;
+  pointer-events: none;
 }

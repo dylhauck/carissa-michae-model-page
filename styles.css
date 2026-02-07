@@ -2707,3 +2707,64 @@ body.home .hero-actions .btn{
   /* Helps browsers continuously repaint */
   will-change: background-position;
 }
+
+/* =========================================================
+   HOME — Hero buttons: FORCE continuous silver chrome animation
+   (Reliable method: animate a dedicated ::after fill layer)
+   ========================================================= */
+
+/* Make the button itself not paint the fill */
+body.home .hero-actions .btn{
+  background: transparent !important;
+  animation: none !important; /* we animate ::after instead */
+  position: relative;         /* already true in your code, re-stating is safe */
+  isolation: isolate;         /* already true, keep stacking clean */
+}
+
+/* Silver chrome FILL layer (animated continuously) */
+body.home .hero-actions .btn::after{
+  content:"";
+  position:absolute;
+  inset: 2px;                 /* keeps your gold ring thickness untouched */
+  border-radius: 999px;
+  pointer-events: none;
+
+  background: linear-gradient(
+    90deg,
+    #0d0f12 0%,
+    #f7fbff 10%,
+    #aeb7c2 22%,
+    #ffffff 32%,
+    #7d8793 44%,
+    #ffffff 56%,
+    #b7c0cb 68%,
+    #ffffff 80%,
+    #1a1d22 100%
+  ) !important;
+
+  background-size: 260% 100% !important;
+  background-position: 0% 50% !important;
+
+  animation: chromeSweep 4.2s ease-in-out infinite !important;
+  will-change: background-position;
+
+  z-index: 0; /* fill */
+}
+
+/* Ensure your gold ring stays ABOVE the fill */
+body.home .hero-actions .btn::before{
+  z-index: 1 !important; /* ring */
+}
+
+/* Ensure the text stays above everything */
+body.home .hero-actions .btn > *{
+  position: relative;
+  z-index: 2 !important;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body.home .hero-actions .btn::after{
+    animation: none !important;
+  }
+}

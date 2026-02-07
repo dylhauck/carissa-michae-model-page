@@ -2737,3 +2737,60 @@ body.home .hero-actions .btn > *{ position: relative; z-index: 2 !important; }
 @media (prefers-reduced-motion: reduce){
   body.home .hero-actions .btn::after{ animation: none !important; }
 }
+
+/* HOME — Force continuous moving chrome fill inside hero buttons (labels visible) */
+body.home .hero-actions .btn{
+  background: transparent !important;
+  position: relative;
+  isolation: isolate;
+  color: #0b0b0b !important;            /* <-- FORCE text visible */
+  -webkit-text-fill-color: #0b0b0b !important;
+  text-shadow: 0 1px 10px rgba(255,255,255,0.25), 0 8px 18px rgba(0,0,0,0.25);
+}
+
+/* moving chrome fill */
+body.home .hero-actions .btn::after{
+  content:"";
+  position:absolute;
+  inset: 2px;
+  border-radius: 999px;
+  pointer-events:none;
+
+  background: linear-gradient(
+    90deg,
+    #0d0f12 0%,
+    #f7fbff 10%,
+    #aeb7c2 22%,
+    #ffffff 32%,
+    #7d8793 44%,
+    #ffffff 56%,
+    #b7c0cb 68%,
+    #ffffff 80%,
+    #1a1d22 100%
+  );
+  background-size: 260% 100%;
+  animation: btnChromeMove 2.6s linear infinite;
+  will-change: background-position;
+  transform: translateZ(0);
+  z-index: 0;
+}
+
+/* keep your gold ring above fill */
+body.home .hero-actions .btn::before{ z-index: 1 !important; }
+
+/* keep text above everything */
+body.home .hero-actions .btn > *{
+  position: relative;
+  z-index: 2 !important;
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+}
+
+@keyframes btnChromeMove{
+  0%   { background-position:   0% 50%; }
+  100% { background-position: 260% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  body.home .hero-actions .btn::after{ animation: none !important; }
+}

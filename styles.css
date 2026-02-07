@@ -2688,3 +2688,22 @@ body.portfolio-page .h-arrow .arrow-glyph{
     height: 100dvh;
   }
 }
+
+/* =========================================================
+   HOME — Hero buttons: ALWAYS animate silver chrome fill
+   (Hover remains polish only)
+   ========================================================= */
+body.home .hero-actions .btn{
+  /* Force continuous animation */
+  background-size: 260% 100% !important;
+  background-position: 0% 50% !important;
+
+  animation-name: chromeSweep !important;
+  animation-duration: 4.2s !important;
+  animation-timing-function: ease-in-out !important;
+  animation-iteration-count: infinite !important;
+  animation-play-state: running !important;
+
+  /* Helps browsers continuously repaint */
+  will-change: background-position;
+}

@@ -2694,12 +2694,15 @@ body.home .hero-actions .btn{
   background: transparent !important;
   position: relative;
   isolation: isolate;
-  color: #0b0b0b !important;            /* <-- FORCE text visible */
+  color: #0b0b0b !important;            /* FORCE text visible */
   -webkit-text-fill-color: #0b0b0b !important;
-  text-shadow: 0 1px 10px rgba(255,255,255,0.25), 0 8px 18px rgba(0,0,0,0.25);
+  text-shadow:
+    0 1px 10px rgba(255,255,255,0.25),
+    0 8px 18px rgba(0,0,0,0.25);
+  z-index: 0;                           /* establish stacking context */
 }
 
-/* moving chrome fill */
+/* moving chrome fill — BEHIND TEXT */
 body.home .hero-actions .btn::after{
   content:"";
   position:absolute;
@@ -2720,21 +2723,22 @@ body.home .hero-actions .btn::after{
     #1a1d22 100%
   );
   background-size: 260% 100%;
-  animation: btnChromeMove 2.6s linear infinite;
+  animation: btnChromeMove 4.8s linear infinite; /* slowed */
   will-change: background-position;
   transform: translateZ(0);
-  z-index: 0;
+
+  z-index: -1;                          /* ✅ KEY FIX */
 }
 
 /* keep your gold ring above fill */
-body.home .hero-actions .btn::before{ z-index: 1 !important; }
+body.home .hero-actions .btn::before{
+  z-index: 1 !important;
+  pointer-events: none;
+}
 
-/* keep text above everything */
-body.home .hero-actions .btn > *{
-  position: relative;
-  z-index: 2 !important;
-  color: inherit !important;
-  -webkit-text-fill-color: inherit !important;
+/* Gold ring stays visible */
+body.home .hero-actions .btn{
+  overflow: hidden;
 }
 
 @keyframes btnChromeMove{
@@ -2743,5 +2747,7 @@ body.home .hero-actions .btn > *{
 }
 
 @media (prefers-reduced-motion: reduce){
-  body.home .hero-actions .btn::after{ animation: none !important; }
+  body.home .hero-actions .btn::after{
+    animation: none !important;
+  }
 }
